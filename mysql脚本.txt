@@ -80,3 +80,12 @@ gstate int(2) default 1
 insert into goodsinfo value(null,'1','123','',0.0,0.0,'','2018-04-23 00:00:00','2018-04-23 17:00:00','Î´³öÊÛ',1);
 
 
+create table goodsphoto(
+photoid int(10) primary key AUTO_INCREMENT,
+goodsid int(8) not null,
+pclass int(2) not null,
+photourl varchar(128) not null,
+pstate int(2) default 1
+);
+
+insert into goodsphoto value(null,'13',1,'123',1);
