@@ -1,0 +1,82 @@
+create database auction;
+use auction;
+
+create table userinfo(
+userid int(8) primary key AUTO_INCREMENT,
+username varchar(24) not null,
+userpwd varchar(20) not null,
+uname varchar(24) not null,
+usex varchar(6) not null,
+ucardid  varchar(18) not null,
+ubirthdate varchar(10) not null,
+uphone varchar(11) not null,
+ustate int(2) default 1
+);
+
+insert into userinfo value(null,'123','123','金新超','男',
+'310228199509020014','1995-09-02','18930155819',1);
+
+
+create table addressinfo(
+addid int(10) primary key AUTO_INCREMENT,
+userid int(8) not null,
+address varchar(80) not null,
+astate int(2) default 1
+);
+
+
+insert into addressinfo value(null,'123','上海市金山区朱泾镇金玉良苑64号',1);
+
+
+create table accountinfo(
+accountid int(8) primary key AUTO_INCREMENT,
+userid int(8) not null,
+amount double not null,
+astate int(2) default 1
+);
+
+insert into accountinfo value(null,'123',0.0,1);
+
+create table accountchange(
+changeid int(16) primary key AUTO_INCREMENT,
+caccountid int(8) not null,
+cuserid int(8) not null,
+camount double not null,
+cdate varchar(20) not null,
+ccontent varchar(24) not null,
+cstate int(2) default 1
+);
+
+insert into accountchange value(null,'1','123',0.0,'2018-04-15','存款',1);
+
+
+create table businessinfo(
+businessid int(32) primary key AUTO_INCREMENT,
+buyuserid int(8) not null,
+saleuserid int(8) not null,
+goodsid int(8) not null,
+bamount double not null,
+bdate varchar(20) not null,
+bcontent varchar(24) not null,
+bclassify varchar(4) not null,
+payway varchar(10) not null,
+bstate int(2) default 1
+);
+
+insert into businessinfo value(null,'1','123',0.0,'2018-04-15','存款',1);
+
+create table goodsinfo(
+goodsid int(8) primary key AUTO_INCREMENT,
+guserid int(8) not null,
+gname varchar(32) not null,
+gstartaccount double not null,
+ghighaccount double,
+gcontent varchar(128),
+gstartdate varchar(20),
+genddate varchar(20),
+goodstate varchar(10),
+gstate int(2) default 1
+);
+insert into goodsinfo value(null,'1','123','',0.0,0.0,'','2018-04-23 00:00:00','2018-04-23 17:00:00','未出售',1);
+
+
