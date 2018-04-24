@@ -1,0 +1,6 @@
+<nz-card style="width:300px;">
+  <ng-template #body>
+    <label><input type="checkbox" [(ngModel)]="isShow">显示更多</label>
+    <p *ngIf="isShow">Angular is good!</p>
+  </ng-template>
+</nz-card>

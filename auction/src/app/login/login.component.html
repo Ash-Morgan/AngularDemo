@@ -1,0 +1,55 @@
+<a *ngIf="userstate == null" style="color: #ffffff" (click)="open()"><i class="anticon anticon-poweroff"></i>
+  登录
+</a>
+<a *ngIf="userstate != null" style="color: #ffffff" (click)="open2()"><i class="anticon anticon-poweroff"></i>
+  {{ userstate }}
+</a>
+<nz-modal [nzVisible]="isVisible" [nzTitle]="'登录'" (nzOnCancel)="close()" [nzContent]="modalContent" [nzFooter]="null">
+  <ng-template #modalContent>
+    <form class="login-form" #loginForm (ngSubmit)="_submitForm(loginForm.value)">
+      <div nz-form-item>
+        <div nz-form-control>
+          <nz-input name="username" [(ngModel)]="username" [nzPlaceHolder]="'Username'" [nzSize]="'large'">
+            <ng-template #prefix>
+              <i class="anticon anticon-user"></i>
+            </ng-template>
+          </nz-input>
+        </div>
+      </div>
+      <br>
+      <div nz-form-item>
+        <div nz-form-control>
+          <nz-input name="password" [(ngModel)]="pwd" [nzType]="'password'" [nzPlaceHolder]="'Password'"
+                    [nzSize]="'large'">
+            <ng-template #prefix>
+              <i class="anticon anticon-lock"></i>
+            </ng-template>
+          </nz-input>
+        </div>
+      </div>
+      <br>
+      <div nz-form-item>
+        <div nz-form-control>
+          <button nz-button class="login-form-button" [nzType]="'primary'" [nzSize]="'large'" type="submit">Log in
+          </button>
+          Or
+          <a href="">register now!</a>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+</nz-modal>
+
+<nz-modal [nzVisible]="isVisible2" [nzTitle]="modaltitle2" (nzOnCancel)="close2()" [nzContent]="modalContent2"
+          [nzFooter]="null">
+  <ng-template #modaltitle2>
+    Signed in as
+    <br>
+    {{ userstate }}
+  </ng-template>
+  <ng-template #modalContent2>
+    <br>
+    <button nz-button (click)="exit()" class="login-form-button" [nzType]="'primary'" [nzSize]="'large'">Exit
+    </button>
+  </ng-template>
+</nz-modal>
