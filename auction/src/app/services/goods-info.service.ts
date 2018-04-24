@@ -31,12 +31,12 @@ export class GoodsInfoService extends WebApiService {
     return ob;
   }
 
-  public postHighAccount(info:GoodsInfo):Observable<any>{
+  public postHighAccount(data):Observable<any>{
     let url=GoodsInfoService.getApiUrl()+"goods/posthighaccount";
     log('Fetching...');
     log(url);
     let ob:Observable<any> = this.http
-      .post(url,info);
+      .post(url,{params: data});
     log('Fetching End');
     return ob;
   }

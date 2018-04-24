@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
           this.isVisible = false;
           this.userstate = this.username;
           sessionStorage.setItem('userinfo', theinfo.username);
-          this._message.create('success', `Welcome to login:` + theinfo.username);
+          this._message.create('success', `Welcome to login:` +  theinfo.username);
         }
       },
       response => {

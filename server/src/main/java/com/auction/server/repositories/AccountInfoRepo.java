@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 */
 @Repository(value = "account-info-repo")
 public interface AccountInfoRepo extends CrudRepository<AccountInfo, String> {
+    public AccountInfo findByUserid(int userid);
 }

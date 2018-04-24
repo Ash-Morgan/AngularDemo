@@ -19,7 +19,7 @@ public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userid", length = 8, nullable = false)
-    private String userid;
+    private int userid;
 
     @Column(name = "username", length = 24, nullable = false)
     private String username;
@@ -45,11 +45,11 @@ public class UserInfo {
     @Column(name = "ustate", length = 2, columnDefinition = "1")
     private int ustate;
 
-    public String getUserid() {
+    public int getUserid() {
         return userid;
     }
 
-    public void setUserid(String userid) {
+    public void setUserid(int userid) {
         this.userid = userid;
     }
 

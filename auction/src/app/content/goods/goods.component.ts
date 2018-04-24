@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {GoodsInfo} from "../../entity/GoodsInfo";
-import {DatePipe} from "@angular/common";
 import {GoodsInfoService} from "../../services/goods-info.service";
 import {NzMessageService} from "ng-zorro-antd";
 import {ActivatedRoute} from "@angular/router";
+import {HttpParams} from "@angular/common/http";
 
 @Component({
   selector: 'app-goods',
@@ -18,6 +18,7 @@ export class GoodsComponent implements OnInit{
   isdisabled:boolean = false;
   count:number = 100.0;
   id:number;
+  private data: HttpParams;
 
   constructor(private goodsInfoService:GoodsInfoService,
               private _message: NzMessageService,
@@ -33,9 +34,10 @@ export class GoodsComponent implements OnInit{
         "url("+this.URL+"goods4.jpg)",
         "url("+this.URL+"goods5.jpg)"];
     }, 500);
-    setInterval(_ => {
-      this.initGoods();
-    }, 2000);
+    this.initGoods();
+    // setInterval(_ => {
+    //   this.initGoods();
+    // }, 2000);
     setInterval(_ => {
       this.endDate = Date.parse(this.goodsinfo.genddate);
       if(Math.floor(this.endDate-Date.now())<= 0){
@@ -73,7 +75,12 @@ export class GoodsComponent implements OnInit{
   addprice():void{
     if(this.isLogin()){
       this.goodsinfo.ghighaccount += this.count;
-      this.goodsInfoService.postHighAccount(this.goodsinfo).subscribe(
+      const data = {
+        'goodsid': this.goodsinfo.goodsid,
+        'goodsghighaccount': this.goodsinfo.ghighaccount,
+        'username': sessionStorage.getItem('userinfo')
+      };
+      this.goodsInfoService.postHighAccount(data).subscribe(
         (val) => {
           console.log("POST call successful value returned in body!",
             val);
