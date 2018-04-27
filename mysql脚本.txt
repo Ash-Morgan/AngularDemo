@@ -13,8 +13,8 @@ uphone varchar(11) not null,
 ustate int(2) default 1
 );
 
-insert into userinfo value(null,'123','123','金新超','男',
-'310228199509020014','1995-09-02','18930155819',1);
+insert into userinfo value(null,'123','123','XXX','男',
+'XXXXXXXXXXXXXXXXXX','XXXX-XX-XX','XXXXXXXXXXX',1);
 
 
 create table addressinfo(
@@ -25,7 +25,7 @@ astate int(2) default 1
 );
 
 
-insert into addressinfo value(null,'123','上海市金山区朱泾镇金玉良苑64号',1);
+insert into addressinfo value(null,'123','XXXXXXXXXXXXXXXXXXXX',1);
 
 
 create table accountinfo(
@@ -35,7 +35,7 @@ amount double not null,
 astate int(2) default 1
 );
 
-insert into accountinfo value(null,'123',0.0,1);
+insert into accountinfo value(null,1,0.0,1);
 
 create table accountchange(
 changeid int(16) primary key AUTO_INCREMENT,
@@ -47,7 +47,7 @@ ccontent varchar(24) not null,
 cstate int(2) default 1
 );
 
-insert into accountchange value(null,'1','123',0.0,'2018-04-15','存款',1);
+insert into accountchange value(null,1,1,0.0,'2018-04-15','存款',1);
 
 
 create table businessinfo(
@@ -63,7 +63,17 @@ payway varchar(10) not null,
 bstate int(2) default 1
 );
 
-insert into businessinfo value(null,'1','123',0.0,'2018-04-15','存款',1);
+insert into businessinfo value(null,1,1,13,3999.9,'2018-04-15 00:00:00','竞拍','1','余额',1);
+insert into businessinfo value(null,1,1,14,3999.9,'2018-04-15 00:00:00','竞拍','1','余额',1);
+insert into businessinfo value(null,1,1,15,3999.9,'2018-04-15 00:00:00','竞拍','1','余额',1);
+insert into businessinfo value(null,1,1,16,3999.9,'2018-04-15 00:00:00','竞拍','1','余额',1);
+insert into businessinfo value(null,1,1,17,3999.9,'2018-04-15 00:00:00','竞拍','1','余额',1);
+insert into businessinfo value(null,1,1,18,3999.9,'2018-04-15 00:00:00','竞拍','1','余额',1);
+insert into businessinfo value(null,1,1,19,3999.9,'2018-04-15 00:00:00','竞拍','1','余额',1);
+
+
+
+
 
 create table goodsinfo(
 goodsid int(8) primary key AUTO_INCREMENT,
@@ -77,7 +87,9 @@ genddate varchar(20),
 goodstate varchar(10),
 gstate int(2) default 1
 );
-insert into goodsinfo value(18,'123','景德镇瓷器',2400.1,3200.1,'景德镇瓷器始于汉代，东汉约公元25－220年，此时的陶器"质甚粗，体甚厚，釉色淡而糙"，"只供迩俗粗用"，并不远销。因此，影响所及，极为有限。五代时的景德镇为南方最早烧造白瓷之地，因白瓷的较高成就而奠定了自己的地位，从而打破了青瓷在南方的垄断局面，并形成了"南青北白"的格局，对于宋代青白瓷的制作，元、明、清瓷业的发展有着极为重要的作用， 是中国陶瓷烧造史上重要的历史时期。','2018-04-23 00:00:00','2018-04-25 23:30:00','未出售',1);
+insert into goodsinfo value(null,1,'景德镇瓷器',2400.1,3200.1,'景德镇瓷器始于汉代，东汉约公元25－220年，此时的陶器"质甚粗，体甚厚，釉色淡而糙"，"只供迩俗粗用"，并不远销。因此，影响所及，极为有限。五代时的景德镇为南方最早烧造白瓷之地，因白瓷的较高成就而奠定了自己的地位，从而打破了青瓷在南方的垄断局面，并形成了"南青北白"的格局，对于宋代青白瓷的制作，元、明、清瓷业的发展有着极为重要的作用， 是中国陶瓷烧造史上重要的历史时期。','2018-04-23 00:00:00','2018-04-25 23:30:00','未出售',1);
+update goodsinfo set genddate = '2018-04-25 14:00:00' where goodsid = 16;
+
 
 
 create table goodsphoto(
@@ -88,4 +100,4 @@ photourl varchar(128) not null,
 pstate int(2) default 1
 );
 
-insert into goodsphoto value(null,'13',1,'123',1);
+insert into goodsphoto value(null,18,1,'XXXXXXXXXXXXXXXXXXXXXXX',1);

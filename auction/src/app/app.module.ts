@@ -10,11 +10,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CardComponent} from "./content/card/card.component";
 import {AppRoutingModule} from './/app-routing.module';
 import {HelloComponent} from "./content/hello/hello.component";
-import {LoginComponent} from "./login/login.component";
+import {LoginComponent} from "./content/login/login.component";
 import {UserInfoService} from "./services/user-info.service";
 import {GoodsComponent} from "./content/goods/goods.component";
 import {GoodsInfoService} from "./services/goods-info.service";
 import {CountdownComponent} from "./content/countdown/countdown.component";
+import {RegisterComponent} from "./content/register/register.component";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {CountdownComponent} from "./content/countdown/countdown.component";
     LoginComponent,
     HelloComponent,
     GoodsComponent,
-    CountdownComponent
+    CountdownComponent,
+    RegisterComponent
   ],
   imports: [
     HttpClientModule,

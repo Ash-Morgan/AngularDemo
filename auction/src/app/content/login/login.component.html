@@ -33,7 +33,7 @@
           <button nz-button class="login-form-button" [nzType]="'primary'" [nzSize]="'large'" type="submit">Log in
           </button>
           Or
-          <a href="">register now!</a>
+          <a (click)="openR()">register now!</a>
         </div>
       </div>
     </form>
@@ -51,5 +51,16 @@
     <br>
     <button nz-button (click)="exit()" class="login-form-button" [nzType]="'primary'" [nzSize]="'large'">Exit
     </button>
+  </ng-template>
+</nz-modal>
+
+<nz-modal [nzVisible]="isShowRegister" [nzTitle]="modaltitleR" (nzOnCancel)="closeR()" [nzContent]="modalccontentR"
+          [nzFooter]="modalfooterR">
+  <ng-template #modaltitleR><b>新用户注册</b>
+  </ng-template>
+  <ng-template #modalccontentR>
+    <app-register></app-register>
+  </ng-template>
+  <ng-template #modalfooterR>
   </ng-template>
 </nz-modal>

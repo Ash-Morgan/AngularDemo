@@ -2,9 +2,12 @@ package com.auction.server.controllers;
 
 import com.auction.server.entities.AccountInfo;
 import com.auction.server.entities.GoodsInfo;
+import com.auction.server.entities.UserInfo;
 import com.auction.server.general.Cross;
 import com.auction.server.services.AccountInfoSevice;
+import com.auction.server.services.BusinessInfoService;
 import com.auction.server.services.GoodsInfoService;
+import com.auction.server.services.UserInfoService;
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,11 +24,17 @@ import java.util.Map;
 @RequestMapping(value = "/goods")
 public class GoodsInfoController extends Cross {
 
+    @Resource(name = "user-info-service", type = UserInfoService.class)
+    private UserInfoService userInfoService;
+
     @Resource(name = "goods-info-service", type = GoodsInfoService.class)
     private GoodsInfoService goodsInfoService;
 
     @Resource(name = "account-info-service", type = AccountInfoSevice.class)
     private AccountInfoSevice accountInfoService;
+
+    @Resource(name = "business-info-service", type = BusinessInfoService.class)
+    private BusinessInfoService businessInfoService;
 
     Gson gson = new Gson();
 
@@ -44,25 +53,23 @@ public class GoodsInfoController extends Cross {
     @ResponseBody
     @PostMapping("/posthighaccount")
     public Map<String, String> postHighAccount(@RequestBody Map<String,Object> params) {
-        System.out.println("+++++++++++++++++++++++++++++");
-        System.out.println("+++++++++++++++++++++++++++++");
-        System.out.println(params.get("params"));
         Map<String,Object> param = (Map<String,Object>)params.get("params");
         int goodsid = (int)param.get("goodsid");
         String username = param.get("username").toString();
-        Double goodsghighaccount = (Double) param.get("goodsghighaccount");
-        System.out.println("+++++++++++++++++++++++++++++"+goodsid);
-        System.out.println("+++++++++++++++++++++++++++++"+username);
-        System.out.println("+++++++++++++++++++++++++++++"+goodsghighaccount);
+        Double goodsghighaccount =Double.parseDouble(param.get("goodsghighaccount")+".0");
         Map<String, String> map = new HashMap<>();
-        GoodsInfo info = null;
-        AccountInfo accountInfo = accountInfoService.findByUserName(username);
-        System.out.println(accountInfo.getAccountid());
+        GoodsInfo goodsInfo = null;
+        UserInfo userInfo = userInfoService.getUserInfoByUname(username);
+        AccountInfo accountInfo = accountInfoService.findByUserId(userInfo.getUserid());
         if (accountInfo.getAmount() >= goodsghighaccount) {
-            info = goodsInfoService.updateHighAccount(goodsInfoService.findById(goodsid));
+            GoodsInfo template = goodsInfoService.findById(goodsid);
+            template.setGhighaccount(goodsghighaccount);
+            goodsInfo = goodsInfoService.updateHighAccount(template);
         }
-        if (info != null) {
-            map.put("goodsinfo", gson.toJson(info));
+        if (goodsInfo != null) {
+            businessInfoService.updateBusinessInfo(userInfo.getUserid(),
+                    goodsInfo.getGoodsid(),goodsInfo.getGhighaccount(),"余额");
+            map.put("goodsinfo", gson.toJson(goodsInfo));
             System.out.println("更新成功！");
             map.put("result", "success");
         } else {
@@ -71,4 +78,6 @@ public class GoodsInfoController extends Cross {
         }
         return map;
     }
+
+
 }

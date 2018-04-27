@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {UserInfo} from "../entity/UserInfo";
-import {UserInfoService} from "../services/user-info.service";
+import {UserInfo} from "../../entity/UserInfo";
+import {UserInfoService} from "../../services/user-info.service";
 import {NzMessageService} from "ng-zorro-antd";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -14,9 +15,12 @@ export class LoginComponent implements OnInit {
   userstate: string = sessionStorage.getItem('userinfo');
   isVisible = false;
   isVisible2 = false;
+  isShowRegister = false;
+  validateForm: FormGroup;
 
   constructor(private userInfoService: UserInfoService,
-              private _message: NzMessageService) {
+              private _message: NzMessageService,
+              private fb: FormBuilder) {
   }
 
   ngOnInit() {
@@ -53,6 +57,13 @@ export class LoginComponent implements OnInit {
     this.isVisible = true;
   }
 
+  openR = () => {
+    this.isVisible = false;
+    this.username = null;
+    this.pwd = null;
+    this.isShowRegister = true;
+  }
+
   close = () => {
     this.isVisible = false;
   }
@@ -63,6 +74,10 @@ export class LoginComponent implements OnInit {
 
   close2 = () => {
     this.isVisible2 = false;
+  }
+
+  closeR = () => {
+    this.isShowRegister = false;
   }
 
   exit = () => {

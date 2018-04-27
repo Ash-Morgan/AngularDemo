@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 */
 @Repository(value = "business-info-repo")
 public interface BusinessInfoRepo extends CrudRepository<BusinessInfo, String> {
+    public BusinessInfo findByGoodsid(int goodsid);
 }

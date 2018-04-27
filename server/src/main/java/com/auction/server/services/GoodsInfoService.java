@@ -19,11 +19,12 @@ public class GoodsInfoService {
 
     /**
      * 获取所有商品信息
+     *
      * @return List<GoodsInfo>
      */
     public List<GoodsInfo> getAllGoodsInfo() {
         List<GoodsInfo> goodsInfoList = new ArrayList<GoodsInfo>();
-        if (goodsInfoRepo.findAll().iterator().hasNext()){
+        if (goodsInfoRepo.findAll().iterator().hasNext()) {
             goodsInfoList = (List<GoodsInfo>) goodsInfoRepo.findAll();
         }
         return goodsInfoList;
@@ -31,19 +32,21 @@ public class GoodsInfoService {
 
     /**
      * 更新商品当前拍卖价格
+     *
      * @param info
      * @return GoodsInfo
      */
-    public GoodsInfo updateHighAccount(GoodsInfo info){
+    public GoodsInfo updateHighAccount(GoodsInfo info) {
         return goodsInfoRepo.save(info);
     }
 
     /**
      * 根据商品编号查询
+     *
      * @param id
      * @return GoodsInfo
      */
-    public GoodsInfo findById(int id){
+    public GoodsInfo findById(int id) {
         return goodsInfoRepo.findByGoodsid(id);
     }
 }
