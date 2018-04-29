@@ -43,7 +43,6 @@ public class GoodsInfoController extends Cross {
         return goodsInfoService.getAllGoodsInfo();
     }
 
-    @ResponseBody
     @GetMapping(value = "/getbyid")
     public GoodsInfo getInfoById(@RequestParam("id") int id) {
         System.out.println("++++++++++++++++++++++++++id = " + id);

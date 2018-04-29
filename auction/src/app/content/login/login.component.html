@@ -59,7 +59,7 @@
   <ng-template #modaltitleR><b>新用户注册</b>
   </ng-template>
   <ng-template #modalccontentR>
-    <app-register></app-register>
+    <app-register  (isShowRegister)="eventHandler($event)"></app-register>
   </ng-template>
   <ng-template #modalfooterR>
   </ng-template>

@@ -16,11 +16,9 @@ export class LoginComponent implements OnInit {
   isVisible = false;
   isVisible2 = false;
   isShowRegister = false;
-  validateForm: FormGroup;
 
   constructor(private userInfoService: UserInfoService,
-              private _message: NzMessageService,
-              private fb: FormBuilder) {
+              private _message: NzMessageService) {
   }
 
   ngOnInit() {
@@ -39,8 +37,8 @@ export class LoginComponent implements OnInit {
           val);
         if (val.result === "success") {
           this.isVisible = false;
-          this.userstate = this.username;
           sessionStorage.setItem('userinfo', theinfo.username);
+          this.userstate = this.username;
           this._message.create('success', `Welcome to login:` +  theinfo.username);
         }
       },
@@ -62,6 +60,10 @@ export class LoginComponent implements OnInit {
     this.username = null;
     this.pwd = null;
     this.isShowRegister = true;
+  }
+
+  eventHandler(event:boolean) {
+    this.isShowRegister = event;
   }
 
   close = () => {

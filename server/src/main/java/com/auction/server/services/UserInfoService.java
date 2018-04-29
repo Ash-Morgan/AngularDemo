@@ -40,4 +40,13 @@ public class UserInfoService {
         }
         return userInfo;
     }
+
+    /**
+     * 添加新用户
+     * @param userInfo
+     * @return
+     */
+    public UserInfo addNewUser(UserInfo userInfo){
+        return userInfoRepo.save(userInfo);
+    }
 }

@@ -16,11 +16,15 @@ import {GoodsComponent} from "./content/goods/goods.component";
 import {GoodsInfoService} from "./services/goods-info.service";
 import {CountdownComponent} from "./content/countdown/countdown.component";
 import {RegisterComponent} from "./content/register/register.component";
+import {CusComponent} from "./cus/cus.component";
+import {AdminComponent} from "./admin/admin.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    CusComponent,
+    AdminComponent,
     MainComponent,
     CardComponent,
     LoginComponent,
