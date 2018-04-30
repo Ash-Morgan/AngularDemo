@@ -1,0 +1,38 @@
+<div style="padding-top:100px;padding-left: 450px">
+  <nz-card style="width:500px;">
+    <ng-template #title>
+      管理员登录
+    </ng-template>
+    <ng-template #body>
+      <form class="login-form" #loginForm (ngSubmit)="submitForm(loginForm.value)">
+        <div nz-form-item>
+          <div nz-form-control>
+            <nz-input name="username" [(ngModel)]="username" [nzPlaceHolder]="'Username'" [nzSize]="'large'">
+              <ng-template #prefix>
+                <i class="anticon anticon-user"></i>
+              </ng-template>
+            </nz-input>
+          </div>
+        </div>
+        <br>
+        <div nz-form-item>
+          <div nz-form-control>
+            <nz-input name="password" [(ngModel)]="pwd" [nzType]="'password'" [nzPlaceHolder]="'Password'"
+                      [nzSize]="'large'">
+              <ng-template #prefix>
+                <i class="anticon anticon-lock"></i>
+              </ng-template>
+            </nz-input>
+          </div>
+        </div>
+        <br>
+        <div nz-form-item>
+          <div nz-form-control>
+            <button nz-button class="login-form-button" [nzType]="'primary'" [nzSize]="'large'" type="submit">Log in
+            </button>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  </nz-card>
+</div>

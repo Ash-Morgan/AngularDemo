@@ -1,6 +1,19 @@
 create database auction;
 use auction;
 
+create table admininfo(
+adminid int(8) primary key AUTO_INCREMENT,
+workid varchar(8) not null,
+adminpwd varchar(20) not null,
+aname varchar(24) not null,
+asex varchar(6) not null,
+abirthdate varchar(10) not null,
+aphone varchar(11) not null,
+astate int(2) default 1
+);
+insert into admininfo value(null,'1234','1234','½ðÐÂ³¬','ÄÐ','1995-09-02','18930155819',1);
+
+
 create table userinfo(
 userid int(8) primary key AUTO_INCREMENT,
 username varchar(24) not null,

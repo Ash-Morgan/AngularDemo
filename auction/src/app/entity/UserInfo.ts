@@ -1,5 +1,5 @@
 export class UserInfo {
-  userid: string;
+  userid: number;
   username: string;
   userpwd: string;
   uname: string;
