@@ -19,16 +19,16 @@ public class BusinessInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "businessid", length = 32, nullable = false)
-    private int businessid;
+    private Integer businessid;
 
     @Column(name = "buyuserid", length = 8, nullable = false)
-    private int buyuserid;
+    private Integer buyuserid;
 
     @Column(name = "saleuserid", length = 8, nullable = false)
-    private int saleuserid;
+    private Integer saleuserid;
 
     @Column(name = "goodsid", length = 8, nullable = false)
-    private int goodsid;
+    private Integer goodsid;
 
     @Column(name = "bamount", nullable = false)
     private double bamount;
@@ -46,37 +46,37 @@ public class BusinessInfo {
     private String payway;
 
     @Column(name = "bstate", length = 2,columnDefinition = "1")
-    private int bstate;
+    private Integer bstate;
 
-    public int getBusinessid() {
+    public Integer getBusinessid() {
         return businessid;
     }
 
-    public void setBusinessid(int businessid) {
+    public void setBusinessid(Integer businessid) {
         this.businessid = businessid;
     }
 
-    public int getBuyuserid() {
+    public Integer getBuyuserid() {
         return buyuserid;
     }
 
-    public void setBuyuserid(int buyuserid) {
+    public void setBuyuserid(Integer buyuserid) {
         this.buyuserid = buyuserid;
     }
 
-    public int getSaleuserid() {
+    public Integer getSaleuserid() {
         return saleuserid;
     }
 
-    public void setSaleuserid(int saleuserid) {
+    public void setSaleuserid(Integer saleuserid) {
         this.saleuserid = saleuserid;
     }
 
-    public int getGoodsid() {
+    public Integer getGoodsid() {
         return goodsid;
     }
 
-    public void setGoodsid(int goodsid) {
+    public void setGoodsid(Integer goodsid) {
         this.goodsid = goodsid;
     }
 
@@ -120,11 +120,11 @@ public class BusinessInfo {
         this.payway = payway;
     }
 
-    public int getBstate() {
+    public Integer getBstate() {
         return bstate;
     }
 
-    public void setBstate(int bstate) {
+    public void setBstate(Integer bstate) {
         this.bstate = bstate;
     }
 }

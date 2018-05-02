@@ -19,10 +19,10 @@ public class GoodsInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "goodsid", length = 8, nullable = false)
-    private int goodsid;
+    private Integer goodsid;
 
     @Column(name = "guserid", length = 8, nullable = false)
-    private int guserid;
+    private Integer guserid;
 
     @Column(name = "gname", length = 32, nullable = false)
     private String gname;
@@ -42,25 +42,28 @@ public class GoodsInfo {
     @Column(name = "genddate", length = 20, nullable = false)
     private String genddate;
 
+    @Column(name = "gtypeid", length = 2, nullable = false)
+    private Integer gtypeid;
+
     @Column(name = "goodstate", length = 10, nullable = false)
     private String goodstate;
 
     @Column(name = "gstate", length = 2,columnDefinition = "1")
-    private int gstate;
+    private Integer gstate;
 
-    public int getGoodsid() {
+    public Integer getGoodsid() {
         return goodsid;
     }
 
-    public void setGoodsid(int goodsid) {
+    public void setGoodsid(Integer goodsid) {
         this.goodsid = goodsid;
     }
 
-    public int getGuserid() {
+    public Integer getGuserid() {
         return guserid;
     }
 
-    public void setGuserid(int guserid) {
+    public void setGuserid(Integer guserid) {
         this.guserid = guserid;
     }
 
@@ -120,11 +123,19 @@ public class GoodsInfo {
         this.goodstate = goodstate;
     }
 
-    public int getGstate() {
+    public Integer getGstate() {
         return gstate;
     }
 
-    public void setGstate(int gstate) {
+    public void setGstate(Integer gstate) {
         this.gstate = gstate;
+    }
+
+    public Integer getGtypeid() {
+        return gtypeid;
+    }
+
+    public void setGtypeid(Integer gtypeid) {
+        this.gtypeid = gtypeid;
     }
 }

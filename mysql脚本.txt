@@ -97,12 +97,18 @@ ghighaccount double,
 gcontent longtext,
 gstartdate varchar(20),
 genddate varchar(20),
+gtypeid int(2) not null,
 goodstate varchar(10),
 gstate int(2) default 1
 );
-insert into goodsinfo value(null,1,'景德镇瓷器',2400.1,3200.1,'景德镇瓷器始于汉代，东汉约公元25－220年，此时的陶器"质甚粗，体甚厚，釉色淡而糙"，"只供迩俗粗用"，并不远销。因此，影响所及，极为有限。五代时的景德镇为南方最早烧造白瓷之地，因白瓷的较高成就而奠定了自己的地位，从而打破了青瓷在南方的垄断局面，并形成了"南青北白"的格局，对于宋代青白瓷的制作，元、明、清瓷业的发展有着极为重要的作用， 是中国陶瓷烧造史上重要的历史时期。','2018-04-23 00:00:00','2018-04-25 23:30:00','未出售',1);
-update goodsinfo set genddate = '2018-04-25 14:00:00' where goodsid = 16;
+insert into goodsinfo value(null,1,'景德镇瓷器',2400,3200,'景德镇瓷器始于汉代，东汉约公元25－220年，此时的陶器"质甚粗，体甚厚，釉色淡而糙"，"只供迩俗粗用"，并不远销。因此，影响所及，极为有限。五代时的景德镇为南方最早烧造白瓷之地，因白瓷的较高成就而奠定了自己的地位，从而打破了青瓷在南方的垄断局面，并形成了"南青北白"的格局，对于宋代青白瓷的制作，元、明、清瓷业的发展有着极为重要的作用， 是中国陶瓷烧造史上重要的历史时期。','2018-04-23 00:00:00','2018-05-25 23:30:00',1,'未出售',1);
 
+create table goodstype(
+typeid int(2) primary key AUTO_INCREMENT,
+tname varchar(20) not null,
+tstate int(2) default 1
+);
+insert into goodstype value(null,'古董',1);
 
 
 create table goodsphoto(

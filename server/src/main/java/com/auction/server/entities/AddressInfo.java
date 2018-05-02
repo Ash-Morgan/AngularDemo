@@ -19,31 +19,31 @@ public class AddressInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "addid", length = 10, nullable = false)
-    private int addid;
+    private Integer addid;
 
     @Column(name = "userid", length = 8, nullable = false)
-    private int userid;
+    private Integer userid;
 
 
     @Column(name = "address", length = 80, nullable = false)
     private String address;
 
     @Column(name = "astate", length = 2,columnDefinition = "1")
-    private int astate;
+    private Integer astate;
 
-    public int getAddid() {
+    public Integer getAddid() {
         return addid;
     }
 
-    public void setAddid(int addid) {
+    public void setAddid(Integer addid) {
         this.addid = addid;
     }
 
-    public int getUserid() {
+    public Integer getUserid() {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(Integer userid) {
         this.userid = userid;
     }
 
@@ -55,11 +55,11 @@ public class AddressInfo {
         this.address = address;
     }
 
-    public int getAstate() {
+    public Integer getAstate() {
         return astate;
     }
 
-    public void setAstate(int astate) {
+    public void setAstate(Integer astate) {
         this.astate = astate;
     }
 }

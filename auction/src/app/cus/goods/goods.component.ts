@@ -60,6 +60,7 @@ export class GoodsComponent implements OnInit {
         this.goodsinfo.gcontent = val.gcontent;
         this.goodsinfo.gstartdate = val.gstartdate;
         this.goodsinfo.genddate = val.genddate;
+        this.goodsinfo.gtypeid = val.gtypeid;
         this.goodsinfo.goodstate = val.goodstate;
         this.goodsinfo.gstate = val.gstate;
         console.log("Put in success!", this.goodsinfo);

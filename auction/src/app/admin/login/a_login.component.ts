@@ -33,6 +33,7 @@ export class A_loginComponent implements OnInit{
         if (val.result === "success") {
           sessionStorage.setItem('adminstate', theinfo.workid);
           this.message.create('success', `Welcome to login:` +  theinfo.workid);
+          window.open('/admin/main',"_self");
         }
       },
       response => {

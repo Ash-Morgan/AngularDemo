@@ -8,6 +8,7 @@ export class GoodsInfo {
   gstartdate:string;
   genddate:string;
   goodstate:string;
+  gtypeid:number;
   gstate:number;
 
   constructor(){}

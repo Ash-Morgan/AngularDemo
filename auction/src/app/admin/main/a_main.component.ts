@@ -6,10 +6,13 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./a_main.component.css']
 })
 export class A_mainComponent implements OnInit{
-
+  adminstate = sessionStorage.getItem('adminstate');
+  isCollapsed = true;
   constructor(
   ){}
 
   ngOnInit(): void {
   }
+
+
 }

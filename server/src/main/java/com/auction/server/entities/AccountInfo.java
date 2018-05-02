@@ -19,31 +19,31 @@ public class AccountInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "accountid", length = 8, nullable = false)
-    private int accountid;
+    private Integer accountid;
 
     @Column(name = "userid", length = 8, nullable = false)
-    private int userid;
+    private Integer userid;
 
 
     @Column(name = "amount", nullable = false)
     private double amount;
 
     @Column(name = "astate", length = 2,columnDefinition = "1")
-    private int astate;
+    private Integer astate;
 
-    public int getAccountid() {
+    public Integer getAccountid() {
         return accountid;
     }
 
-    public void setAccountid(int accountid) {
+    public void setAccountid(Integer accountid) {
         this.accountid = accountid;
     }
 
-    public int getUserid() {
+    public Integer getUserid() {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(Integer userid) {
         this.userid = userid;
     }
 
@@ -55,11 +55,11 @@ public class AccountInfo {
         this.amount = amount;
     }
 
-    public int getAstate() {
+    public Integer getAstate() {
         return astate;
     }
 
-    public void setAstate(int astate) {
+    public void setAstate(Integer astate) {
         this.astate = astate;
     }
 }

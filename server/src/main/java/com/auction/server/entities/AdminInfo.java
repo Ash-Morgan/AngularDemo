@@ -18,7 +18,7 @@ public class AdminInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "adminid", length = 8, nullable = false)
-    private int adminid;
+    private Integer adminid;
 
     @Column(name = "workid", length = 8, nullable = false)
     private String workid;
@@ -39,13 +39,13 @@ public class AdminInfo {
     private String aphone;
 
     @Column(name = "astate", length = 2, columnDefinition = "1")
-    private int astate;
+    private Integer astate;
 
-    public int getAdminid() {
+    public Integer getAdminid() {
         return adminid;
     }
 
-    public void setAdminid(int adminid) {
+    public void setAdminid(Integer adminid) {
         this.adminid = adminid;
     }
 
@@ -97,11 +97,11 @@ public class AdminInfo {
         this.aphone = aphone;
     }
 
-    public int getAstate() {
+    public Integer getAstate() {
         return astate;
     }
 
-    public void setAstate(int astate) {
+    public void setAstate(Integer astate) {
         this.astate = astate;
     }
 }

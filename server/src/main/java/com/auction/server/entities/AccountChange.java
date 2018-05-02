@@ -19,13 +19,13 @@ public class AccountChange {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "changeid", length = 16, nullable = false)
-    private int changeid;
+    private Integer changeid;
 
     @Column(name = "caccountid", length = 8, nullable = false)
-    private int caccountid;
+    private Integer caccountid;
 
     @Column(name = "cuserid", length = 8, nullable = false)
-    private int cuserid;
+    private Integer cuserid;
 
     @Column(name = "amount", nullable = false)
     private double amount;
@@ -37,29 +37,29 @@ public class AccountChange {
     private String ccontent;
 
     @Column(name = "cstate", length = 2,columnDefinition = "1")
-    private int cstate;
+    private Integer cstate;
 
-    public int getChangeid() {
+    public Integer getChangeid() {
         return changeid;
     }
 
-    public void setChangeid(int changeid) {
+    public void setChangeid(Integer changeid) {
         this.changeid = changeid;
     }
 
-    public int getCaccountid() {
+    public Integer getCaccountid() {
         return caccountid;
     }
 
-    public void setCaccountid(int caccountid) {
+    public void setCaccountid(Integer caccountid) {
         this.caccountid = caccountid;
     }
 
-    public int getCuserid() {
+    public Integer getCuserid() {
         return cuserid;
     }
 
-    public void setCuserid(int cuserid) {
+    public void setCuserid(Integer cuserid) {
         this.cuserid = cuserid;
     }
 
@@ -87,11 +87,11 @@ public class AccountChange {
         this.ccontent = ccontent;
     }
 
-    public int getCstate() {
+    public Integer getCstate() {
         return cstate;
     }
 
-    public void setCstate(int cstate) {
+    public void setCstate(Integer cstate) {
         this.cstate = cstate;
     }
 }

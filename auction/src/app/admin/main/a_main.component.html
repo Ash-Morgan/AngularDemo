@@ -1,39 +1,33 @@
-<nz-layout>
-  <nz-header style="width:100%;height: 70px;">
-    <a href="/main">
-      <div class="logo">
-      </div>
-    </a>
-    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 70px;">
-      <li nz-menu-item>
-        <a href="/main"><i class="anticon anticon-home"></i>首页</a>
-      </li>
+<nz-layout style="height: 100%">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" nzCollapsedWidth="100">
+    <div class="logo" align="center">
+      <a style="color: #fff"><span>管理员<span class="nav-text">:{{ adminstate }}</span></span></a>
+    </div>
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
       <li nz-submenu>
-        <span title><i class="anticon anticon-plus-circle-o"></i>管理员主要功能</span>
+        <span title><i class="anticon anticon-user"></i><span class="nav-text">商品管理</span></span>
         <ul>
-          <li nz-menu-group>
-            <span title>拍卖平台</span>
-            <ul>
-              <a href="/goods?id=14">
-                <li nz-menu-item>查看商品</li>
-              </a>
-              <a href="/hello">
-                <li nz-menu-item>hello</li>
-              </a>
-            </ul>
-          </li>
+          <a href="/admin/main/goods"><li nz-menu-item>商品审核</li></a>
+          <li nz-menu-item>Bill</li>
+          <li nz-menu-item>Alex</li>
         </ul>
       </li>
-      <li nz-menu-item><i class="anticon anticon-pushpin"></i>标题 2</li>
-      <li nz-menu-item><i class="anticon anticon-message"></i>标题 3</li>
-      <li nz-menu-item>
-        <app-login></app-login>
+      <li nz-submenu>
+        <span title><i class="anticon anticon-team"></i><span class="nav-text">Team</span></span>
+        <ul>
+          <li nz-menu-item>Team 1</li>
+          <li nz-menu-item>Team 2</li>
+        </ul>
       </li>
+      <li nz-menu-item><span><i class="anticon anticon-file"></i><span class="nav-text">File</span></span></li>
     </ul>
-  </nz-header>
-  <nz-content style="padding:50px 50px;">
-    <router-outlet></router-outlet>
-  </nz-content>
-  <nz-footer style="text-align: center;">©2018 by:Ash-Morgan</nz-footer>
+  </nz-sider>
+  <nz-layout style="padding-top: 20px">
+    <nz-content style="margin:0 16px;">
+      <div style="padding:24px; background: #fff; min-height: 100%;">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer style="text-align: center;">©2018 by:Ash-Morgan</nz-footer>
+  </nz-layout>
 </nz-layout>
-

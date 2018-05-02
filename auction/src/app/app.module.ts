@@ -21,6 +21,7 @@ import {AdminComponent} from "./admin/admin.component";
 import {A_loginComponent} from "./admin/login/a_login.component";
 import {AdminInfoService} from "./services/admin-info.service";
 import {A_mainComponent} from "./admin/main/a_main.component";
+import {A_goodsComponent} from "./admin/goods/a_goods.component";
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {A_mainComponent} from "./admin/main/a_main.component";
     CountdownComponent,
     RegisterComponent,
     A_loginComponent,
-    A_mainComponent
+    A_mainComponent,
+    A_goodsComponent
   ],
   imports: [
     HttpClientModule,
