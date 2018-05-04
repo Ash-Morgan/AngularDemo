@@ -10,5 +10,7 @@ import org.springframework.stereotype.Repository;
 */
 @Repository(value = "user-info-repo")
 public interface UserInfoRepo extends CrudRepository<UserInfo, String> {
+    public Iterable<UserInfo> findAllByUstate(int ustate);
+
     public UserInfo findByUsername(String username);
 }

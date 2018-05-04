@@ -13,6 +13,16 @@ export class UserInfoService extends WebApiService {
     super();
   }
 
+  public getAllUsers():Observable<any>{
+    let url=UserInfoService.getApiUrl()+"user/getallusers";
+    log('Fetching...');
+    log(url);
+    let ob:Observable<any> = this.http
+      .get(url);
+    log('Fetching End');
+    return ob;
+  }
+
   //用户登录提交用户信息
   public postUserInfo(info:UserInfo):Observable<any>{
     let url=UserInfoService.getApiUrl()+"user/postuserinfo";
@@ -39,6 +49,63 @@ export class UserInfoService extends WebApiService {
   //用户注册提交登录信息
   public registerUser(info:UserInfo):Observable<any>{
     let url=UserInfoService.getApiUrl()+"user/registeruser";
+    log('Fetching...');
+    log(url);
+    log(info.toString());
+    let ob:Observable<any> = this.http
+      .post(url,info);
+    log('Fetching End');
+    return ob;
+  }
+
+  public getNotCheck():Observable<any>{
+    let url=UserInfoService.getApiUrl()+"user/getnotcheck";
+    log('Fetching...');
+    log(url);
+    let ob:Observable<any> = this.http
+      .get(url);
+    log('Fetching End');
+    return ob;
+  }
+
+  public postCheckSign(data,sign):Observable<any>{
+    let url=UserInfoService.getApiUrl()+"user/postchecksign";
+    log('Fetching...');
+    log(url);
+    let ob:Observable<any> = this.http
+      .post(url,{
+        params: data,
+        sign:sign
+      });
+    log('Fetching End');
+    return ob;
+  }
+
+  public getCheckFailedUserInfo():Observable<any>{
+    let url=UserInfoService.getApiUrl()+"user/getcheckfailed";
+    log('Fetching...');
+    log(url);
+    let ob:Observable<any> = this.http
+      .get(url);
+    log('Fetching End');
+    return ob;
+  }
+
+  //删除用户信息
+  public deleteuserinfo(info:UserInfo):Observable<any>{
+    let url=UserInfoService.getApiUrl()+"user/deleteuserinfo";
+    log('Fetching...');
+    log(url);
+    log(info.toString());
+    let ob:Observable<any> = this.http
+      .post(url,info);
+    log('Fetching End');
+    return ob;
+  }
+
+  //更新用户信息
+  public updateuserinfo(info:UserInfo):Observable<any>{
+    let url=UserInfoService.getApiUrl()+"user/updateuserinfo";
     log('Fetching...');
     log(url);
     log(info.toString());

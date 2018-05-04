@@ -21,10 +21,10 @@ public class UserInfoService {
      * 获取所有用户信息
      * @return List<UserInfo>
      */
-    public List<UserInfo> getAllUserInfo() {
+    public List<UserInfo> getAllUserInfoByUstate(int ustate) {
         List<UserInfo> userInfoList = new ArrayList<UserInfo>();
-        if (userInfoRepo.findAll().iterator().hasNext()){
-            userInfoList = (List<UserInfo>) userInfoRepo.findAll();
+        if (userInfoRepo.findAllByUstate(ustate).iterator().hasNext()){
+            userInfoList = (List<UserInfo>) userInfoRepo.findAllByUstate(ustate);
         }
         return userInfoList;
     }
@@ -46,7 +46,16 @@ public class UserInfoService {
      * @param userInfo
      * @return
      */
-    public UserInfo addNewUser(UserInfo userInfo){
+    public UserInfo saveUserInfo(UserInfo userInfo){
         return userInfoRepo.save(userInfo);
     }
+
+    /**
+     * 删除指定商品
+     * @param userInfo
+     */
+    public void deleteGoodsInfo(UserInfo userInfo){
+        userInfoRepo.delete(userInfo);
+    }
+
 }

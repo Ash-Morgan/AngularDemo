@@ -40,6 +40,8 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('userinfo', theinfo.username);
           this.userstate = this.username;
           this._message.create('success', `Welcome to login:` +  theinfo.username);
+        }else if (val.result === "error") {
+          this._message.create('error', `用户尚未注册或还在审核中！`);
         }
       },
       response => {
@@ -67,6 +69,8 @@ export class LoginComponent implements OnInit {
   }
 
   close = () => {
+    this.username = null;
+    this.pwd = null;
     this.isVisible = false;
   }
 

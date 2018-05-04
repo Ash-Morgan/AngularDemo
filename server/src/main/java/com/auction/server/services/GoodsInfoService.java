@@ -18,14 +18,14 @@ public class GoodsInfoService {
     private GoodsInfoRepo goodsInfoRepo;
 
     /**
-     * 获取所有商品信息
+     * 根据商品状态获取所有商品信息
      *
      * @return List<GoodsInfo>
      */
-    public List<GoodsInfo> getAllGoodsInfo() {
+    public List<GoodsInfo> getAllGoodsInfoByGstate(int gstate) {
         List<GoodsInfo> goodsInfoList = new ArrayList<GoodsInfo>();
-        if (goodsInfoRepo.findAll().iterator().hasNext()) {
-            goodsInfoList = (List<GoodsInfo>) goodsInfoRepo.findAll();
+        if (goodsInfoRepo.findAllByGstate(gstate).iterator().hasNext()) {
+            goodsInfoList = (List<GoodsInfo>) goodsInfoRepo.findAllByGstate(gstate);
         }
         return goodsInfoList;
     }
@@ -48,5 +48,22 @@ public class GoodsInfoService {
      */
     public GoodsInfo findById(int id) {
         return goodsInfoRepo.findByGoodsid(id);
+    }
+
+    /**
+     * 删除指定商品
+     * @param goodsInfo
+     */
+    public void deleteGoodsInfo(GoodsInfo goodsInfo){
+        goodsInfoRepo.delete(goodsInfo);
+    }
+
+    /**
+     * 保存指定商品
+     * @param goodsInfo
+     * @return GoodsInfo
+     */
+    public GoodsInfo saveGoodsInfo(GoodsInfo goodsInfo){
+        return goodsInfoRepo.save(goodsInfo);
     }
 }

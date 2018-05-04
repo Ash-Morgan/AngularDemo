@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {AppComponent} from './app.component';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
@@ -22,6 +22,12 @@ import {A_loginComponent} from "./admin/login/a_login.component";
 import {AdminInfoService} from "./services/admin-info.service";
 import {A_mainComponent} from "./admin/main/a_main.component";
 import {A_goodsComponent} from "./admin/goods/a_goods.component";
+import {G_checkComponent} from "./admin/goods/goodscheck/g_check.component";
+import {G_check_FailedComponent} from "./admin/goods/goodscheckfailed/g_check_failed.component";
+import {U_checkComponent} from "./admin/user/usercheck/u_check.component";
+import {U_check_FailedComponent} from "./admin/user/userfailed/u_failed.component";
+import {U_managementComponent} from "./admin/user/usermanagement/u_management.component";
+import {U_formComponent} from "./admin/user/usermanagement/form/form.component";
 
 
 @NgModule({
@@ -38,9 +44,16 @@ import {A_goodsComponent} from "./admin/goods/a_goods.component";
     RegisterComponent,
     A_loginComponent,
     A_mainComponent,
-    A_goodsComponent
+    A_goodsComponent,
+    G_checkComponent,
+    G_check_FailedComponent,
+    U_checkComponent,
+    U_check_FailedComponent,
+    U_managementComponent,
+    U_formComponent
   ],
   imports: [
+    NgbModule.forRoot(),
     HttpClientModule,
     NgZorroAntdModule.forRoot(),
     BrowserModule,
@@ -48,7 +61,7 @@ import {A_goodsComponent} from "./admin/goods/a_goods.component";
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [AdminInfoService,UserInfoService,GoodsInfoService],
+  providers: [AdminInfoService, UserInfoService, GoodsInfoService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

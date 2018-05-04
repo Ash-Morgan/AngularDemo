@@ -1,31 +1,27 @@
 import {Component, OnInit} from '@angular/core';
-import {AdminInfo} from '../../entity/AdminInfo';
 import {NzMessageService} from "ng-zorro-antd";
-import {GoodsInfoService} from "../../services/goods-info.service";
-import {GoodsInfo} from "../../entity/GoodsInfo";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UserInfo} from "../../../entity/UserInfo";
+import {UserInfoService} from "../../../services/user-info.service";
 
 @Component({
-  selector: 'app-a-goods',
-  templateUrl: './a_goods.component.html',
-  styleUrls: ['a_goods.component.css']
+  selector: 'app-u-management',
+  templateUrl: './u_management.component.html'
 })
-export class A_goodsComponent implements OnInit {
+export class U_managementComponent implements OnInit {
 
-  displayTh: Array<any> = ['商品编号', '所属用户编号', '商品名称', '商品起拍价格',
-    '商品最高拍卖价格', '商品简介', '拍卖开始时间', '拍卖结束时间', '商品类别',
-    '商品状态','操作'];
+  displayTh: Array<any> = ['用户编号', '用户名', '用户姓名',
+    '用户性别', '身份证号', '出生日期', '联系方式', '用户状态','操作'];
   data: any;
-  goodsUpdate:GoodsInfo = new GoodsInfo();
-  goodsinfo:GoodsInfo = new GoodsInfo();
+  userUpdate:UserInfo = new UserInfo();
+  userinfo:UserInfo = new UserInfo();
   updateShow:boolean = false;
   addShow:boolean = false;
-  _startdate = new Date();
   u_validateForm: FormGroup;
   a_validateForm: FormGroup;
 
   initTable(){
-    this.goodsService.getAllGoodsInfo().subscribe(
+    this.userService.getAllUsers().subscribe(
       (val) => {
         console.log('Get success!', val);
         this.data = val;
@@ -33,24 +29,28 @@ export class A_goodsComponent implements OnInit {
     );
   }
 
-  initgoodsinfo():void{
-    this.goodsinfo.goodsid = null;
-    this.goodsinfo.guserid = null;
-    this.goodsinfo.gname = null;
-    this.goodsinfo.gstartaccount = null;
-    this.goodsinfo.ghighaccount = null;
-    this.goodsinfo.gcontent = null;
-    this.goodsinfo.gstartdate = null;
-    this.goodsinfo.genddate = null;
-    this.goodsinfo.gtypeid = null;
-    this.goodsinfo.goodstate = null;
-    this.goodsinfo.gstate = null;
+  eventHandler_U(event:boolean) {
+    this.updateShow = event;
+  }
+
+  eventHandler_A(event:boolean) {
+    this.addShow = event;
+  }
+
+  inituserinfo():void{
+    this.userinfo.userid = null;
+    this.userinfo.username = null;
+    this.userinfo.uname = null;
+    this.userinfo.usex = null;
+    this.userinfo.ucardid = null;
+    this.userinfo.ubirthdate = null;
+    this.userinfo.uphone = null;
+    this.userinfo.ustate = null;
   }
 
   openUpdate(info:any):void{
     console.log('info=',info.gname);
-    this.goodsUpdate=info;
-    this._startdate = new Date();
+    this.userUpdate=info;
     this.updateShow = true;
   }
 
@@ -59,16 +59,15 @@ export class A_goodsComponent implements OnInit {
   }
 
   submitUpdate($event, value):void{
-    this.goodsUpdate.guserid = value.u_guserid;
-    this.goodsUpdate.gname = value.u_gname;
-    this.goodsUpdate.gstartaccount = value.u_gstartaccount;
-    this.goodsUpdate.ghighaccount = value.u_ghighaccount;
-    this.goodsUpdate.gcontent = value.u_gcontent;
-    this.goodsUpdate.gstartdate = value.u_gstartdate;
-    this.goodsUpdate.genddate = value.u_genddate;
-    this.goodsUpdate.gtypeid = value.u_gtypeid;
-    this.goodsUpdate.goodstate = value.u_goodstate;
-    this.goodsService.updategoodsinfo(this.goodsUpdate).subscribe(
+    this.userUpdate.userid = value.userid;
+    this.userUpdate.username = value.username;
+    this.userUpdate.uname = value.uname;
+    this.userUpdate.usex = value.usex;
+    this.userUpdate.ucardid = value.ucardid;
+    this.userUpdate.ubirthdate = value.ubirthdate;
+    this.userUpdate.uphone = value.uphone;
+    this.userUpdate.ustate = value.ustate;
+    this.userService.updateuserinfo(this.userUpdate).subscribe(
       () =>{
         this.message.create('success', `更新成功！`);
         this.initTable();
@@ -78,27 +77,26 @@ export class A_goodsComponent implements OnInit {
   }
 
   openAdd():void{
-    this.initgoodsinfo();
+    this.inituserinfo();
     this.addShow = true;
   }
 
   closeAdd():void{
-    this.initgoodsinfo();
+    this.inituserinfo();
     this.a_validateForm.reset();
     this.addShow = false;
   }
 
   submitAdd($event, value):void{
-    this.goodsinfo.guserid = value.a_guserid;
-    this.goodsinfo.gname = value.a_gname;
-    this.goodsinfo.gstartaccount = value.a_gstartaccount;
-    this.goodsinfo.ghighaccount = value.a_ghighaccount;
-    this.goodsinfo.gcontent = value.a_gcontent;
-    this.goodsinfo.gstartdate = value.a_gstartdate;
-    this.goodsinfo.genddate = value.a_genddate;
-    this.goodsinfo.gtypeid = value.a_gtypeid;
-    this.goodsinfo.goodstate = value.a_goodstate;
-    this.goodsService.addgoodsinfo(this.goodsinfo).subscribe(
+    this.userinfo.userid = value.userid;
+    this.userinfo.username = value.username;
+    this.userinfo.uname = value.uname;
+    this.userinfo.usex = value.usex;
+    this.userinfo.ucardid = value.ucardid;
+    this.userinfo.ubirthdate = value.ubirthdate;
+    this.userinfo.uphone = value.uphone;
+    this.userinfo.ustate = value.ustate;
+    this.userService.registerUser(this.userinfo).subscribe(
       () =>{
         this.message.create('success', `添加成功！`);
         this.initTable();
@@ -108,7 +106,7 @@ export class A_goodsComponent implements OnInit {
   }
 
   deleteinfo(info:any):void{
-    this.goodsService.deletegoodsinfo(info).subscribe(
+    this.userService.deleteuserinfo(info).subscribe(
       () =>{
         this.message.create('success', `删除成功！`);
         this.initTable();
@@ -126,7 +124,7 @@ export class A_goodsComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private message: NzMessageService,
-              private goodsService: GoodsInfoService) {
+              private userService: UserInfoService) {
     this.u_validateForm = this.fb.group({
       u_gname: ['', [Validators.required]],
       u_guserid: ['', [Validators.required]],

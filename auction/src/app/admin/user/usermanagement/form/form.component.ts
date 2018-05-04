@@ -2,19 +2,21 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from "rxjs/Observable";
-import {UserInfo} from "../../entity/UserInfo";
-import {UserInfoService} from "../../services/user-info.service";
 import {NzMessageService} from "ng-zorro-antd";
+import {UserInfo} from "../../../../entity/UserInfo";
+import {UserInfoService} from "../../../../services/user-info.service";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-u-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class U_formComponent implements OnInit {
   [x: string]: any;
+  @Output() isShow: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input()  datainfo:any;
   validateForm: FormGroup;
-  @Output() isShowRegister: EventEmitter<boolean> = new EventEmitter<boolean>();
+
 
   submitForm = ($event, value) => {
     $event.preventDefault();
@@ -35,7 +37,7 @@ export class RegisterComponent implements OnInit {
       (val)=>{
         console.log("Post return",val);
         this._message.create('success', `注册成功，请等待管理员审核！`);
-        this.isShowRegister.emit(false);
+        this.isShow.emit(false);
       }
     );
   };
@@ -132,7 +134,18 @@ userNameAsyncValidator = (control: FormControl):  any=> {
     });
   }
 
+  initValue():void{
+    this.validateForm.value.username = this.data.userName;
+    this.validateForm.value.userpwd = this.data.password;
+    this.validateForm.value.uname = this.data.uName
+    this.validateForm.value.usex = this.data.sexRadioGroup
+    this.validateForm.value.ucardid = this.data.uCardId
+    this.validateForm.value.ubirthdate = this.data.birthDay
+    this.validateForm.value.uphone = this.data.uPhone
+  }
+
   ngOnInit() {
+    this.initValue();
   }
 
 }

@@ -13,3 +13,9 @@
 .highlight {
   color: #f50;
 }
+
+.frm{
+  border: 1px solid #CCC;
+  border-radius:5px;
+}
+input[type=date]::-webkit-inner-spin-button{visibility: hidden;}

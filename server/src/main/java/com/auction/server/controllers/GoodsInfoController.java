@@ -38,17 +38,31 @@ public class GoodsInfoController extends Cross {
 
     Gson gson = new Gson();
 
+    /**
+     * 获取所有商品信息
+     * @return List<GoodsInfo>
+     */
     @GetMapping(value = "/getallgoodsinfo")
     public List<GoodsInfo> getGoodsInfo() {
-        return goodsInfoService.getAllGoodsInfo();
+        return goodsInfoService.getAllGoodsInfoByGstate(1);
     }
 
+    /**
+     * 根据商品编号获取商品信息
+     * @param id
+     * @return GoodsInfo
+     */
     @GetMapping(value = "/getbyid")
     public GoodsInfo getInfoById(@RequestParam("id") int id) {
         System.out.println("++++++++++++++++++++++++++id = " + id);
         return goodsInfoService.findById(id);
     }
 
+    /**
+     * 用户对拍卖商品出价
+     * @param params
+     * @return Map<String, String>
+     */
     @ResponseBody
     @PostMapping("/posthighaccount")
     public Map<String, String> postHighAccount(@RequestBody Map<String,Object> params) {
@@ -78,5 +92,73 @@ public class GoodsInfoController extends Cross {
         return map;
     }
 
+    /**
+     * 删除指定商品
+     * @param params
+     */
+    @ResponseBody
+    @PostMapping("/deletegoodsinfo")
+    public void deletegoodsinfo(@RequestBody Map<String,Object> params) {
+        Map<String,Object> param = (Map<String,Object>)params.get("params");
+        GoodsInfo goodsInfo = gson.fromJson(gson.toJson(param),GoodsInfo.class);
+        goodsInfoService.deleteGoodsInfo(goodsInfo);
+    }
+
+    /**
+     * 添加指定商品
+     * @param params
+     */
+    @ResponseBody
+    @PostMapping("/addgoodsinfo")
+    public void addgoodsinfo(@RequestBody Map<String,Object> params){
+        Map<String,Object> param = (Map<String,Object>)params.get("params");
+        GoodsInfo goodsInfo = gson.fromJson(gson.toJson(param),GoodsInfo.class);
+        goodsInfo.setGstate(0);
+        goodsInfoService.saveGoodsInfo(goodsInfo);
+    }
+
+    /**
+     * 更新指定商品信息
+     * @param params
+     */
+    @ResponseBody
+    @PostMapping("/updategoodsinfo")
+    public void updategoodsinfo(@RequestBody Map<String,Object> params){
+        Map<String,Object> param = (Map<String,Object>)params.get("params");
+        GoodsInfo goodsInfo = gson.fromJson(gson.toJson(param),GoodsInfo.class);
+        goodsInfoService.saveGoodsInfo(goodsInfo);
+    }
+
+    /**
+     * 获取所有商品信息
+     * @return List<GoodsInfo>
+     */
+    @GetMapping(value = "/getnotcheckgoodsinfo")
+    public List<GoodsInfo> getNotCheckGoodsInfo() {
+        return goodsInfoService.getAllGoodsInfoByGstate(0);
+    }
+
+    /**
+     * 更新商品状态
+     * @param params
+     */
+    @ResponseBody
+    @PostMapping("/postchecksign")
+    public void postCheckSign(@RequestBody Map<String,Object> params){
+        Map<String,Object> param = (Map<String,Object>)params.get("params");
+        Integer sign = (Integer)params.get("sign");
+        GoodsInfo goodsInfo = gson.fromJson(gson.toJson(param),GoodsInfo.class);
+        goodsInfo.setGstate(sign);
+        goodsInfoService.saveGoodsInfo(goodsInfo);
+    }
+
+    /**
+     * 获取所有不合格商品信息
+     * @return List<GoodsInfo>
+     */
+    @GetMapping(value = "/getcheckfailedgoodsinfo")
+    public List<GoodsInfo> getCheckFailedGoodsInfo() {
+        return goodsInfoService.getAllGoodsInfoByGstate(2);
+    }
 
 }
