@@ -9,29 +9,14 @@
       <div class="banner-info">
         <div class="news body-border">
           <ul>
-            <li class="title">社区热点</li>
+            <li class="title">商品分类</li>
             <li class="link">
-              <a href="#">冬天</a>
-              <span></span>
-              <a href="#">把生活过成一首诗</a>
-              <span></span>
-              <a href="#">早餐</a>
-              <span></span>
-              <a href="#">记下时间走过的路</a>
-              <span></span>
-              <a href="#">穿搭</a>
-              <span></span>
-              <a href="#">家居</a>
-              <span></span>
-              <a href="#">原创</a>
-              <span></span>
+              <a href="/cus/goodstype?typeid={{item.typeid}}"  *ngFor="let item of goodsTlist">{{ item.tname}}<span></span></a>
             </li>
             <li class="choose">
-              <a href="#">『人气连衣裙精选』 大合集</a>
-              <span class="icon-text__pink">精选</span>
-            </li>
-            <li class="assistant">
-              <p>收图小助手: <a href="#">tang收集工具</a></p>
+              <nz-anchor>
+              <nz-link nzHref="#selected" [nzTitle]="'精选拍品'"></nz-link>
+              </nz-anchor>
             </li>
           </ul>
         </div>
@@ -40,86 +25,24 @@
         </div>
       </div>
     </div>
-    <div class="main-cont main-album">
+    <div id="selected" class="main-cont main-album">
       <div class="main-cont__title">
         <h3>精选拍品</h3>
-        <a href="#" class="more">往期回顾 ></a>
+        <a href="#" class="more">更多 ></a>
       </div>
       <ul class="main-cont__list clearfix">
-        <li class="item" *ngFor="let item of goodslist">
+        <div *ngFor="let item of goodslist;let i = index">
+        <li class="item"  *ngIf="i<=4">
           <a href="/cus/goods?id={{item.goodsid}}" class="pic">
-            <img src="../../../assets/images/cont/main_img1.jpg" alt="#">
+            <img src="../../../assets/images/goods/goods{{item.goodsid}}_1.jpg" alt="#">
           </a>
           <div class="info">
-            <a href="#" class="title">你的书写工具需要一个庇护所</a>
-            <p>68张图片 · 2255人收藏</p>
-            <p>by <a href="#" class="author">Moollly</a></p>
+            <a href="/cus/goods?id={{item.goodsid}}" class="title">{{item.gname}}</a>
+            <strong>起拍价：</strong><p>{{item.gstartaccount}}</p>
           </div>
         </li>
-      </ul>
-    </div>
-    <div class="main-cont main-recommend">
-      <div class="main-cont__title">
-        <h3>单品推荐</h3>
-        <p class="list">
-          <em>良品购：</em>
-          <a href="#">全部</a>
-          <span>|</span>
-          <a href="#">上衣</a>
-          <span>|</span>
-          <a href="#">裙裤</a>
-          <span>|</span>
-          <a href="#">配饰</a>
-          <span>|</span>
-          <a href="#">鞋子</a>
-          <span>|</span>
-          <a href="#">包袋</a>
-          <span>|</span>
-          <a href="#">日杂</a>
-        </p>
-      </div>
-      <ul class="main-cont__list clearfix">
-        <li class="item" *ngFor="let item of list2">
-          <a href="#" class="pic">
-            <img src="../../../assets/images/cont/main_img{{item}}.jpg" alt="#">
-          </a>
-          <div class="info">
-            <a href="#" class="title">夹克</a>
-            <span>18739人在逛</span>
-            <a href="#" class="icon-text__pink purchase">良品购</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="main-cont main-waterfall">
-      <div class="main-cont__title">
-        <h3>大家正在逛</h3>
-      </div>
-      <ul class="main-cont__list clearfix">
-        <div *ngFor="let item of list1">
-          <li class="item item-cur" *ngFor="let item of list1">
-            <a href="#" class="pic">
-              <img src="../../../assets/images/cont/waterfall_img{{ item }}.jpg" alt="#">
-            </a>
-            <div class="waterfall-hover">
-              <span class="mask"></span>
-              <a href="#" class="btn-collect">收集 45</a>
-              <a href="#" class="btn-white btn-like"></a>
-              <a href="#" class="btn-white btn-comment"></a>
-            </div>
-            <div class="waterfall-info">
-              <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-              <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-            </div>
-            <div class="collect-info">
-              <a href="#" class="headImg"><img src="../../../assets/images/cont/waterfall_headImg{{item}}.jpeg" alt="#"></a>
-              <p class="title"><a href="#">大祁Y</a></p>
-              <p class="to">收集到<a href="#">时尚语型录</a></p>
-            </div>
-          </li>
         </div>
       </ul>
     </div>
   </div>
-  <a href="#" id="readMore">浏览更多 ></a>
 </div>

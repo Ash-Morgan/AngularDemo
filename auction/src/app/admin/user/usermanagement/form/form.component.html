@@ -1,15 +1,25 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+  <!--用户编号-->
+  <div nz-form-item nz-row>
+    <div nz-form-label nz-col [nzSpan]="7">
+      <label>用户编号</label>
+    </div>
+    <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+      <nz-input formControlName="userId" [nzReadonly]="true" [(ngModel)]="datainfo.userid" [nzType]="'text'" [nzSize]="'large'">
+        <ng-template #addOnBefore><i class="anticon anticon-lock"></i></ng-template>
+      </nz-input>
+     </div>
+  </div>
   <!--用户名-->
   <div nz-form-item nz-row>
     <div nz-form-label nz-col [nzSpan]="7">
-      <label nz-form-item-required>用户名</label>
+      <label>用户名</label>
     </div>
     <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
-      <nz-input formControlName="userName" [nzType]="'text'" [nzPlaceHolder]="'请输入用户名'" [nzSize]="'large'">
+      <nz-input formControlName="userName" [nzReadonly]="true"  [(ngModel)]="datainfo.username" [nzType]="'text'" [nzPlaceHolder]="'请输入用户名'" [nzSize]="'large'">
+        <ng-template #addOnBefore><i class="anticon anticon-lock"></i></ng-template>
       </nz-input>
       <div nz-form-explain *ngIf="getFormControl('userName').dirty&&getFormControl('userName').hasError('required')">用户名不能为空!</div>
-      <div nz-form-explain *ngIf="getFormControl('userName').dirty&&getFormControl('userName').hasError('duplicated')">用户名已存在!</div>
-      <div nz-form-explain *ngIf="getFormControl('userName').dirty&&getFormControl('userName').pending">验证中。。</div>
     </div>
   </div>
   <!--密码-->
@@ -19,7 +29,7 @@
     </div>
     <div>
       <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
-        <nz-input formControlName="password" [nzPlaceHolder]="'请输入密码'" [nzType]="'password'" [nzSize]="'large'" (ngModelChange)="validateConfirmPassword()">
+        <nz-input formControlName="password" [(ngModel)]="datainfo.userpwd" [nzPlaceHolder]="'请输入密码'" [nzType]="'password'" [nzSize]="'large'" (ngModelChange)="validateConfirmPassword()">
         </nz-input>
         <div nz-form-explain *ngIf="getFormControl('password').dirty&&getFormControl('password').hasError('required')">密码不能为空!</div>
       </div>
@@ -31,7 +41,7 @@
       <label nz-form-item-required>确认密码</label>
     </div>
     <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
-      <nz-input formControlName="passwordConfirmation" [nzType]="'password'" [nzPlaceHolder]="'确认你的密码'" [nzSize]="'large'">
+      <nz-input formControlName="passwordConfirmation" [(ngModel)]="datainfo.userpwd" [nzType]="'password'" [nzPlaceHolder]="'确认你的密码'" [nzSize]="'large'">
       </nz-input>
       <div nz-form-explain *ngIf="getFormControl('passwordConfirmation').dirty&&getFormControl('passwordConfirmation').hasError('required')">密码不能为空!</div>
       <div nz-form-explain *ngIf="getFormControl('passwordConfirmation').dirty&&getFormControl('passwordConfirmation').hasError('confirm')">两次输入的密码不一致，请重新确认!</div>
@@ -44,7 +54,7 @@
     </div>
     <div>
       <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
-        <nz-input formControlName="uName" [nzPlaceHolder]="'请输入姓名'" [nzType]="'text'" [nzSize]="'large'">
+        <nz-input formControlName="uName" [(ngModel)]="datainfo.uname" [nzPlaceHolder]="'请输入姓名'" [nzType]="'text'" [nzSize]="'large'">
         </nz-input>
         <div nz-form-explain *ngIf="getFormControl('uName').dirty&&getFormControl('uName').hasError('required')">姓名不能为空!</div>
       </div>
@@ -56,7 +66,7 @@
       <label  nz-form-item-required>性别</label>
     </div>
     <div nz-form-control nz-col [nzSpan]="12">
-      <nz-radio-group formControlName="sexRadioGroup">
+      <nz-radio-group formControlName="sexRadioGroup" [(ngModel)]="datainfo.usex" >
         <label nz-radio [nzValue]="'男'">
           <span>男</span>
         </label>
@@ -73,7 +83,7 @@
     </div>
     <div>
       <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
-        <nz-input formControlName="uCardId" [nzPlaceHolder]="'请输入身份证号'" [nzType]="'text'" [nzSize]="'large'">
+        <nz-input formControlName="uCardId" [(ngModel)]="datainfo.ucardid" [nzPlaceHolder]="'请输入身份证号'" [nzType]="'text'" [nzSize]="'large'">
         </nz-input>
         <div nz-form-explain *ngIf="getFormControl('uCardId').dirty&&getFormControl('uCardId').hasError('required')">身份证号不能为空!</div>
         <div nz-form-explain *ngIf="getFormControl('uCardId').dirty&&getFormControl('uCardId').hasError('ucardid')">身份证号不正确，请重新输入!</div>
@@ -86,7 +96,7 @@
       <label nz-form-item-required>出生日期</label>
     </div>
     <div nz-col [nzSpan]="12" nz-form-control>
-      <input formControlName="birthDay" class="frm" type="date" placeholder="'Choose your birthday'" style="width: 100%;"/>
+      <nz-datepicker formControlName="birthDay" [(ngModel)]="datainfo.ubirthdate" [nzPlaceHolder]="'请选择你的出生日期'" [nzSize]="'large'"></nz-datepicker>
       <div nz-form-explain *ngIf="getFormControl('birthDay').dirty&&getFormControl('birthDay').hasError('required')">出生日期不能为空！</div>
       <div nz-form-explain *ngIf="getFormControl('birthDay').dirty&&getFormControl('birthDay').hasError('expired')">出生日期不能超过当前日期!</div>
     </div>
@@ -98,18 +108,29 @@
     </div>
     <div>
       <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
-        <nz-input formControlName="uPhone" [nzPlaceHolder]="'请输入手机号码'" [nzType]="'text'" [nzSize]="'large'">
+        <nz-input formControlName="uPhone" [(ngModel)]="datainfo.uphone" [nzPlaceHolder]="'请输入手机号码'" [nzType]="'text'" [nzSize]="'large'">
         </nz-input>
         <div nz-form-explain *ngIf="getFormControl('uPhone').dirty&&getFormControl('uPhone').hasError('required')">手机号不能为空!</div>
         <div nz-form-explain *ngIf="getFormControl('uPhone').dirty&&getFormControl('uPhone').hasError('phonecheck')">手机号不正确，请重新输入!</div>
       </div>
     </div>
   </div>
+  <!--用户状态-->
+  <div nz-form-item nz-row>
+    <div nz-form-label nz-col [nzSpan]="7">
+      <label>用户状态</label>
+    </div>
+    <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+      <nz-input formControlName="uState" [nzReadonly]="true" [(ngModel)]="datainfo.ustate" [nzType]="'text'" [nzSize]="'large'">
+        <ng-template #addOnBefore><i class="anticon anticon-lock"></i></ng-template>
+      </nz-input>
+    </div>
+  </div>
   <!--submit Button-->
   <div nz-form-item nz-row>
-    <div nz-col [nzOffset]="7" [nzSpan]="12" nz-form-control>
-      <button nz-button [nzType]="'primary'" [nzSize]="'large'" [disabled]="!validateForm.valid">提交</button>
-      <button nz-button [nzSize]="'large'" (click)="resetForm($event)">重置</button>
+    <div nz-col [nzOffset]="7" [nzSpan]="12">
+      <button nz-button [nzType]="'primary'" [nzSize]="'large'">提交</button>
+      <!--<button nz-button [nzSize]="'large'" (click)="resetForm($event)">重置</button>-->
     </div>
   </div>
 </form>

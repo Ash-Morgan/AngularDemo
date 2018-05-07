@@ -2,12 +2,10 @@ package com.auction.server.controllers;
 
 import com.auction.server.entities.AccountInfo;
 import com.auction.server.entities.GoodsInfo;
+import com.auction.server.entities.GoodsType;
 import com.auction.server.entities.UserInfo;
 import com.auction.server.general.Cross;
-import com.auction.server.services.AccountInfoSevice;
-import com.auction.server.services.BusinessInfoService;
-import com.auction.server.services.GoodsInfoService;
-import com.auction.server.services.UserInfoService;
+import com.auction.server.services.*;
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +33,9 @@ public class GoodsInfoController extends Cross {
 
     @Resource(name = "business-info-service", type = BusinessInfoService.class)
     private BusinessInfoService businessInfoService;
+
+    @Resource(name = "goods-type-service", type = GoodsTypeService.class)
+    private GoodsTypeService goodsTypeService;
 
     Gson gson = new Gson();
 
@@ -161,4 +162,32 @@ public class GoodsInfoController extends Cross {
         return goodsInfoService.getAllGoodsInfoByGstate(2);
     }
 
+    /**
+     * 获取所有商品信息
+     * @return List<GoodsInfo>
+     */
+    @GetMapping(value = "/getallgoodstype")
+    public List<GoodsType> getAllType() {
+        return goodsTypeService.getAllGoodsTypeByTstate(1);
+    }
+
+    /**
+     * 根据商品类型获取商品信息
+     * @param typeid
+     * @return List<GoodsInfo>
+     */
+    @GetMapping(value = "/getbytype")
+    public List<GoodsInfo> getInfoByType(@RequestParam("typeid") int typeid) {
+        System.out.println("++++++++++++++++++++++++++typeid = " + typeid);
+        return goodsInfoService.findByType(typeid);
+    }
+
+    /**
+     * 获取指定商品类型
+     * @return GoodsType
+     */
+    @GetMapping(value = "/gettypebyid")
+    public GoodsType getTypeById(@RequestParam("typeid") int typeid) {
+        return goodsTypeService.getById(typeid);
+    }
 }

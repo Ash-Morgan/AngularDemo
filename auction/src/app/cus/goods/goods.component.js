@@ -14,7 +14,7 @@ var GoodsComponent = /** @class */ (function () {
         this._message = _message;
         this.routerInfo = routerInfo;
         this.URL = ".././assets/images/goods/";
-        this.array = ["url(" + this.URL + "goods1.jpg)"];
+        this.array = ["url(" + this.URL + "goods1_1.jpg)"];
         this.goodsinfo = new GoodsInfo_1.GoodsInfo();
         this.isdisabled = false;
         this.count = 100.0;
@@ -23,11 +23,11 @@ var GoodsComponent = /** @class */ (function () {
         var _this = this;
         this.id = this.routerInfo.snapshot.queryParams["id"];
         setTimeout(function (_) {
-            _this.array = ["url(" + _this.URL + "goods1.jpg)",
-                "url(" + _this.URL + "goods2.jpg)",
-                "url(" + _this.URL + "goods3.jpg)",
-                "url(" + _this.URL + "goods4.jpg)",
-                "url(" + _this.URL + "goods5.jpg)"];
+            _this.array = ["url(" + _this.URL + "goods1_1.jpg)",
+                "url(" + _this.URL + "goods1_2.jpg)",
+                "url(" + _this.URL + "goods1_3.jpg)",
+                "url(" + _this.URL + "goods1_4.jpg)",
+                "url(" + _this.URL + "goods1_5.jpg)"];
         }, 500);
         this.initGoods();
         // setInterval(_ => {

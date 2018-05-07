@@ -92,8 +92,19 @@ export class UserInfoService extends WebApiService {
   }
 
   //删除用户信息
-  public deleteuserinfo(info:UserInfo):Observable<any>{
+  public deleteuserinfo(data):Observable<any>{
     let url=UserInfoService.getApiUrl()+"user/deleteuserinfo";
+    log('Fetching...');
+    log(url);
+    let ob:Observable<any> = this.http
+      .post(url,{params: data});
+    log('Fetching End');
+    return ob;
+  }
+
+  //更新用户信息
+  public updateuserinfo(info:UserInfo):Observable<any>{
+    let url=UserInfoService.getApiUrl()+"user/updateuserinfo";
     log('Fetching...');
     log(url);
     log(info.toString());
@@ -103,9 +114,9 @@ export class UserInfoService extends WebApiService {
     return ob;
   }
 
-  //更新用户信息
-  public updateuserinfo(info:UserInfo):Observable<any>{
-    let url=UserInfoService.getApiUrl()+"user/updateuserinfo";
+  //用户注册提交登录信息
+  public updateUser(info:UserInfo):Observable<any>{
+    let url=UserInfoService.getApiUrl()+"user/updateuser";
     log('Fetching...');
     log(url);
     log(info.toString());

@@ -110,11 +110,41 @@ public class UserInfoController extends Cross {
 
     /**
      * 获取所有不合格的用户信息
-     * @return List<GoodsInfo>
+     * @return List<UserInfo>
      */
     @GetMapping(value = "/getcheckfailed")
     public List<UserInfo> getCheckFailedGoodsInfo() {
         return userInfoService.getAllUserInfoByUstate(2);
     }
 
+
+    /**
+     * 更新用户信息
+     * @param userInfo
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("/updateuser")
+    public Map<String, String> updateUser(@RequestBody UserInfo userInfo) {
+        Map<String, String> map = new HashMap<>();
+        if (userInfoService.saveUserInfo(userInfo) != null) {
+            map.put("result", "success");
+        } else {
+            map.put("result", "error");
+        }
+        return map;
+    }
+
+    /**
+     * 删除指定商品
+     * @param params
+     */
+    @ResponseBody
+    @PostMapping("/deleteuserinfo")
+    public void deletegoodsinfo(@RequestBody Map<String,Object> params) {
+        Map<String,Object> param = (Map<String,Object>)params.get("params");
+        UserInfo userInfo = gson.fromJson(gson.toJson(param),UserInfo.class);
+        userInfo.setUstate(2);
+        userInfoService.saveUserInfo(userInfo);
+    }
 }

@@ -66,4 +66,19 @@ public class GoodsInfoService {
     public GoodsInfo saveGoodsInfo(GoodsInfo goodsInfo){
         return goodsInfoRepo.save(goodsInfo);
     }
+
+    /**
+     * 根据商品类型查询
+     *
+     * @param typeid
+     * @return List<GoodsInfo>
+     */
+    public List<GoodsInfo> findByType(int typeid) {
+        List<GoodsInfo> goodsInfoList = new ArrayList<GoodsInfo>();
+        if (goodsInfoRepo.findAllByGtypeid(typeid).iterator().hasNext()) {
+            goodsInfoList = (List<GoodsInfo>) goodsInfoRepo.findAllByGtypeid(typeid);
+        }
+        System.out.println(goodsInfoList.toString());
+        return goodsInfoList;
+    }
 }

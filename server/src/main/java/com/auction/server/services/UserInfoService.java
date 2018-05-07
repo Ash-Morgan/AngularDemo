@@ -54,7 +54,7 @@ public class UserInfoService {
      * 删除指定商品
      * @param userInfo
      */
-    public void deleteGoodsInfo(UserInfo userInfo){
+    public void deleteUserInfo(UserInfo userInfo){
         userInfoRepo.delete(userInfo);
     }
 

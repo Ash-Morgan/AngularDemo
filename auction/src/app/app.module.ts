@@ -28,6 +28,9 @@ import {U_checkComponent} from "./admin/user/usercheck/u_check.component";
 import {U_check_FailedComponent} from "./admin/user/userfailed/u_failed.component";
 import {U_managementComponent} from "./admin/user/usermanagement/u_management.component";
 import {U_formComponent} from "./admin/user/usermanagement/form/form.component";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {GoodsTypeService} from "./services/goods-type.service";
+import {GoodstypeComponent} from "./cus/type/goodstype.component";
 
 
 @NgModule({
@@ -50,9 +53,11 @@ import {U_formComponent} from "./admin/user/usermanagement/form/form.component";
     U_checkComponent,
     U_check_FailedComponent,
     U_managementComponent,
-    U_formComponent
+    U_formComponent,
+    GoodstypeComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     NgbModule.forRoot(),
     HttpClientModule,
     NgZorroAntdModule.forRoot(),
@@ -61,7 +66,12 @@ import {U_formComponent} from "./admin/user/usermanagement/form/form.component";
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [AdminInfoService, UserInfoService, GoodsInfoService],
+  providers: [
+    AdminInfoService,
+    UserInfoService,
+    GoodsInfoService,
+    GoodsTypeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

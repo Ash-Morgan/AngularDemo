@@ -49,8 +49,8 @@ export class U_managementComponent implements OnInit {
   }
 
   openUpdate(info:any):void{
-    console.log('info=',info.gname);
     this.userUpdate=info;
+    console.log('userUpdate=',this.userUpdate);
     this.updateShow = true;
   }
 

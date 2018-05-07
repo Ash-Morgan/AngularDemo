@@ -13,6 +13,8 @@ import {G_checkComponent} from "./admin/goods/goodscheck/g_check.component";
 import {G_check_FailedComponent} from "./admin/goods/goodscheckfailed/g_check_failed.component";
 import {U_checkComponent} from "./admin/user/usercheck/u_check.component";
 import {U_check_FailedComponent} from "./admin/user/userfailed/u_failed.component";
+import {U_managementComponent} from "./admin/user/usermanagement/u_management.component";
+import {GoodstypeComponent} from "./cus/type/goodstype.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/cus/main', pathMatch: 'full'},
@@ -21,7 +23,9 @@ const routes: Routes = [
     children: [
       {path: 'main', component: MainComponent},
       {path: 'demo2', component: CardComponent},
+      {path: 'goodstype', component: GoodstypeComponent},
       {path: 'goods', component: GoodsComponent}
+
     ]
   },
   {
@@ -34,6 +38,7 @@ const routes: Routes = [
           {path: 'goods', component: A_goodsComponent},
           {path: 'goodscheck', component: G_checkComponent},
           {path: 'goodsfailed', component: G_check_FailedComponent},
+          {path: 'user', component: U_managementComponent},
           {path: 'usercheck', component: U_checkComponent},
           {path: 'userfailed', component: U_check_FailedComponent}
         ]

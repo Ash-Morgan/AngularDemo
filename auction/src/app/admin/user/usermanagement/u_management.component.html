@@ -30,16 +30,16 @@
 </nz-table>
 
 <!--update Modal-->
-<nz-modal [nzVisible]="updateShow" [nzTitle]="'商品信息更新'" [nzContent]="contentUpdate" [nzFooter]="null"
+<nz-modal [nzVisible]="updateShow" [nzTitle]="'用户信息修改'" [nzContent]="contentUpdate" [nzFooter]="null"
           (nzOnCancel)="closeUpdate()">
   <ng-template #contentUpdate>
     <app-u-form (isShow)="eventHandler_U($event)" [datainfo]="userUpdate"></app-u-form>
   </ng-template>
 </nz-modal>
 <!--add Modal-->
-<nz-modal [nzVisible]="addShow" [nzTitle]="'新增商品信息'" [nzContent]="content" [nzFooter]="null"
+<nz-modal [nzVisible]="addShow" [nzTitle]="'新增用户信息'" [nzContent]="content" [nzFooter]="null"
           (nzOnCancel)="closeAdd()">
   <ng-template #content>
-    <app-u-form (isShow)="eventHandler_A($event)" ></app-u-form>
+    <app-register (isShowRegister)="eventHandler_A($event)"></app-register>
   </ng-template>
 </nz-modal>

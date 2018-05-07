@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from "rxjs/Observable";
@@ -14,6 +14,7 @@ import {NzMessageService} from "ng-zorro-antd";
 export class RegisterComponent implements OnInit {
   [x: string]: any;
   validateForm: FormGroup;
+  date:Date = new Date();
   @Output() isShowRegister: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   submitForm = ($event, value) => {
@@ -28,7 +29,7 @@ export class RegisterComponent implements OnInit {
     user.uname = value.uName
     user.usex = value.sexRadioGroup
     user.ucardid = value.uCardId
-    user.ubirthdate = value.birthDay
+    user.ubirthdate = value.birthDay.toLocaleDateString()
     user.uphone = value.uPhone
     console.log(user.toString());
     this.userservice.registerUser(user).subscribe(

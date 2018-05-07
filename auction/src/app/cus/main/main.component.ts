@@ -1,18 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {GoodsInfoService} from "../../services/goods-info.service";
+import {GoodsTypeService} from "../../services/goods-type.service";
 
 @Component({
   selector: 'app-content',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit{
-  constructor(private goodsinfoservice:GoodsInfoService) {
+export class MainComponent implements OnInit {
+  constructor(private goodsinfoservice: GoodsInfoService,
+              private goodstypeservice:GoodsTypeService) {
   }
 
-  array = [ "url(.././assets/images/cont/slider_img1.jpg)" ];
-  list1 = ["1","2","3","4","5"];
-  list2 = ["6","7","8","9","10"];
+  array = ["url(.././assets/images/cont/slider_img1.jpg)"];
+  goodsTlist = [];
   goodslist = [];
 
   ngOnInit() {
@@ -24,14 +25,25 @@ export class MainComponent implements OnInit{
         "url(.././assets/images/cont/slider_img5.jpg)"];
     }, 500);
     this.initList();
+    this.initTList();
   }
 
-  initList():void{
+  initList(): void {
     this.goodsinfoservice.getAllGoodsInfo().subscribe(
       (val) => {
-          console.log("Post success",val)
-          this.goodslist = val;
-        console.log("Put success",this.goodslist);
+        console.log("Get success", val)
+        this.goodslist = val;
+        console.log("Get success", this.goodslist);
+      }
+    )
+  }
+
+  initTList(): void {
+    this.goodstypeservice.getAllType().subscribe(
+      (val) => {
+        console.log("Get success", val)
+        this.goodsTlist = val;
+        console.log("Get success", this.goodsTlist);
       }
     )
   }

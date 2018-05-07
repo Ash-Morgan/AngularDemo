@@ -1,0 +1,24 @@
+<div class="main">
+  <div class="main-inner body-width">
+    <div id="selected" class="main-cont main-album">
+      <div class="title" style="font-size: 30px">
+        <h3>{{ goodstype.tname }}</h3>
+      </div>
+      <div class="main-cont__title"></div>
+      <ul class=" main-cont__list clearfix">
+        <div *ngFor="let item of goodslist;let i = index">
+          <li class="item">
+            <a href="/cus/goods?id={{item.goodsid}}" class="pic">
+              <img src="../../../assets/images/goods/goods{{item.goodsid}}_1.jpg" alt="#">
+            </a>
+            <div class="info">
+              <a href="/cus/goods?id={{item.goodsid}}" class="title">{{item.gname}}</a>
+              <strong>起拍价：</strong>
+              <p>{{item.gstartaccount}}</p>
+            </div>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>

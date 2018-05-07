@@ -103,4 +103,14 @@ export class GoodsInfoService extends WebApiService {
     log('Fetching End');
     return ob;
   }
+
+  public getGoodsInfoByType(data):Observable<any>{
+    let url=GoodsInfoService.getApiUrl()+"goods/getbytype";
+    log('Fetching...');
+    log(url);
+    let ob:Observable<any> = this.http
+      .get(url,{params: data});
+    log('Fetching End');
+    return ob;
+  }
 }

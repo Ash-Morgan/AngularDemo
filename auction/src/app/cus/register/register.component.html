@@ -86,7 +86,7 @@
       <label nz-form-item-required>出生日期</label>
     </div>
     <div nz-col [nzSpan]="12" nz-form-control>
-      <input formControlName="birthDay" class="frm" type="date" placeholder="'Choose your birthday'" style="width: 100%;"/>
+      <nz-datepicker formControlName="birthDay" [nzPlaceHolder]="'请输入你的出生日期'"></nz-datepicker>
       <div nz-form-explain *ngIf="getFormControl('birthDay').dirty&&getFormControl('birthDay').hasError('required')">出生日期不能为空！</div>
       <div nz-form-explain *ngIf="getFormControl('birthDay').dirty&&getFormControl('birthDay').hasError('expired')">出生日期不能超过当前日期!</div>
     </div>

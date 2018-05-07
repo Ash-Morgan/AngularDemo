@@ -11,7 +11,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class GoodsComponent implements OnInit {
   URL: string = ".././assets/images/goods/";
-  array = ["url(" + this.URL + "goods1.jpg)"];
+  array = ["url(" + this.URL + "goods1_1.jpg)"];
   goodsinfo: GoodsInfo = new GoodsInfo();
   endDate: number;
   isdisabled: boolean = false;
@@ -26,11 +26,11 @@ export class GoodsComponent implements OnInit {
   ngOnInit() {
     this.id = this.routerInfo.snapshot.queryParams["id"];
     setTimeout(_ => {
-      this.array = ["url(" + this.URL + "goods1.jpg)",
-        "url(" + this.URL + "goods2.jpg)",
-        "url(" + this.URL + "goods3.jpg)",
-        "url(" + this.URL + "goods4.jpg)",
-        "url(" + this.URL + "goods5.jpg)"];
+      this.array = ["url(" + this.URL + "goods1_1.jpg)",
+        "url(" + this.URL + "goods1_2.jpg)",
+        "url(" + this.URL + "goods1_3.jpg)",
+        "url(" + this.URL + "goods1_4.jpg)",
+        "url(" + this.URL + "goods1_5.jpg)"];
     }, 500);
     this.initGoods();
     // setInterval(_ => {

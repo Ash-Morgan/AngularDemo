@@ -14,7 +14,7 @@ import {UserInfoService} from "../../../../services/user-info.service";
 export class U_formComponent implements OnInit {
   [x: string]: any;
   @Output() isShow: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Input()  datainfo:any;
+  @Input() datainfo: UserInfo;
   validateForm: FormGroup;
 
 
@@ -23,8 +23,9 @@ export class U_formComponent implements OnInit {
     for (const key in this.validateForm.controls) {
       this.validateForm.controls[key].markAsDirty();
     }
-    console.log(value);
+    console.log("value=",value);
     let user = new UserInfo();
+    user.userid = value.userId
     user.username = value.userName;
     user.userpwd = value.password;
     user.uname = value.uName
@@ -32,11 +33,12 @@ export class U_formComponent implements OnInit {
     user.ucardid = value.uCardId
     user.ubirthdate = value.birthDay
     user.uphone = value.uPhone
+    user.ustate = value.uState
     console.log(user.toString());
-    this.userservice.registerUser(user).subscribe(
-      (val)=>{
-        console.log("Post return",val);
-        this._message.create('success', `注册成功，请等待管理员审核！`);
+    this.userservice.updateUser(user).subscribe(
+      (val) => {
+        console.log("Post return", val);
+        this._message.create('success', `更新成功`);
         this.isShow.emit(false);
       }
     );
@@ -55,7 +57,7 @@ export class U_formComponent implements OnInit {
   }
 
   // 用户名验证
-userNameAsyncValidator = (control: FormControl):  any=> {
+  userNameAsyncValidator = (control: FormControl): any => {
     return Observable.create(function (observer) {
       setTimeout(() => {
         if (control.value === '123') {
@@ -120,32 +122,23 @@ userNameAsyncValidator = (control: FormControl):  any=> {
   };
 
   constructor(private fb: FormBuilder,
-              private userservice:UserInfoService,
+              private userservice: UserInfoService,
               private _message: NzMessageService) {
     this.validateForm = this.fb.group({
-      userName: ['', [Validators.required], [this.userNameAsyncValidator]],
+      userId:[''],
+      userName: [''],
       password: ['', [Validators.required]],
       passwordConfirmation: ['', [this.passwordConfirmationValidator]],
       uName: ['', [Validators.required]],
       sexRadioGroup: ['男'],
       uCardId: ['', [this.uCardIdValidator]],
       birthDay: ['', [this.birthDayValidator]],
-      uPhone: ['', [this.uPhoneValidator]]
+      uPhone: ['', [this.uPhoneValidator]],
+      uState:['']
     });
   }
 
-  initValue():void{
-    this.validateForm.value.username = this.data.userName;
-    this.validateForm.value.userpwd = this.data.password;
-    this.validateForm.value.uname = this.data.uName
-    this.validateForm.value.usex = this.data.sexRadioGroup
-    this.validateForm.value.ucardid = this.data.uCardId
-    this.validateForm.value.ubirthdate = this.data.birthDay
-    this.validateForm.value.uphone = this.data.uPhone
-  }
-
   ngOnInit() {
-    this.initValue();
   }
 
 }
