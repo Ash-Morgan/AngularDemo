@@ -120,3 +120,17 @@ pstate int(2) default 1
 );
 
 insert into goodsphoto value(null,18,1,'XXXXXXXXXXXXXXXXXXXXXXX',1);
+
+create table auctioninfo(
+auctionid int(10) primary key AUTO_INCREMENT,
+goodsid int(8) not null,
+userid int(8) not null,
+aaccount double not null,
+aaddmoney double not null,
+adatetime varchar(20) not null,
+astate int(2) default 1
+);
+insert into auctioninfo value(null,3,1,3200,100,'2018-05-08 10:00:00',1);
+insert into auctioninfo value(null,3,2,3300,100,'2018-05-08 10:01:00',1);
+insert into auctioninfo value(null,3,3,3400,100,'2018-05-08 10:03:00',1);
+insert into auctioninfo value(null,3,1,3500,100,'2018-05-08 10:05:00',1);

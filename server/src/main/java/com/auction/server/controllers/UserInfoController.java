@@ -147,4 +147,13 @@ public class UserInfoController extends Cross {
         userInfo.setUstate(2);
         userInfoService.saveUserInfo(userInfo);
     }
+
+    /**
+     * 获取指定用户信息
+     * @return UserInfo
+     */
+    @GetMapping(value = "/getbyusername")
+    public UserInfo getUserInfoByUsername(@RequestParam("username") String username){
+        return userInfoService.getUserInfoByUname(username);
+    }
 }

@@ -1,9 +1,6 @@
 package com.auction.server.controllers;
 
-import com.auction.server.entities.AccountInfo;
-import com.auction.server.entities.GoodsInfo;
-import com.auction.server.entities.GoodsType;
-import com.auction.server.entities.UserInfo;
+import com.auction.server.entities.*;
 import com.auction.server.general.Cross;
 import com.auction.server.services.*;
 import com.google.gson.Gson;
@@ -37,6 +34,9 @@ public class GoodsInfoController extends Cross {
     @Resource(name = "goods-type-service", type = GoodsTypeService.class)
     private GoodsTypeService goodsTypeService;
 
+    @Resource(name = "auction-info-service", type = AuctionInfoService.class)
+    private AuctionInfoService auctionInfoService;
+
     Gson gson = new Gson();
 
     /**
@@ -54,9 +54,13 @@ public class GoodsInfoController extends Cross {
      * @return GoodsInfo
      */
     @GetMapping(value = "/getbyid")
-    public GoodsInfo getInfoById(@RequestParam("id") int id) {
-        System.out.println("++++++++++++++++++++++++++id = " + id);
-        return goodsInfoService.findById(id);
+    public Map<String, String> getInfoById(@RequestParam("id") int id) {
+        Map<String, String> map = new HashMap<>();
+        List<AuctionInfo> auctionInfoList = auctionInfoService.getTopFromAuction(id);
+        map.put("auctionInfoList", gson.toJson(auctionInfoList));
+        GoodsInfo goodsInfo = goodsInfoService.findById(id);
+        map.put("goodsinfo", gson.toJson(goodsInfo));
+        return map;
     }
 
     /**
@@ -189,5 +193,20 @@ public class GoodsInfoController extends Cross {
     @GetMapping(value = "/gettypebyid")
     public GoodsType getTypeById(@RequestParam("typeid") int typeid) {
         return goodsTypeService.getById(typeid);
+    }
+
+    @GetMapping(value = "/ischange")
+    public Map<String,String> isChange(@RequestParam("username") String username,
+                                       @RequestParam("goodsid") int goodsid) {
+        Map<String, String> map = new HashMap<>();
+        System.out.println("username= "+username);
+        UserInfo userInfo = userInfoService.getUserInfoByUname(username);
+        GoodsInfo goodsInfo = goodsInfoService.findById(goodsid);
+        if(goodsInfo.getGuserid().equals(userInfo.getUserid())){
+            map.put("result", "success");
+        }else {
+            map.put("result", "error");
+        }
+        return map;
     }
 }

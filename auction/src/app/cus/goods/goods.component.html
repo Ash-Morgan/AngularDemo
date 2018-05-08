@@ -9,27 +9,50 @@
       <div class="banner-info">
         <div class="news body-border">
           <ul>
-            <li class="title"><b>{{ goodsinfo.gname }}</b></li>
+            <li class="title"><b>{{goodsinfo.gname}}</b></li>
             <li class="account">
               <h1 style="font-size: 20px;color: #22b4f6"><strong style="color: #000000">起拍价：</strong>¥{{
                 goodsinfo.gstartaccount }}</h1>
               <h1 style="font-size: 32px"><strong>当前最高出价：</strong>
-                <div style="font-size: 42px;color: chartreuse">¥{{ goodsinfo.ghighaccount }}</div>
+                <div style="font-size: 38px;color: chartreuse">¥{{ auctioninfoList[0].aaccount }}
+                  <b style="font-size: 20px;color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    出价人编号：{{auctioninfoList[0].userid}}</b></div>
               </h1>
-              <roy-countdown *ngIf="!isdisabled" title="距离起拍结束还有：" [endDate]="endDate"></roy-countdown>
+              <h1 style="font-size: 15px"><strong>最近出价记录：</strong>
+                <div style="font-size: 15px;color:gray">¥{{ auctioninfoList[1].aaccount }}
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  出价人编号：{{auctioninfoList[1].userid}}
+                </div>
+                <div style="font-size: 15px;color:gray">¥{{ auctioninfoList[2].aaccount }}
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  出价人编号：{{auctioninfoList[2].userid}}
+                </div>
+              </h1>
+              <roy-countdown *ngIf="isButton==='Ing'" title="距离起拍结束还有：" [endDate]="endDate"></roy-countdown>
               <h1 style="font-size: 22px"><b>每次加价价格：</b>
                 <nz-input-number [nzSize]="'large'" [(ngModel)]="count" [nzMin]="100" [nzMax]="1000"
                                  [nzStep]="100"></nz-input-number>
               </h1>
-              <h1 *ngIf="isdisabled" style="font-size: 42px"><strong style="color: #e03c5a">已售出</strong></h1>
+              <h1 *ngIf="isButton === 'End'" style="font-size: 42px"><strong style="color: #e03c5a">已售出</strong></h1>
             </li>
             <li class="link">
-              <button *ngIf="!isdisabled" (click)="addprice()"
+              <button *ngIf="isButton==='Ing'" (click)="addprice()"
                       style="background-color: #e03c5a;font-size: 30px;height: 80px;width: 160px" nz-button
                       [nzType]="'primary'">
                 出价
               </button>
-              <button *ngIf="isdisabled" disabled
+              <button *ngIf="isButton==='Did'" disabled
+                      style="background-color: #e03c5a;font-size: 30px;height: 80px;width: 160px" nz-button
+                      [nzType]="'primary'">
+                您已出价
+              </button>
+              <button *ngIf="isButton === 'End'" disabled
                       style="background-color: #cfd0d1;font-size: 30px;height: 80px;width: 160px" nz-button
                       [nzType]="'primary'">
                 禁止出价
@@ -41,8 +64,8 @@
 
     </div>
     <div class="banner clearfix" style="padding-top: 40px">
-      <div class="banner-info" >
-        <div class="content body-border" >
+      <div class="banner-info">
+        <div class="content body-border">
           <strong style="font-size: 42px">商品简介：</strong>
           <p style="font-size: 22px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ goodsinfo.gcontent }}</p>
         </div>

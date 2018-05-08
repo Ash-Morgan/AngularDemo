@@ -125,4 +125,15 @@ export class UserInfoService extends WebApiService {
     log('Fetching End');
     return ob;
   }
+
+  //获取指定用户信息
+  public getUserInfoByUsername(data):Observable<any>{
+    let url=UserInfoService.getApiUrl()+"user/getbyusername";
+    log('Fetching...');
+    log(url);
+    let ob:Observable<any> = this.http
+      .get(url,{params: data});
+    log('Fetching End');
+    return ob;
+  }
 }
