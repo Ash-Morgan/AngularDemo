@@ -150,10 +150,13 @@ public class UserInfoController extends Cross {
 
     /**
      * 获取指定用户信息
-     * @return UserInfo
+     * @return Map<String, String>
      */
     @GetMapping(value = "/getbyusername")
-    public UserInfo getUserInfoByUsername(@RequestParam("username") String username){
-        return userInfoService.getUserInfoByUname(username);
+    public Map<String, String> getUserInfoByUsername(@RequestParam("username") String username){
+        Map<String, String> map = new HashMap<>();
+        UserInfo userInfo = userInfoService.getUserInfoByUname(username);
+        map.put("userinfo", gson.toJson(userInfo));
+        return map;
     }
 }

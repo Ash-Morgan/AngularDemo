@@ -51,7 +51,7 @@ public class GoodsInfoController extends Cross {
     /**
      * 根据商品编号获取商品信息
      * @param id
-     * @return GoodsInfo
+     * @return Map<String, String>
      */
     @GetMapping(value = "/getbyid")
     public Map<String, String> getInfoById(@RequestParam("id") int id) {

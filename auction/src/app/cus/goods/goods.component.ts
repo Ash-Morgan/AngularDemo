@@ -40,7 +40,7 @@ export class GoodsComponent implements OnInit {
   }
 
   addprice(): void {
-    alert(this.auctioninfoList)
+    alert(this.isButton)
     if (this.isLogin()) {
       this.goodsinfo.ghighaccount += this.count;
       const data = {
@@ -81,13 +81,15 @@ export class GoodsComponent implements OnInit {
     this.userInfoService.getUserInfoByUsername(data).subscribe(
       (val)=>{
         console.log("GET call successful!",val);
-        this.userinfo = JSON.parse(val);
+        this.userinfo = JSON.parse(val.userinfo);
       }
     );
-    if(this.userinfo.userid === this.auctioninfoList[0].userid){
-      return false;
+    if(this.auctioninfoList.length > 0){
+      if(this.userinfo.userid === this.auctioninfoList[0].userid){
+        return true;
+      }
     }
-    return true;
+    return false;
   }
 
   constructor(private goodsInfoService: GoodsInfoService,
@@ -110,9 +112,10 @@ export class GoodsComponent implements OnInit {
     //   this.initGoods();
     // }, 500);
     var interval = setInterval(_ => {
-
-      if(this.isDid()){
-        this.isButton = 'Did';
+      if(this.isLogin()){
+        if(this.isDid()){
+          this.isButton = 'Did';
+        }
       }
       this.endDate = Date.parse(this.goodsinfo.genddate);
       if (Math.floor(this.endDate - Date.now()) <= 0) {

@@ -11,22 +11,36 @@
           <ul>
             <li class="title"><b>{{goodsinfo.gname}}</b></li>
             <li class="account">
-              <h1 style="font-size: 20px;color: #22b4f6"><strong style="color: #000000">起拍价：</strong>¥{{
-                goodsinfo.gstartaccount }}</h1>
+              <h1 style="font-size: 20px;color: #22b4f6"><strong style="color: #000000">起拍价：</strong>
+                ¥{{ goodsinfo.gstartaccount }}</h1>
               <h1 style="font-size: 32px"><strong>当前最高出价：</strong>
-                <div style="font-size: 38px;color: chartreuse">¥{{ auctioninfoList[0].aaccount }}
-                  <b style="font-size: 20px;color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    出价人编号：{{auctioninfoList[0].userid}}</b></div>
+                <div style="font-size: 38px;color: chartreuse"  *ngIf="auctioninfoList.length < 1">
+                  ¥{{ goodsinfo.gstartaccount }}
+                </div>
+                <div style="font-size: 38px;color: chartreuse"  *ngIf="auctioninfoList.length >= 1">
+                  ¥{{ auctioninfoList[0].aaccount }}
+                  <b style="font-size: 20px;color: #000000;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    出价人编号：{{auctioninfoList[0].userid}}</b>
+                </div>
               </h1>
               <h1 style="font-size: 15px"><strong>最近出价记录：</strong>
-                <div style="font-size: 15px;color:gray">¥{{ auctioninfoList[1].aaccount }}
+                <div style="font-size: 15px;color:gray" *ngIf="auctioninfoList.length < 2">
+                  暂时无人出价
+                </div>
+                <div style="font-size: 15px;color:gray" *ngIf="auctioninfoList.length >= 2">
+                  ¥{{ auctioninfoList[1].aaccount }}
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   出价人编号：{{auctioninfoList[1].userid}}
                 </div>
-                <div style="font-size: 15px;color:gray">¥{{ auctioninfoList[2].aaccount }}
+                <div style="font-size: 15px;color:gray" *ngIf="auctioninfoList.length < 3">
+                  暂时无人出价
+                </div>
+                <div style="font-size: 15px;color:gray" *ngIf="auctioninfoList.length >= 3">
+                  ¥{{ auctioninfoList[2].aaccount }}
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
