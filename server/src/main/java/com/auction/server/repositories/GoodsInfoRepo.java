@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 public interface GoodsInfoRepo extends CrudRepository<GoodsInfo, String> {
     public Iterable<GoodsInfo> findAllByGstate(int gstate);
 
+    public Iterable<GoodsInfo> findAllByGoodstate(String goodstate);
+
     public GoodsInfo findByGoodsid(int Goodsid);
 
     public Iterable<GoodsInfo> findAllByGtypeid(int typeid);

@@ -268,7 +268,7 @@ body {
 }
 .banner {
   position: relative;
-  height: 445px;
+  height: 1000px;
 }
 .slider {
   position: relative;
@@ -355,14 +355,14 @@ body {
 .banner-info {
   position: relative;
   float: right;
-  height: 445px;
+  height: 600px;
 }
 .banner-info a {
   display: inline-block;
 }
 .banner-info .news {
   width: 466px;
-  height: 445px;
+  height: 560px;
   margin-bottom: 20px;
 }
 .banner-info .news ul {

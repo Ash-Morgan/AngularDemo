@@ -99,9 +99,8 @@
           <label>拍卖开始时间</label>
         </div>
         <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
-          <nz-input formControlName="u_gstartdate" [(ngModel)]="goodsUpdate.gstartdate" [nzType]="'datatime'"
-                    [nzPlaceHolder]="'请输入拍卖开始时间'" [nzSize]="'large'">
-          </nz-input>
+          <nz-datepicker formControlName="u_gstartdate" [(ngModel)]="goodsUpdate.gstartdate" [nzFormat]="'YYYY/MM/DD HH:mm:ss'"
+                         [nzPlaceHolder]="'请输入拍卖开始时间'" [nzSize]="'large'" nzShowTime></nz-datepicker>
           <div nz-form-explain *ngIf="getU_FormControl('u_gstartdate')
           .dirty&&getU_FormControl('u_gstartdate').hasError('required')">拍卖开始时间不能为空!
           </div>
@@ -113,9 +112,8 @@
           <label>拍卖结束时间</label>
         </div>
         <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
-          <nz-input formControlName="u_genddate" [(ngModel)]="goodsUpdate.genddate" [nzType]="'datatime'"
-                    [nzPlaceHolder]="'请输入拍卖结束时间'" [nzSize]="'large'">
-          </nz-input>
+          <nz-datepicker formControlName="u_genddate" [(ngModel)]="goodsUpdate.genddate" [nzFormat]="'YYYY/MM/DD HH:mm:ss'"
+                         [nzPlaceHolder]="'请输入拍卖结束时间'" [nzSize]="'large'" nzShowTime></nz-datepicker>
           <div nz-form-explain *ngIf="getU_FormControl('u_genddate')
           .dirty&&getU_FormControl('u_genddate').hasError('required')">拍卖结束时间不能为空!
           </div>
@@ -240,9 +238,8 @@
           <label>拍卖开始时间</label>
         </div>
         <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
-          <nz-input formControlName="a_gstartdate" [(ngModel)]="goodsinfo.gstartdate" [nzType]="'datatime'"
-                    [nzPlaceHolder]="'请输入拍卖开始时间'" [nzSize]="'large'">
-          </nz-input>
+          <nz-datepicker formControlName="a_gstartdate" [(ngModel)]="goodsinfo.gstartdate" [nzFormat]="'YYYY/MM/DD HH:mm:ss'"
+                         [nzPlaceHolder]="'请输入拍卖开始时间'" [nzSize]="'large'" nzShowTime></nz-datepicker>
           <div nz-form-explain *ngIf="getA_FormControl('a_gstartdate')
           .dirty&&getU_FormControl('a_gstartdate').hasError('required')">拍卖开始时间不能为空!
           </div>
@@ -254,9 +251,8 @@
           <label>拍卖结束时间</label>
         </div>
         <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
-          <nz-input formControlName="a_genddate" [(ngModel)]="goodsinfo.genddate" [nzType]="'datatime'"
-                    [nzPlaceHolder]="'请输入拍卖结束时间'" [nzSize]="'large'">
-          </nz-input>
+          <nz-datepicker formControlName="a_genddate" [(ngModel)]="goodsinfo.genddate" [nzFormat]="'YYYY/MM/DD HH:mm:ss'"
+                         [nzPlaceHolder]="'请输入拍卖结束时间'" [nzSize]="'large'" nzShowTime></nz-datepicker>
           <div nz-form-explain *ngIf="getA_FormControl('a_genddate')
           .dirty&&getU_FormControl('a_genddate').hasError('required')">拍卖结束时间不能为空!
           </div>

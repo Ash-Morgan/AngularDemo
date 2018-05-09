@@ -31,6 +31,7 @@ import {U_formComponent} from "./admin/user/usermanagement/form/form.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {GoodsTypeService} from "./services/goods-type.service";
 import {GoodstypeComponent} from "./cus/type/goodstype.component";
+import {DatePipe} from "@angular/common";
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import {GoodstypeComponent} from "./cus/type/goodstype.component";
     AppRoutingModule
   ],
   providers: [
+    DatePipe,
     AdminInfoService,
     UserInfoService,
     GoodsInfoService,

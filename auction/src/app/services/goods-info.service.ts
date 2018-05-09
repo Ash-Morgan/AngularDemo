@@ -11,8 +11,18 @@ export class GoodsInfoService extends WebApiService {
     super();
   }
 
-  public getAllGoodsInfo():Observable<any>{
-    let url=GoodsInfoService.getApiUrl()+"goods/getallgoodsinfo";
+  public getAllGoodsInfoByGstate():Observable<any>{
+    let url=GoodsInfoService.getApiUrl()+"goods/getgoodsinfobygstate";
+    log('Fetching...');
+    log(url);
+    let ob:Observable<any> = this.http
+      .get(url);
+    log('Fetching End');
+    return ob;
+  }
+
+  public getAllGoodsInfoByGoodstate():Observable<any>{
+    let url=GoodsInfoService.getApiUrl()+"goods/getgoodsinfobygoodstate";
     log('Fetching...');
     log(url);
     let ob:Observable<any> = this.http

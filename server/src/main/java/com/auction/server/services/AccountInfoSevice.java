@@ -23,4 +23,5 @@ public class AccountInfoSevice {
     public AccountInfo findByUserId(int id){
         return accountInfoRepo.findByUserid(id);
     }
+
 }

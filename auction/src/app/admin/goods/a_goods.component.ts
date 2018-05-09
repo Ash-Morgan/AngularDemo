@@ -4,6 +4,7 @@ import {NzMessageService} from "ng-zorro-antd";
 import {GoodsInfoService} from "../../services/goods-info.service";
 import {GoodsInfo} from "../../entity/GoodsInfo";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-a-goods',
@@ -25,7 +26,7 @@ export class A_goodsComponent implements OnInit {
   a_validateForm: FormGroup;
 
   initTable(){
-    this.goodsService.getAllGoodsInfo().subscribe(
+    this.goodsService.getAllGoodsInfoByGstate().subscribe(
       (val) => {
         console.log('Get success!', val);
         this.data = val;
@@ -64,8 +65,8 @@ export class A_goodsComponent implements OnInit {
     this.goodsUpdate.gstartaccount = value.u_gstartaccount;
     this.goodsUpdate.ghighaccount = value.u_ghighaccount;
     this.goodsUpdate.gcontent = value.u_gcontent;
-    this.goodsUpdate.gstartdate = value.u_gstartdate;
-    this.goodsUpdate.genddate = value.u_genddate;
+    this.goodsUpdate.gstartdate = this.datePipe.transform(value.u_gstartdate,'yyyy-MM-dd HH:mm:ss');
+    this.goodsUpdate.genddate = this.datePipe.transform(value.u_genddate,'yyyy-MM-dd HH:mm:ss');
     this.goodsUpdate.gtypeid = value.u_gtypeid;
     this.goodsUpdate.goodstate = value.u_goodstate;
     this.goodsService.updategoodsinfo(this.goodsUpdate).subscribe(
@@ -94,8 +95,8 @@ export class A_goodsComponent implements OnInit {
     this.goodsinfo.gstartaccount = value.a_gstartaccount;
     this.goodsinfo.ghighaccount = value.a_ghighaccount;
     this.goodsinfo.gcontent = value.a_gcontent;
-    this.goodsinfo.gstartdate = value.a_gstartdate;
-    this.goodsinfo.genddate = value.a_genddate;
+    this.goodsinfo.gstartdate = this.datePipe.transform(value.a_gstartdate,'yyyy-MM-dd HH:mm:ss');
+    this.goodsinfo.genddate = this.datePipe.transform(value.a_gstartdate,'yyyy-MM-dd HH:mm:ss');
     this.goodsinfo.gtypeid = value.a_gtypeid;
     this.goodsinfo.goodstate = value.a_goodstate;
     this.goodsService.addgoodsinfo(this.goodsinfo).subscribe(
@@ -125,6 +126,7 @@ export class A_goodsComponent implements OnInit {
   }
 
   constructor(private fb: FormBuilder,
+              private datePipe: DatePipe,
               private message: NzMessageService,
               private goodsService: GoodsInfoService) {
     this.u_validateForm = this.fb.group({

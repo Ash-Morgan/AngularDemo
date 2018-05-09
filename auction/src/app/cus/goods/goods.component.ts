@@ -17,9 +17,10 @@ export class GoodsComponent implements OnInit {
   array = ["url(" + this.URL + "goods1_1.jpg)"];
   goodsinfo: GoodsInfo = new GoodsInfo();
   userinfo: UserInfo = new UserInfo();
-  auctioninfoList:any;
+  highaccount: number;
+  auctioninfoList: any;
   endDate: number;
-  isButton:string = 'Ing';
+  isButton: string = 'Ing';
   count: number = 100.0;
   id: number;
 
@@ -35,17 +36,24 @@ export class GoodsComponent implements OnInit {
         this.auctioninfoList = JSON.parse(val.auctionInfoList);
         console.log("Put in success!", this.goodsinfo);
         console.log("Put in success!", this.auctioninfoList);
+        if (this.auctioninfoList.length > 0) {
+          this.highaccount = this.auctioninfoList[0].aaccount
+        }else {
+          this.highaccount = this.goodsinfo.gstartaccount
+        }
       }
     );
   }
 
   addprice(): void {
-    alert(this.isButton)
     if (this.isLogin()) {
-      this.goodsinfo.ghighaccount += this.count;
+      alert("请问您，是否确认出价？")
+      this.isButton = 'Did'
+      this.highaccount += this.count
       const data = {
         'goodsid': this.goodsinfo.goodsid,
-        'goodsghighaccount': this.goodsinfo.ghighaccount,
+        'highaccount': this.highaccount,
+        'addaccount':this.count,
         'username': sessionStorage.getItem('userinfo')
       };
       this.goodsInfoService.postHighAccount(data).subscribe(
@@ -54,14 +62,15 @@ export class GoodsComponent implements OnInit {
             val);
           if (val.result === "success") {
             this._message.create('success',
-              '恭喜你，出价成功所出价格为:' + this.goodsinfo.ghighaccount);
+              '恭喜你，出价成功所出价格为:' + this.highaccount);
           } else if (val.result === "error") {
-            this.goodsinfo.ghighaccount -= this.count;
+            this.highaccount -= this.count;
             this._message.create('error',
-              '出价失败，余额不足！');
+              '对不起，出价失败，余额不足！');
           }
         }
       );
+      this.initGoods();
     } else {
       window.alert("请先登录！");
     }
@@ -74,19 +83,21 @@ export class GoodsComponent implements OnInit {
     return false;
   }
 
-  isDid():boolean{
+  isDid(): boolean {
     const data = {
-      "username":sessionStorage.getItem('userinfo')
+      "username": sessionStorage.getItem('userinfo')
     }
     this.userInfoService.getUserInfoByUsername(data).subscribe(
-      (val)=>{
-        console.log("GET call successful!",val);
+      (val) => {
+        console.log("GET call successful!", val);
         this.userinfo = JSON.parse(val.userinfo);
       }
     );
-    if(this.auctioninfoList.length > 0){
-      if(this.userinfo.userid === this.auctioninfoList[0].userid){
+    if (this.auctioninfoList.length > 0) {
+      if (this.userinfo.userid === this.auctioninfoList[0].userid) {
         return true;
+      }else {
+        return false;
       }
     }
     return false;
@@ -107,15 +118,17 @@ export class GoodsComponent implements OnInit {
         "url(" + this.URL + "goods1_4.jpg)",
         "url(" + this.URL + "goods1_5.jpg)"];
     }, 500);
-    this.initGoods();
-    // setInterval(_ => {
-    //   this.initGoods();
-    // }, 500);
+    // this.initGoods();
     var interval = setInterval(_ => {
-      if(this.isLogin()){
-        if(this.isDid()){
+      this.initGoods();
+      if (this.isLogin()) {
+        if (this.isDid()) {
           this.isButton = 'Did';
+        }else {
+          this.isButton = 'Ing';
         }
+      }else {
+        this.isButton = 'Ing';
       }
       this.endDate = Date.parse(this.goodsinfo.genddate);
       if (Math.floor(this.endDate - Date.now()) <= 0) {
@@ -137,7 +150,7 @@ export class GoodsComponent implements OnInit {
           }
         );
       }
-    }, 500);
+    }, 200);
   }
 
 }

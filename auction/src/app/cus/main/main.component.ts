@@ -29,7 +29,7 @@ export class MainComponent implements OnInit {
   }
 
   initList(): void {
-    this.goodsinfoservice.getAllGoodsInfo().subscribe(
+    this.goodsinfoservice.getAllGoodsInfoByGoodstate().subscribe(
       (val) => {
         console.log("Get success", val)
         this.goodslist = val;

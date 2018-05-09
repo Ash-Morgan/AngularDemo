@@ -16,7 +16,21 @@ public class AuctionInfoService {
     @Resource(name = "auction-info-repo", type = AuctionInfoRepo.class)
     private AuctionInfoRepo auctionInfoRepo;
 
+    /**
+     *获取指定商品的前3个出价
+     * @param goodsid
+     * @return List<AuctionInfo>
+     */
     public List<AuctionInfo> getTopFromAuction(Integer goodsid){
         return (List<AuctionInfo>)auctionInfoRepo.findFirst3ByGoodsidOrderByAaccountDesc(goodsid);
+    }
+
+    /**
+     * 保存出价信息
+     * @param auctionInfo
+     * @return AuctionInfo
+     */
+    public AuctionInfo saveAccountInfo(AuctionInfo auctionInfo){
+        return auctionInfoRepo.save(auctionInfo);
     }
 }

@@ -31,6 +31,18 @@ public class GoodsInfoService {
     }
 
     /**
+     * 根据商品状态获取所有商品信息
+     * @return List<GoodsInfo>
+     */
+    public List<GoodsInfo> getAllGoodsInfoByGoodstate(String goodstate) {
+        List<GoodsInfo> goodsInfoList = new ArrayList<GoodsInfo>();
+        if (goodsInfoRepo.findAllByGoodstate(goodstate).iterator().hasNext()) {
+            goodsInfoList = (List<GoodsInfo>) goodsInfoRepo.findAllByGoodstate(goodstate);
+        }
+        return goodsInfoList;
+    }
+
+    /**
      * 更新商品当前拍卖价格
      *
      * @param info

@@ -7,6 +7,8 @@ import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,11 +42,20 @@ public class GoodsInfoController extends Cross {
     Gson gson = new Gson();
 
     /**
-     * 获取所有商品信息
+     * 获取指定状态所有商品信息
      * @return List<GoodsInfo>
      */
-    @GetMapping(value = "/getallgoodsinfo")
-    public List<GoodsInfo> getGoodsInfo() {
+    @GetMapping(value = "/getgoodsinfobygoodstate")
+    public List<GoodsInfo> getGoodsInfoByGoodstate() {
+        return goodsInfoService.getAllGoodsInfoByGoodstate("未出售");
+    }
+
+    /**
+     * 获取指定状态所有商品信息
+     * @return List<GoodsInfo>
+     */
+    @GetMapping(value = "/getgoodsinfobygstate")
+    public List<GoodsInfo> getGoodsInfoByGstate() {
         return goodsInfoService.getAllGoodsInfoByGstate(1);
     }
 
@@ -74,20 +85,27 @@ public class GoodsInfoController extends Cross {
         Map<String,Object> param = (Map<String,Object>)params.get("params");
         int goodsid = (int)param.get("goodsid");
         String username = param.get("username").toString();
-        Double goodsghighaccount =Double.parseDouble(param.get("goodsghighaccount")+".0");
+        Double highaccount =Double.parseDouble(param.get("highaccount")+".0");
+        Double addaccount =Double.parseDouble(param.get("addaccount")+".0");
         Map<String, String> map = new HashMap<>();
-        GoodsInfo goodsInfo = null;
+        AuctionInfo auctionInfo = null;
         UserInfo userInfo = userInfoService.getUserInfoByUname(username);
         AccountInfo accountInfo = accountInfoService.findByUserId(userInfo.getUserid());
-        if (accountInfo.getAmount() >= goodsghighaccount) {
-            GoodsInfo template = goodsInfoService.findById(goodsid);
-            template.setGhighaccount(goodsghighaccount);
-            goodsInfo = goodsInfoService.updateHighAccount(template);
+        if (accountInfo.getAmount() >= highaccount) {
+            AuctionInfo template = new AuctionInfo();
+            template.setGoodsid(goodsid);
+            template.setUserid(userInfo.getUserid());
+            template.setAaccount(highaccount);
+            template.setAaddmoney(addaccount);
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            template.setAdatetime(df.format(new Date()));
+            template.setAstate(1);
+            auctionInfo = auctionInfoService.saveAccountInfo(template);
         }
-        if (goodsInfo != null) {
-            businessInfoService.updateBusinessInfo(userInfo.getUserid(),
-                    goodsInfo.getGoodsid(),goodsInfo.getGhighaccount(),"余额");
-            map.put("goodsinfo", gson.toJson(goodsInfo));
+        if (auctionInfo != null) {
+//            businessInfoService.updateBusinessInfo(userInfo.getUserid(),
+//                    auctionInfo.getGoodsid(),auctionInfo.getAaccount(),"余额");
+            map.put("auctionInfo", gson.toJson(auctionInfo));
             System.out.println("更新成功！");
             map.put("result", "success");
         } else {
@@ -202,7 +220,18 @@ public class GoodsInfoController extends Cross {
         System.out.println("username= "+username);
         UserInfo userInfo = userInfoService.getUserInfoByUname(username);
         GoodsInfo goodsInfo = goodsInfoService.findById(goodsid);
-        if(goodsInfo.getGuserid().equals(userInfo.getUserid())){
+        List<AuctionInfo> auctionInfoList = auctionInfoService.getTopFromAuction(goodsid);
+        AuctionInfo auctionInfo = null;
+        if(auctionInfoList.size()>0){
+            auctionInfo = auctionInfoList.get(0);
+            goodsInfo.setGuserid(auctionInfo.getUserid());
+            goodsInfo.setGhighaccount(auctionInfo.getAaccount());
+            goodsInfo.setGoodstate("已出售");
+            goodsInfoService.saveGoodsInfo(goodsInfo);
+        }
+        if(userInfo==null){
+            map.put("result", "notlogin");
+        }else if(userInfo.getUserid().equals(auctionInfo.getUserid())){
             map.put("result", "success");
         }else {
             map.put("result", "error");
