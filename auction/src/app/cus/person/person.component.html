@@ -1,0 +1,121 @@
+<div class="main">
+  <div class="main-inner body-width">
+    <div id="selected" class="main-cont main-album">
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+        <!--用户编号-->
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="7">
+            <label>用户编号</label>
+          </div>
+          <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+            <nz-input formControlName="userId" [nzReadonly]="true" [(ngModel)]="datainfo.userid" [nzType]="'text'" [nzSize]="'large'">
+              <ng-template #addOnBefore><i class="anticon anticon-lock"></i></ng-template>
+            </nz-input>
+          </div>
+        </div>
+        <!--用户名-->
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="7">
+            <label>用户名</label>
+          </div>
+          <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+            <nz-input formControlName="userName" [nzReadonly]="true"  [(ngModel)]="datainfo.username" [nzType]="'text'" [nzPlaceHolder]="'请输入用户名'" [nzSize]="'large'">
+              <ng-template #addOnBefore><i class="anticon anticon-lock"></i></ng-template>
+            </nz-input>
+            <div nz-form-explain *ngIf="getFormControl('userName').dirty&&getFormControl('userName').hasError('required')">用户名不能为空!</div>
+          </div>
+        </div>
+        <!--密码-->
+        <div nz-form-item nz-row>
+          <div nz-col [nzSpan]="7" nz-form-label>
+            <label nz-form-item-required>密码</label>
+          </div>
+          <div>
+            <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+              <nz-input formControlName="password" [(ngModel)]="datainfo.userpwd" [nzPlaceHolder]="'请输入密码'" [nzType]="'password'" [nzSize]="'large'" (ngModelChange)="validateConfirmPassword()">
+              </nz-input>
+              <div nz-form-explain *ngIf="getFormControl('password').dirty&&getFormControl('password').hasError('required')">密码不能为空!</div>
+            </div>
+          </div>
+        </div>
+        <!--姓名-->
+        <div nz-form-item nz-row>
+          <div nz-col [nzSpan]="7" nz-form-label>
+            <label nz-form-item-required>姓名</label>
+          </div>
+          <div>
+            <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+              <nz-input formControlName="uName" [(ngModel)]="datainfo.uname" [nzPlaceHolder]="'请输入姓名'" [nzType]="'text'" [nzSize]="'large'">
+              </nz-input>
+              <div nz-form-explain *ngIf="getFormControl('uName').dirty&&getFormControl('uName').hasError('required')">姓名不能为空!</div>
+            </div>
+          </div>
+        </div>
+        <!--性别-->
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="7">
+            <label  nz-form-item-required>性别</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="12">
+            <nz-radio-group formControlName="sexRadioGroup" [(ngModel)]="datainfo.usex" >
+              <label nz-radio [nzValue]="'男'">
+                <span>男</span>
+              </label>
+              <label nz-radio [nzValue]="'女'">
+                <span>女</span>
+              </label>
+            </nz-radio-group>
+          </div>
+        </div>
+        <!--身份证号-->
+        <div nz-form-item nz-row>
+          <div nz-col [nzSpan]="7" nz-form-label>
+            <label nz-form-item-required>身份证号</label>
+          </div>
+          <div>
+            <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+              <nz-input formControlName="uCardId" [(ngModel)]="datainfo.ucardid" [nzPlaceHolder]="'请输入身份证号'" [nzType]="'text'" [nzSize]="'large'">
+              </nz-input>
+              <div nz-form-explain *ngIf="getFormControl('uCardId').dirty&&getFormControl('uCardId').hasError('required')">身份证号不能为空!</div>
+              <div nz-form-explain *ngIf="getFormControl('uCardId').dirty&&getFormControl('uCardId').hasError('ucardid')">身份证号不正确，请重新输入!</div>
+            </div>
+          </div>
+        </div>
+        <!--出生日期-->
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="7">
+            <label nz-form-item-required>出生日期</label>
+          </div>
+          <div nz-col [nzSpan]="12" nz-form-control>
+            <nz-datepicker formControlName="birthDay" [(ngModel)]="datainfo.ubirthdate" [nzPlaceHolder]="'请选择你的出生日期'" [nzSize]="'large'"></nz-datepicker>
+            <div nz-form-explain *ngIf="getFormControl('birthDay').dirty&&getFormControl('birthDay').hasError('required')">出生日期不能为空！</div>
+            <div nz-form-explain *ngIf="getFormControl('birthDay').dirty&&getFormControl('birthDay').hasError('expired')">出生日期不能超过当前日期!</div>
+          </div>
+        </div>
+        <!--手机号码-->
+        <div nz-form-item nz-row>
+          <div nz-col [nzSpan]="7" nz-form-label>
+            <label nz-form-item-required>手机号码</label>
+          </div>
+          <div>
+            <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+              <nz-input formControlName="uPhone" [(ngModel)]="datainfo.uphone" [nzPlaceHolder]="'请输入手机号码'" [nzType]="'text'" [nzSize]="'large'">
+              </nz-input>
+              <div nz-form-explain *ngIf="getFormControl('uPhone').dirty&&getFormControl('uPhone').hasError('required')">手机号不能为空!</div>
+              <div nz-form-explain *ngIf="getFormControl('uPhone').dirty&&getFormControl('uPhone').hasError('phonecheck')">手机号不正确，请重新输入!</div>
+            </div>
+          </div>
+        </div>
+        <!--submit Button-->
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="7">
+          </div>
+          <div nz-col [nzSpan]="12" nz-form-control>
+            <button style="background-color: #22b4f6" nz-button [nzType]="'primary'" [nzSize]="'large'">提交</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

@@ -1,7 +1,9 @@
 package com.auction.server.controllers;
 
+import com.auction.server.entities.AccountInfo;
 import com.auction.server.entities.UserInfo;
 import com.auction.server.general.Cross;
+import com.auction.server.services.AccountInfoSevice;
 import com.auction.server.services.UserInfoService;
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,9 @@ public class UserInfoController extends Cross {
 
     @Resource(name = "user-info-service", type = UserInfoService.class)
     private UserInfoService userInfoService;
+
+    @Resource(name = "account-info-service", type = AccountInfoSevice.class)
+    private AccountInfoSevice accountInfoSevice;
 
     Gson gson = new Gson();
 
@@ -157,6 +162,19 @@ public class UserInfoController extends Cross {
         Map<String, String> map = new HashMap<>();
         UserInfo userInfo = userInfoService.getUserInfoByUname(username);
         map.put("userinfo", gson.toJson(userInfo));
+        return map;
+    }
+
+    /**
+     * 获取指定用户信息
+     * @return Map<String, String>
+     */
+    @GetMapping(value = "/getaccountbyusername")
+    public Map<String, String> getAccountByUsername(@RequestParam("username") String username){
+        Map<String, String> map = new HashMap<>();
+        UserInfo userInfo = userInfoService.getUserInfoByUname(username);
+        AccountInfo accountInfo = accountInfoSevice.findByUserId(userInfo.getUserid());
+        map.put("accountinfo", gson.toJson(accountInfo));
         return map;
     }
 }

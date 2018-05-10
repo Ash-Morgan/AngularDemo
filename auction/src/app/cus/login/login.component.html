@@ -41,16 +41,25 @@
 </nz-modal>
 
 <nz-modal [nzVisible]="isVisible2" [nzTitle]="modaltitle2" (nzOnCancel)="close2()" [nzContent]="modalContent2"
-          [nzFooter]="null">
+          [nzWidth]="250" [nzFooter]="null">
   <ng-template #modaltitle2>
     Signed in as
     <br>
     {{ userstate }}
   </ng-template>
   <ng-template #modalContent2>
-    <br>
-    <button nz-button (click)="exit()" class="login-form-button" [nzType]="'primary'" [nzSize]="'large'">Exit
-    </button>
+    <button nz-button [nzType]="'primary'" (click)="turnTo('/cus/business')">交易记录</button>
+    <br><br>
+    <button nz-button [nzType]="'primary'" (click)="turnTo('/cus/auction')">我的拍卖</button>
+    <br><br>
+    <button nz-button [nzType]="'primary'" (click)="turnTo('/cus/account/balance')">账户信息</button>
+    <br><br>
+    <button nz-button [nzType]="'primary'" (click)="turnTo('/cus/person')">个人中心</button>
+    <br><br>
+    <button nz-button (click)="exit()" [nzType]="'primary'" >退出登录</button>
+  </ng-template>
+  <ng-template #modalFooter2>
+
   </ng-template>
 </nz-modal>
 
@@ -59,7 +68,7 @@
   <ng-template #modaltitleR><b>新用户注册</b>
   </ng-template>
   <ng-template #modalccontentR>
-    <app-register  (isShowRegister)="eventHandler($event)"></app-register>
+    <app-register (isShowRegister)="eventHandler($event)"></app-register>
   </ng-template>
   <ng-template #modalfooterR>
   </ng-template>

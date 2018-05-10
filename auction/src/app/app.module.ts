@@ -32,6 +32,12 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {GoodsTypeService} from "./services/goods-type.service";
 import {GoodstypeComponent} from "./cus/type/goodstype.component";
 import {DatePipe} from "@angular/common";
+import {PersonComponent} from "./cus/person/person.component";
+import {AccountComponent} from "./cus/account/account";
+import {BalanceComponent} from "./cus/account/balance/balance";
+import {AccountInfoService} from "./services/account-info.service";
+import {RechargeComponent} from "./cus/account/recharge/recharge";
+import {MainService} from "./services/main.service";
 
 
 @NgModule({
@@ -55,7 +61,11 @@ import {DatePipe} from "@angular/common";
     U_check_FailedComponent,
     U_managementComponent,
     U_formComponent,
-    GoodstypeComponent
+    GoodstypeComponent,
+    PersonComponent,
+    AccountComponent,
+    BalanceComponent,
+    RechargeComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -69,10 +79,12 @@ import {DatePipe} from "@angular/common";
   ],
   providers: [
     DatePipe,
+    MainService,
     AdminInfoService,
     UserInfoService,
     GoodsInfoService,
-    GoodsTypeService
+    GoodsTypeService,
+    AccountInfoService
   ],
   bootstrap: [AppComponent]
 })

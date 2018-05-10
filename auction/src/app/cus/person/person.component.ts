@@ -1,19 +1,17 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {UserInfo} from "../../entity/UserInfo";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
+import {UserInfoService} from "../../services/user-info.service";
 import {NzMessageService} from "ng-zorro-antd";
-import {UserInfo} from "../../../../entity/UserInfo";
-import {UserInfoService} from "../../../../services/user-info.service";
 
 @Component({
-  selector: 'app-u-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  selector: 'app-person',
+  templateUrl: './person.component.html',
+  styleUrls:['person.component.css']
 })
-export class U_formComponent implements OnInit {
-  @Output() isShow: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Input() datainfo: UserInfo;
+export class PersonComponent implements OnInit{
+  datainfo:UserInfo = new UserInfo();
   validateForm: FormGroup;
   [x: string]: any;
 
@@ -33,7 +31,6 @@ export class U_formComponent implements OnInit {
     user.ucardid = value.uCardId
     user.ubirthdate = value.birthDay
     user.uphone = value.uPhone
-    user.ustate = value.uState
     console.log(user.toString());
     this.userservice.updateUser(user).subscribe(
       (val) => {
@@ -56,21 +53,6 @@ export class U_formComponent implements OnInit {
     return this.validateForm.controls[name];
   }
 
-  // 用户名验证
-  userNameAsyncValidator = (control: FormControl): any => {
-    return Observable.create(function (observer) {
-      setTimeout(() => {
-        if (control.value === '123') {
-          observer.next({error: true, duplicated: true});
-        } else {
-          observer.next(null);
-        }
-        observer.complete();
-      }, 1000);
-    });
-  };
-
-//密码更改后的确认验证
   validateUsername() {
     setTimeout(_ => {
       this.validateForm.controls['userName'].updateValueAndValidity();
@@ -133,13 +115,19 @@ export class U_formComponent implements OnInit {
       sexRadioGroup: ['男'],
       uCardId: ['', [this.uCardIdValidator]],
       birthDay: ['', [this.birthDayValidator]],
-      uPhone: ['', [this.uPhoneValidator]],
-      uState:['']
+      uPhone: ['', [this.uPhoneValidator]]
     });
+    const data = {
+      "username":sessionStorage.getItem('userinfo')
+    }
+    userservice.getUserInfoByUsername(data).subscribe(
+      (val)=>{
+        console.log(val)
+        this.datainfo = JSON.parse(val.userinfo);
+      }
+    );
   }
 
   ngOnInit() {
   }
-
 }
-

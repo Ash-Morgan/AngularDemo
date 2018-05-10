@@ -7,6 +7,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  styleUrls:['login.component.css']
 })
 export class LoginComponent implements OnInit {
   private info: UserInfo = new UserInfo();
@@ -94,6 +95,11 @@ export class LoginComponent implements OnInit {
     this.userstate = sessionStorage.getItem('userinfo');
     this._message.success("您已成功退出登录！");
 
+  }
+
+  turnTo(url){
+    this.close2();
+    open(url,'_self')
   }
 }
 

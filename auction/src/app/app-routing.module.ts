@@ -15,6 +15,10 @@ import {U_checkComponent} from "./admin/user/usercheck/u_check.component";
 import {U_check_FailedComponent} from "./admin/user/userfailed/u_failed.component";
 import {U_managementComponent} from "./admin/user/usermanagement/u_management.component";
 import {GoodstypeComponent} from "./cus/type/goodstype.component";
+import {PersonComponent} from "./cus/person/person.component";
+import {AccountComponent} from "./cus/account/account";
+import {BalanceComponent} from "./cus/account/balance/balance";
+import {RechargeComponent} from "./cus/account/recharge/recharge";
 
 const routes: Routes = [
   {path: '', redirectTo: '/cus/main', pathMatch: 'full'},
@@ -22,9 +26,16 @@ const routes: Routes = [
     path: 'cus', component: CusComponent,
     children: [
       {path: 'main', component: MainComponent},
-      {path: 'demo2', component: CardComponent},
       {path: 'goodstype', component: GoodstypeComponent},
-      {path: 'goods', component: GoodsComponent}
+      {path: 'goods', component: GoodsComponent},
+      {path: 'person', component: PersonComponent},
+      {path: 'account', component: AccountComponent,
+        children:[
+          {path: 'balance', component: BalanceComponent},
+          {path: 'recharge', component: RechargeComponent}
+        ]
+      },
+      {path: 'demo2', component: CardComponent}
 
     ]
   },

@@ -1,0 +1,19 @@
+<div nz-form-item nz-row>
+  <div nz-form-label nz-col [nzSpan]="5">
+    <label>请输入需要充值的金额</label>
+  </div>
+  <div nz-col [nzSpan]="17" nz-form-control>
+    <nz-input-number [(ngModel)]="amount" [nzMin]="1" [nzStep]="1"></nz-input-number>
+  </div>
+</div>
+<div nz-form-item nz-row>
+  <div nz-form-label nz-col [nzSpan]="5">
+  </div>
+  <div nz-col [nzSpan]="17" nz-form-control nzHasFeedback>
+    <button nz-button [nzType]="'primary'">
+      <span>充值</span>
+    </button>
+  </div>
+</div>
+<img src="http://b.bshare.cn/barCode?site=weixin&url={{URL}}">
+
