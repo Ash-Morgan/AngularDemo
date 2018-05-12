@@ -51,6 +51,16 @@ public class GoodsInfoController extends Cross {
     }
 
     /**
+     * 获取指定用户和状态的所有商品信息
+     * @return List<GoodsInfo>
+     */
+    @GetMapping(value = "/getbygstateandguserid")
+    public List<GoodsInfo> getGoodsInfoByGstateAndGuserid(@RequestParam("gstate") Integer gstate,
+                                                          @RequestParam("userid") Integer userid) {
+        return goodsInfoService.getGoodsInfoByGstateAndGuserid(gstate,userid);
+    }
+
+    /**
      * 获取指定状态所有商品信息
      * @return List<GoodsInfo>
      */

@@ -17,4 +17,6 @@ public interface GoodsInfoRepo extends CrudRepository<GoodsInfo, String> {
     public GoodsInfo findByGoodsid(int Goodsid);
 
     public Iterable<GoodsInfo> findAllByGtypeid(int typeid);
+
+    public Iterable<GoodsInfo> findByGuseridAndGstate(Integer userid,Integer gstate);
 }

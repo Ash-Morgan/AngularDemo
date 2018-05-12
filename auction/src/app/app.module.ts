@@ -43,6 +43,10 @@ import {AuctionInfoService} from "./services/auction-info.service";
 import {AuctionComponent} from "./cus/auction/auction";
 import {AuctionIngComponent} from "./cus/auction/auctioning/auctioning";
 import {AuctionedComponent} from "./cus/auction/auctioned/auctioned";
+import {GoodsaddComponent} from "./cus/auction/goodsadd/goodsadd";
+import {GoodsauctionComponent} from "./cus/auction/goodsauction/goodsauction";
+import {GoodscheckComponent} from "./cus/auction/goodscheck/goodscheck";
+import {GoodsfailedComponent} from "./cus/auction/goodsfailed/goodsfailed";
 
 
 @NgModule({
@@ -74,7 +78,11 @@ import {AuctionedComponent} from "./cus/auction/auctioned/auctioned";
     BillComponent,
     AuctionComponent,
     AuctionIngComponent,
-    AuctionedComponent
+    AuctionedComponent,
+    GoodsaddComponent,
+    GoodsauctionComponent,
+    GoodscheckComponent,
+    GoodsfailedComponent
   ],
   imports: [
     BrowserAnimationsModule,

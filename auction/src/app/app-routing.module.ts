@@ -23,6 +23,10 @@ import {BillComponent} from "./cus/account/bill/bill";
 import {AuctionComponent} from "./cus/auction/auction";
 import {AuctionIngComponent} from "./cus/auction/auctioning/auctioning";
 import {AuctionedComponent} from "./cus/auction/auctioned/auctioned";
+import {GoodsaddComponent} from "./cus/auction/goodsadd/goodsadd";
+import {GoodsauctionComponent} from "./cus/auction/goodsauction/goodsauction";
+import {GoodscheckComponent} from "./cus/auction/goodscheck/goodscheck";
+import {GoodsfailedComponent} from "./cus/auction/goodsfailed/goodsfailed";
 
 const routes: Routes = [
   {path: '', redirectTo: '/cus/main', pathMatch: 'full'},
@@ -35,7 +39,11 @@ const routes: Routes = [
       {path: 'auction', component: AuctionComponent,
         children:[
           {path: 'auctioning', component: AuctionIngComponent},
-          {path: 'auctioned', component: AuctionedComponent}
+          {path: 'auctioned', component: AuctionedComponent},
+          {path: 'goodsadd', component: GoodsaddComponent},
+          {path: 'goodsauction', component: GoodsauctionComponent},
+          {path: 'goodscheck', component: GoodscheckComponent},
+          {path: 'goodsfailed', component: GoodsfailedComponent}
         ]
       },
       {path: 'person', component: PersonComponent},

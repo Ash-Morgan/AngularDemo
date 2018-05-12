@@ -32,6 +32,19 @@ public class GoodsInfoService {
 
     /**
      * 根据商品状态获取所有商品信息
+     *
+     * @return List<GoodsInfo>
+     */
+    public List<GoodsInfo> getGoodsInfoByGstateAndGuserid(int gstate,int userid) {
+        List<GoodsInfo> goodsInfoList = new ArrayList<GoodsInfo>();
+        if (goodsInfoRepo.findByGuseridAndGstate(gstate,userid).iterator().hasNext()) {
+            goodsInfoList = (List<GoodsInfo>) goodsInfoRepo.findByGuseridAndGstate(gstate,userid);
+        }
+        return goodsInfoList;
+    }
+
+    /**
+     * 根据商品状态获取所有商品信息
      * @return List<GoodsInfo>
      */
     public List<GoodsInfo> getAllGoodsInfoByGoodstate(String goodstate) {

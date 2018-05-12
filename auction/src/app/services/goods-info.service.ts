@@ -11,8 +11,18 @@ export class GoodsInfoService extends WebApiService {
     super();
   }
 
+  public getGoodsInfoByGstateAndGuserid(data):Observable<any>{
+    let url=GoodsInfoService.getApiUrl()+"goods/getbygstateandguserid";
+    log('Fetching...');
+    log(url);
+    let ob:Observable<any> = this.http
+      .get(url,{params:data});
+    log('Fetching End');
+    return ob;
+  }
+
   public getAllGoodsInfoByGstate():Observable<any>{
-    let url=GoodsInfoService.getApiUrl()+"goods/getgoodsinfoby";
+    let url=GoodsInfoService.getApiUrl()+"goods/getgoodsinfobygstate";
     log('Fetching...');
     log(url);
     let ob:Observable<any> = this.http
@@ -133,4 +143,5 @@ export class GoodsInfoService extends WebApiService {
     log('Fetching End');
     return ob;
   }
+
 }
