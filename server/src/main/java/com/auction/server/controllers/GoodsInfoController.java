@@ -100,7 +100,7 @@ public class GoodsInfoController extends Cross {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
             template.setAdatetime(df.format(new Date()));
             template.setAstate(1);
-            auctionInfo = auctionInfoService.saveAccountInfo(template);
+            auctionInfo = auctionInfoService.saveAuctionInfo(template);
         }
         if (auctionInfo != null) {
 //            businessInfoService.updateBusinessInfo(userInfo.getUserid(),

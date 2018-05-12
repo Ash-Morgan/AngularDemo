@@ -30,7 +30,14 @@ public class AuctionInfoService {
      * @param auctionInfo
      * @return AuctionInfo
      */
-    public AuctionInfo saveAccountInfo(AuctionInfo auctionInfo){
+    public AuctionInfo saveAuctionInfo(AuctionInfo auctionInfo){
         return auctionInfoRepo.save(auctionInfo);
+    }
+
+    public List< Object> getAuctionByUserid(Integer userid){
+        if(auctionInfoRepo.findGoodsidByUserid(userid)!=null){
+            return auctionInfoRepo.findGoodsidByUserid(userid);
+        }
+        return null;
     }
 }

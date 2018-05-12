@@ -12,7 +12,7 @@ export class GoodsInfoService extends WebApiService {
   }
 
   public getAllGoodsInfoByGstate():Observable<any>{
-    let url=GoodsInfoService.getApiUrl()+"goods/getgoodsinfobygstate";
+    let url=GoodsInfoService.getApiUrl()+"goods/getgoodsinfoby";
     log('Fetching...');
     log(url);
     let ob:Observable<any> = this.http

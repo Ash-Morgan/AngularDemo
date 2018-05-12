@@ -39,6 +39,10 @@ import {AccountInfoService} from "./services/account-info.service";
 import {RechargeComponent} from "./cus/account/recharge/recharge";
 import {MainService} from "./services/main.service";
 import {BillComponent} from "./cus/account/bill/bill";
+import {AuctionInfoService} from "./services/auction-info.service";
+import {AuctionComponent} from "./cus/auction/auction";
+import {AuctionIngComponent} from "./cus/auction/auctioning/auctioning";
+import {AuctionedComponent} from "./cus/auction/auctioned/auctioned";
 
 
 @NgModule({
@@ -67,7 +71,10 @@ import {BillComponent} from "./cus/account/bill/bill";
     AccountComponent,
     BalanceComponent,
     RechargeComponent,
-    BillComponent
+    BillComponent,
+    AuctionComponent,
+    AuctionIngComponent,
+    AuctionedComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -86,7 +93,8 @@ import {BillComponent} from "./cus/account/bill/bill";
     UserInfoService,
     GoodsInfoService,
     GoodsTypeService,
-    AccountInfoService
+    AccountInfoService,
+    AuctionInfoService
   ],
   bootstrap: [AppComponent]
 })
