@@ -1,14 +1,18 @@
 package com.auction.server.controllers;
 
+import com.auction.server.entities.AccountChange;
 import com.auction.server.entities.AccountInfo;
 import com.auction.server.entities.UserInfo;
 import com.auction.server.general.Cross;
+import com.auction.server.services.AccountChangeService;
 import com.auction.server.services.AccountInfoSevice;
 import com.auction.server.services.UserInfoService;
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +30,9 @@ public class UserInfoController extends Cross {
 
     @Resource(name = "account-info-service", type = AccountInfoSevice.class)
     private AccountInfoSevice accountInfoSevice;
+
+    @Resource(name = "account-change-service", type = AccountChangeService.class)
+    private AccountChangeService accountChangeService;
 
     Gson gson = new Gson();
 
@@ -81,13 +88,6 @@ public class UserInfoController extends Cross {
             map.put("result", "isEmpty");
         }
         return map;
-    }
-
-
-    @GetMapping(value = "/checktest")
-    public boolean checktest(@RequestParam("username") String username) {
-        System.out.println("++++++++++++++++++++++++++username = " + username);
-        return false;
     }
 
     /**
@@ -169,12 +169,55 @@ public class UserInfoController extends Cross {
      * 获取指定用户信息
      * @return Map<String, String>
      */
-    @GetMapping(value = "/getaccountbyusername")
-    public Map<String, String> getAccountByUsername(@RequestParam("username") String username){
+    @GetMapping(value = "/getaccountbyuserid")
+    public Map<String, String> getAccountByUsername(@RequestParam("userid") Integer userid){
         Map<String, String> map = new HashMap<>();
-        UserInfo userInfo = userInfoService.getUserInfoByUname(username);
-        AccountInfo accountInfo = accountInfoSevice.findByUserId(userInfo.getUserid());
+        AccountInfo accountInfo = accountInfoSevice.findByUserId(userid);
         map.put("accountinfo", gson.toJson(accountInfo));
         return map;
+    }
+
+
+    @ResponseBody
+    @PostMapping("/setaccountinfo")
+    public Map<String, String> setAccountInfo(@RequestBody Map<String,Object> params) {
+        Map<String, String> map = new HashMap<>();
+        Map<String,Object> param = (Map<String,Object>)params.get("params");
+        System.out.println(param);
+        Integer accountid = (Integer)param.get("accountid");
+        Integer userid = (Integer)param.get("userid");
+        Double amount = Double.parseDouble((Integer)param.get("amount")+"");
+        String content = (String)param.get("content");
+        AccountChange accountChange = new AccountChange();
+        accountChange.setCaccountid(accountid);
+        accountChange.setCuserid(userid);
+        accountChange.setCamount(amount);
+        accountChange.setCcontent(content);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        accountChange.setCdate(df.format(new Date()));
+        accountChange.setCstate(0);
+        AccountChange reback = accountChangeService.save(accountChange);
+        map.put("reback", gson.toJson(reback));
+        return map;
+    }
+
+    @GetMapping(value = "/getaccountchangebyid")
+    public Map<String, String> getAccountChangeById(@RequestParam("changeid") Integer changeid){
+        Map<String, String> map = new HashMap<>();
+        AccountChange accountChange = accountChangeService.getAccountChangeById(changeid);
+        map.put("accountchange", gson.toJson(accountChange));
+        return map;
+    }
+
+    @GetMapping(value = "/getallaccountchangebyuserid")
+    public List<AccountChange> getAllAccountChangeByUserId(@RequestParam("userid") Integer userid){
+        return accountChangeService.getAllAccountChangeByUserId(userid);
+    }
+
+    @GetMapping(value = "/deleteaccountinfo")
+    public void deleteAccountInfo(@RequestParam("changeid") Integer changeid){
+        AccountChange accountChange = accountChangeService.getAccountChangeById(changeid);
+        accountChange.setCstate(2);
+        accountChangeService.save(accountChange);
     }
 }

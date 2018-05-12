@@ -19,6 +19,7 @@ import {PersonComponent} from "./cus/person/person.component";
 import {AccountComponent} from "./cus/account/account";
 import {BalanceComponent} from "./cus/account/balance/balance";
 import {RechargeComponent} from "./cus/account/recharge/recharge";
+import {BillComponent} from "./cus/account/bill/bill";
 
 const routes: Routes = [
   {path: '', redirectTo: '/cus/main', pathMatch: 'full'},
@@ -32,6 +33,7 @@ const routes: Routes = [
       {path: 'account', component: AccountComponent,
         children:[
           {path: 'balance', component: BalanceComponent},
+          {path: 'bill', component: BillComponent},
           {path: 'recharge', component: RechargeComponent}
         ]
       },

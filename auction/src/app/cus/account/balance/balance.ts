@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountInfo} from "../../../entity/AccountInfo";
 import {AccountInfoService} from "../../../services/account-info.service";
+import {UserInfo} from "../../../entity/UserInfo";
 
 @Component({
   selector: 'app-balance',
@@ -13,10 +14,11 @@ export class BalanceComponent implements OnInit{
   }
 
   ngOnInit() {
+    var userInfo:UserInfo = JSON.parse(sessionStorage.getItem('userinfo'));
     const data = {
-      'username':sessionStorage.getItem('userinfo')
+      'userid':userInfo.userid
     }
-    this.accountInfoService.getAccountByUsername(data).subscribe(
+    this.accountInfoService.getAccountByUserid(data).subscribe(
       (val)=>{
         console.log(val);
         this.dataInfo = JSON.parse(val.accountinfo);

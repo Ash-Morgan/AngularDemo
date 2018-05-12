@@ -1,8 +1,8 @@
-<a *ngIf="userstate == null" style="color: #ffffff" (click)="open()"><i class="anticon anticon-poweroff"></i>
+<a *ngIf="sign === 0" style="color: #ffffff" (click)="open()"><i class="anticon anticon-poweroff"></i>
   登录
 </a>
-<a *ngIf="userstate != null" style="color: #ffffff" (click)="open2()"><i class="anticon anticon-poweroff"></i>
-  {{ userstate }}
+<a *ngIf="sign === 1" style="color: #ffffff" (click)="open2()"><i class="anticon anticon-poweroff"></i>
+  {{ userInfo.username }}
 </a>
 <nz-modal [nzVisible]="isVisible" [nzTitle]="'登录'" (nzOnCancel)="close()" [nzContent]="modalContent" [nzFooter]="null">
   <ng-template #modalContent>
@@ -45,7 +45,7 @@
   <ng-template #modaltitle2>
     Signed in as
     <br>
-    {{ userstate }}
+    {{ userInfo.username }}
   </ng-template>
   <ng-template #modalContent2>
     <button nz-button [nzType]="'primary'" (click)="turnTo('/cus/business')">交易记录</button>

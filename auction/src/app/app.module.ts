@@ -38,6 +38,7 @@ import {BalanceComponent} from "./cus/account/balance/balance";
 import {AccountInfoService} from "./services/account-info.service";
 import {RechargeComponent} from "./cus/account/recharge/recharge";
 import {MainService} from "./services/main.service";
+import {BillComponent} from "./cus/account/bill/bill";
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import {MainService} from "./services/main.service";
     PersonComponent,
     AccountComponent,
     BalanceComponent,
-    RechargeComponent
+    RechargeComponent,
+    BillComponent
   ],
   imports: [
     BrowserAnimationsModule,

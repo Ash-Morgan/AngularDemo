@@ -2,7 +2,6 @@ import {Component, OnInit} from "@angular/core";
 import {GoodsInfoService} from "../../services/goods-info.service";
 import {GoodsTypeService} from "../../services/goods-type.service";
 import {ActivatedRoute} from "@angular/router";
-import {GoodsInfo} from "../../entity/GoodsInfo";
 import {GoodsType} from "../../entity/GoodsType";
 
 @Component({

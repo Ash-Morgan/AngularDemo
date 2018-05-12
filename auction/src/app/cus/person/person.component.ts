@@ -11,7 +11,7 @@ import {NzMessageService} from "ng-zorro-antd";
   styleUrls:['person.component.css']
 })
 export class PersonComponent implements OnInit{
-  datainfo:UserInfo = new UserInfo();
+  datainfo:UserInfo = JSON.parse(sessionStorage.getItem('userinfo'));
   validateForm: FormGroup;
   [x: string]: any;
 
@@ -117,15 +117,6 @@ export class PersonComponent implements OnInit{
       birthDay: ['', [this.birthDayValidator]],
       uPhone: ['', [this.uPhoneValidator]]
     });
-    const data = {
-      "username":sessionStorage.getItem('userinfo')
-    }
-    userservice.getUserInfoByUsername(data).subscribe(
-      (val)=>{
-        console.log(val)
-        this.datainfo = JSON.parse(val.userinfo);
-      }
-    );
   }
 
   ngOnInit() {

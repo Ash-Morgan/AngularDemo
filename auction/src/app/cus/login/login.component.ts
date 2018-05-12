@@ -7,13 +7,14 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls:['login.component.css']
+  styleUrls: ['login.component.css']
 })
 export class LoginComponent implements OnInit {
   private info: UserInfo = new UserInfo();
+  sign: number = 0;
+  userInfo: UserInfo = new UserInfo();
   username: string;
   pwd: string;
-  userstate: string = sessionStorage.getItem('userinfo');
   isVisible = false;
   isVisible2 = false;
   isShowRegister = false;
@@ -23,6 +24,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (sessionStorage.getItem('userinfo') !== null) {
+      this.userInfo = JSON.parse(sessionStorage.getItem('userinfo'));
+      this.sign = 1;
+    } else {
+      this.sign = 0
+    }
   }
 
   _submitForm(value) {
@@ -38,10 +45,11 @@ export class LoginComponent implements OnInit {
           val);
         if (val.result === "success") {
           this.isVisible = false;
-          sessionStorage.setItem('userinfo', theinfo.username);
-          this.userstate = this.username;
-          this._message.create('success', `Welcome to login:` +  theinfo.username);
-        }else if (val.result === "error") {
+          sessionStorage.setItem('userinfo', val.user);
+          this.userInfo = JSON.parse(val.user);
+          this.sign = 1;
+          this._message.create('success', `Welcome to login:` + this.userInfo.username);
+        } else if (val.result === "error") {
           this._message.create('error', `用户尚未注册或还在审核中！`);
         }
       },
@@ -65,7 +73,7 @@ export class LoginComponent implements OnInit {
     this.isShowRegister = true;
   }
 
-  eventHandler(event:boolean) {
+  eventHandler(event: boolean) {
     this.isShowRegister = event;
   }
 
@@ -92,14 +100,14 @@ export class LoginComponent implements OnInit {
     this.username = null;
     this.pwd = null;
     sessionStorage.removeItem('userinfo');
-    this.userstate = sessionStorage.getItem('userinfo');
+    this.sign = 0;
     this._message.success("您已成功退出登录！");
 
   }
 
-  turnTo(url){
+  turnTo(url) {
     this.close2();
-    open(url,'_self')
+    open(url, '_self')
   }
 }
 

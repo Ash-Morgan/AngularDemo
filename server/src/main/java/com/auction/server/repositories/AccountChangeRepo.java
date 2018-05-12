@@ -10,4 +10,7 @@ import org.springframework.stereotype.Repository;
 */
 @Repository(value = "account-change-repo")
 public interface AccountChangeRepo extends CrudRepository<AccountChange, String> {
+    public AccountChange findByChangeid(Integer changeid);
+
+    public Iterable<AccountChange> findByCuseridAndCstateNot(Integer userid,Integer cstate);
 }

@@ -10,10 +10,14 @@
   <div nz-form-label nz-col [nzSpan]="5">
   </div>
   <div nz-col [nzSpan]="17" nz-form-control nzHasFeedback>
-    <button nz-button [nzType]="'primary'">
+    <button nz-button [nzType]="'primary'" (click)="reCharge()">
       <span>充值</span>
     </button>
   </div>
 </div>
-<img src="http://b.bshare.cn/barCode?site=weixin&url={{URL}}">
+<nz-modal [nzVisible]="isVisible" [nzClosable]="false" [nzTitle]="'请用微信扫描付款'" [nzWidth]="215" [nzContent]="modalContent" [nzFooter]="null">
+  <ng-template #modalContent>
+    <img src="http://b.bshare.cn/barCode?site=weixin&url={{URL}}?changeid={{accountchange.changeid}}">
+  </ng-template>
+</nz-modal>
 

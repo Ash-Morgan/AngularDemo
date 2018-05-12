@@ -24,4 +24,7 @@ public class AccountInfoSevice {
         return accountInfoRepo.findByUserid(id);
     }
 
+    public AccountInfo save(AccountInfo accountInfo){
+        return accountInfoRepo.save(accountInfo);
+    }
 }

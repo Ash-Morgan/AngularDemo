@@ -1,15 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {AccountInfo} from "../../../entity/AccountInfo";
 import {AccountInfoService} from "../../../services/account-info.service";
-import {MainService} from "../../../services/main.service";
+import {AccountInfo} from "../../../entity/AccountInfo";
 import {AccountChange} from "../../../entity/Accountchange";
+import {MainService} from "../../../services/main.service";
 import {NzMessageService} from "ng-zorro-antd";
 
 @Component({
-  selector: 'app-recharge',
-  templateUrl: './recharge.html'
+  selector: 'app-bill',
+  templateUrl: './bill.html'
 })
-export class RechargeComponent implements OnInit{
+export class BillComponent implements OnInit{
+  displayTh: Array<any> = ['账单编号', '账户编号', '用户编号', '交易金额',
+    '交易时间', '交易内容', '交易状态','操作'];
+  data: any;
   isVisible:boolean = false;
   dataInfo:AccountInfo = new AccountInfo();
   amount:number = 1.0;
@@ -17,24 +20,26 @@ export class RechargeComponent implements OnInit{
   accountchange:AccountChange = new AccountChange();
   reaccountchange:AccountChange = new AccountChange();
 
-  reCharge(){
-    this.isVisible = true;
+  deleteinfo(changeid:number){
     const data = {
-      'accountid':this.dataInfo.accountid,
-      'userid':this.dataInfo.userid,
-      'amount':this.amount,
-      'content':'充值'
+      'changeid':changeid
     }
-    this.accountInfoService.setAccountInfo(data).subscribe(
-      (val) =>{
-        console.log('Get acconutchange',val)
-        this.accountchange = JSON.parse(val.reback);
-        console.log('Get acconutchange',this.accountchange)
+    this.accountInfoService.deleteAccountInfo(data).subscribe(
+      (val)=>{
+        console.log('Get',val)
+        this.message.create('success',
+          '记录删除成功！');
+        this.initTable();
       }
-    );
+    )
+  }
+
+  reCharge(changeid:number){
+    this.isVisible = true;
+    this.accountchange.changeid = changeid;
     var interval = setInterval(_ => {
       const info = {
-        'changeid':this.accountchange.changeid
+        'changeid':changeid
       }
       this.accountInfoService.getAccountChangeById(info).subscribe(
         (val)=>{
@@ -44,7 +49,7 @@ export class RechargeComponent implements OnInit{
           if(this.reaccountchange.cstate === 1){
             clearInterval(interval);
             this.close();
-            window.open('/cus/account/balance','_self');
+            window.open('/cus/account/bill','_self');
             this.message.create('success',
               '恭喜你，充值成功！');
           }
@@ -57,9 +62,23 @@ export class RechargeComponent implements OnInit{
     this.isVisible = false;
   }
 
+  initTable(){
+    var userInfo = JSON.parse(sessionStorage.getItem('userinfo'));
+    const data = {
+      'userid':userInfo.userid
+    }
+    this.accountInfoService.getAllAccountChangeByUserid(data).subscribe(
+      (val)=>{
+        console.log('Get success!', val);
+        this.data = val;
+        console.log(this.data);
+      }
+    );
+  }
+
   constructor(private mainService:MainService,
               private message: NzMessageService,
-    private accountInfoService:AccountInfoService) {
+              private accountInfoService:AccountInfoService) {
   }
 
   ngOnInit() {
@@ -79,6 +98,7 @@ export class RechargeComponent implements OnInit{
         this.dataInfo = JSON.parse(val.accountinfo);
         console.log(this.dataInfo);
       }
-    )
+    );
+    this.initTable();
   }
 }

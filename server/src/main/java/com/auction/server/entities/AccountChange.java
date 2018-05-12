@@ -27,8 +27,8 @@ public class AccountChange {
     @Column(name = "cuserid", length = 8, nullable = false)
     private Integer cuserid;
 
-    @Column(name = "amount", nullable = false)
-    private double amount;
+    @Column(name = "camount", nullable = false)
+    private double camount;
 
     @Column(name = "cdate", length = 20, nullable = false)
     private String cdate;
@@ -63,12 +63,12 @@ public class AccountChange {
         this.cuserid = cuserid;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getCamount() {
+        return camount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setCamount(double amount) {
+        this.camount = amount;
     }
 
     public String getCdate() {
