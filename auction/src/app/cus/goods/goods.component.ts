@@ -102,11 +102,9 @@ export class GoodsComponent implements OnInit {
   ngOnInit() {
     this.id = this.routerInfo.snapshot.queryParams["id"];
     setTimeout(_ => {
-      this.array = ["url(" + this.URL + "goods1_1.jpg)",
-        "url(" + this.URL + "goods1_2.jpg)",
-        "url(" + this.URL + "goods1_3.jpg)",
-        "url(" + this.URL + "goods1_4.jpg)",
-        "url(" + this.URL + "goods1_5.jpg)"];
+      this.array = ["url(" + this.URL + "goods"+this.id+"_1.jpg)",
+        "url(" + this.URL + "goods"+this.id+"_2.jpg)",
+        "url(" + this.URL + "goods"+this.id+"_3.jpg)"];
     }, 500);
     // this.initGoods();
     var interval = setInterval(_ => {

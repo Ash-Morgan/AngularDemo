@@ -240,9 +240,6 @@
         <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
           <nz-datepicker formControlName="a_gstartdate" [(ngModel)]="goodsinfo.gstartdate" [nzFormat]="'YYYY/MM/DD HH:mm:ss'"
                          [nzPlaceHolder]="'请输入拍卖开始时间'" [nzSize]="'large'" nzShowTime></nz-datepicker>
-          <div nz-form-explain *ngIf="getA_FormControl('a_gstartdate')
-          .dirty&&getU_FormControl('a_gstartdate').hasError('required')">拍卖开始时间不能为空!
-          </div>
         </div>
       </div>
       <!--拍卖结束时间-->
@@ -253,9 +250,6 @@
         <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
           <nz-datepicker formControlName="a_genddate" [(ngModel)]="goodsinfo.genddate" [nzFormat]="'YYYY/MM/DD HH:mm:ss'"
                          [nzPlaceHolder]="'请输入拍卖结束时间'" [nzSize]="'large'" nzShowTime></nz-datepicker>
-          <div nz-form-explain *ngIf="getA_FormControl('a_genddate')
-          .dirty&&getU_FormControl('a_genddate').hasError('required')">拍卖结束时间不能为空!
-          </div>
         </div>
       </div>
       <!--商品类别-->
@@ -269,20 +263,6 @@
           </nz-input>
           <div nz-form-explain *ngIf="getA_FormControl('a_gtypeid')
           .dirty&&getA_FormControl('a_gtypeid').hasError('required')">商品类别不能为空!
-          </div>
-        </div>
-      </div>
-      <!--商品状态-->
-      <div nz-form-item nz-row>
-        <div nz-form-label nz-col [nzSpan]="7">
-          <label>商品状态</label>
-        </div>
-        <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
-          <nz-input formControlName="a_goodstate" [(ngModel)]="goodsinfo.goodstate" [nzType]="'text'"
-                    [nzPlaceHolder]="'请输入商品状态'" [nzSize]="'large'">
-          </nz-input>
-          <div nz-form-explain *ngIf="getA_FormControl('a_goodstate')
-          .dirty&&getA_FormControl('a_goodstate').hasError('required')">商品状态不能为空!
           </div>
         </div>
       </div>
@@ -307,5 +287,13 @@
         </div>
       </div>
     </form>
+  </ng-template>
+</nz-modal>
+
+
+<nz-modal [nzVisible]="uploadShow" [nzTitle]="'上传商品图片'" [nzContent]="uploadcontent" [nzFooter]="null"
+          (nzOnCancel)="closeUpload()">
+  <ng-template #uploadcontent>
+    <nz-upload-picture [goodsid]="addgoods.goodsid"></nz-upload-picture>
   </ng-template>
 </nz-modal>

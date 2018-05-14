@@ -75,13 +75,6 @@ public class GoodsInfoService {
         return goodsInfoRepo.findByGoodsid(id);
     }
 
-    /**
-     * 删除指定商品
-     * @param goodsInfo
-     */
-    public void deleteGoodsInfo(GoodsInfo goodsInfo){
-        goodsInfoRepo.delete(goodsInfo);
-    }
 
     /**
      * 保存指定商品
@@ -100,8 +93,8 @@ public class GoodsInfoService {
      */
     public List<GoodsInfo> findByType(int typeid) {
         List<GoodsInfo> goodsInfoList = new ArrayList<GoodsInfo>();
-        if (goodsInfoRepo.findAllByGtypeid(typeid).iterator().hasNext()) {
-            goodsInfoList = (List<GoodsInfo>) goodsInfoRepo.findAllByGtypeid(typeid);
+        if (goodsInfoRepo.findAllByGtypeidAndGstate(typeid,1).iterator().hasNext()) {
+            goodsInfoList = (List<GoodsInfo>) goodsInfoRepo.findAllByGtypeidAndGstate(typeid,1);
         }
         System.out.println(goodsInfoList.toString());
         return goodsInfoList;

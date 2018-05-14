@@ -47,6 +47,7 @@ import {GoodsaddComponent} from "./cus/auction/goodsadd/goodsadd";
 import {GoodsauctionComponent} from "./cus/auction/goodsauction/goodsauction";
 import {GoodscheckComponent} from "./cus/auction/goodscheck/goodscheck";
 import {GoodsfailedComponent} from "./cus/auction/goodsfailed/goodsfailed";
+import {NzDemoUploadPictureCardComponent} from "./content/upload/NzDemoUploadPictureCard.component";
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import {GoodsfailedComponent} from "./cus/auction/goodsfailed/goodsfailed";
     GoodsaddComponent,
     GoodsauctionComponent,
     GoodscheckComponent,
-    GoodsfailedComponent
+    GoodsfailedComponent,
+    NzDemoUploadPictureCardComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -1,3 +1,7 @@
+<button nz-button [nzType]="'default'" name="add" (click)="openAdd()">
+  <span>申请商品拍卖</span>
+</button>
+<br>
 <nz-table #nzTable [nzDataSource]="data" [nzPageSize]="2">
   <thead nz-thead>
   <tr>
@@ -19,3 +23,130 @@
   </tr>
   </tbody>
 </nz-table>
+
+<nz-modal [nzVisible]="addShow" [nzTitle]="'新增商品信息'" [nzContent]="content" [nzFooter]="null"
+          (nzOnCancel)="closeAdd()">
+  <ng-template #content>
+    <form [formGroup]="a_validateForm" nz-form (ngSubmit)="submitAdd($event,a_validateForm.value)">
+      <!--商品名称-->
+      <div nz-form-item nz-row>
+        <div nz-form-label nz-col [nzSpan]="7">
+          <label>商品名称</label>
+        </div>
+        <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+          <nz-input formControlName="a_gname" [(ngModel)]="goodsinfo.gname" [nzType]="'text'"
+                    [nzPlaceHolder]="'请输入商品名称'" [nzSize]="'large'">
+          </nz-input>
+          <div nz-form-explain
+               *ngIf="getA_FormControl('a_gname').dirty&&getA_FormControl('a_gname').hasError('required')">商品名称不能为空!
+          </div>
+        </div>
+      </div>
+      <!--所属用户编号-->
+      <div nz-form-item nz-row>
+        <div nz-form-label nz-col [nzSpan]="7">
+          <label>所属用户编号</label>
+        </div>
+        <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+          <nz-input formControlName="a_guserid" [(ngModel)]="goodsinfo.guserid" [nzType]="'text'"
+                    [nzPlaceHolder]="'请输入所属用户编号'" [nzSize]="'large'">
+          </nz-input>
+          <div nz-form-explain
+               *ngIf="getA_FormControl('a_guserid').dirty&&getA_FormControl('a_guserid').hasError('required')">
+            所属用户编号不能为空!
+          </div>
+        </div>
+      </div>
+      <!--商品起拍价格-->
+      <div nz-form-item nz-row>
+        <div nz-form-label nz-col [nzSpan]="7">
+          <label>商品起拍价格</label>
+        </div>
+        <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+          <nz-input formControlName="a_gstartaccount" [(ngModel)]="goodsinfo.gstartaccount"
+                    [nzType]="'text'" [nzPlaceHolder]="'请输入商品起拍价格'" [nzSize]="'large'">
+          </nz-input>
+          <div nz-form-explain *ngIf="getA_FormControl('a_gstartaccount')
+          .dirty&&getA_FormControl('a_gstartaccount').hasError('required')">商品起拍价格不能为空!
+          </div>
+        </div>
+      </div>
+      <!--商品最高拍卖价格-->
+      <div nz-form-item nz-row>
+        <div nz-form-label nz-col [nzSpan]="7">
+          <label>商品最高拍卖价格</label>
+        </div>
+        <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+          <nz-input formControlName="a_ghighaccount" [(ngModel)]="goodsinfo.ghighaccount" [nzType]="'text'"
+                    [nzPlaceHolder]="'请输入商品最高拍卖价格'" [nzSize]="'large'">
+          </nz-input>
+          <div nz-form-explain *ngIf="getA_FormControl('a_ghighaccount')
+          .dirty&&getA_FormControl('a_ghighaccount').hasError('required')">商品最高拍卖价格不能为空!
+          </div>
+        </div>
+      </div>
+      <!--拍卖开始时间-->
+      <div nz-form-item nz-row>
+        <div nz-form-label nz-col [nzSpan]="7">
+          <label>拍卖开始时间</label>
+        </div>
+        <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+          <nz-datepicker formControlName="a_gstartdate" [(ngModel)]="goodsinfo.gstartdate" [nzFormat]="'YYYY/MM/DD HH:mm:ss'"
+                         [nzPlaceHolder]="'请输入拍卖开始时间'" [nzSize]="'large'" nzShowTime></nz-datepicker>
+        </div>
+      </div>
+      <!--拍卖结束时间-->
+      <div nz-form-item nz-row>
+        <div nz-form-label nz-col [nzSpan]="7">
+          <label>拍卖结束时间</label>
+        </div>
+        <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+          <nz-datepicker formControlName="a_genddate" [(ngModel)]="goodsinfo.genddate" [nzFormat]="'YYYY/MM/DD HH:mm:ss'"
+                         [nzPlaceHolder]="'请输入拍卖结束时间'" [nzSize]="'large'" nzShowTime></nz-datepicker>
+        </div>
+      </div>
+      <!--商品类别-->
+      <div nz-form-item nz-row>
+        <div nz-form-label nz-col [nzSpan]="7">
+          <label>商品类别</label>
+        </div>
+        <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+          <nz-input formControlName="a_gtypeid" [(ngModel)]="goodsinfo.gtypeid" [nzType]="'text'"
+                    [nzPlaceHolder]="'请输入商品类别'" [nzSize]="'large'">
+          </nz-input>
+          <div nz-form-explain *ngIf="getA_FormControl('a_gtypeid')
+          .dirty&&getA_FormControl('a_gtypeid').hasError('required')">商品类别不能为空!
+          </div>
+        </div>
+      </div>
+      <!--商品简介-->
+      <div nz-form-item nz-row>
+        <div nz-form-label nz-col [nzSpan]="7">
+          <label>商品简介</label>
+        </div>
+        <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+          <nz-input formControlName="a_gcontent" [(ngModel)]="goodsinfo.gcontent" [nzRows]="'6'"
+                    [nzType]="'textarea'" [nzPlaceHolder]="'请输入商品简介'" [nzSize]="'large'">
+          </nz-input>
+          <div nz-form-explain *ngIf="getA_FormControl('a_gcontent')
+          .dirty&&getA_FormControl('a_gcontent').hasError('required')">商品简介不能为空!
+          </div>
+        </div>
+      </div>
+      <!--submit Button-->
+      <div nz-form-item nz-row>
+        <div nz-col [nzOffset]="7" [nzSpan]="12" nz-form-control>
+          <button nz-button [nzType]="'primary'" [nzSize]="'large'">Submit</button>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+</nz-modal>
+
+<nz-modal [nzVisible]="uploadShow" [nzTitle]="'上传商品图片'" [nzContent]="uploadcontent" [nzFooter]="null"
+          (nzOnCancel)="closeUpload()">
+  <ng-template #uploadcontent>
+    <nz-upload-picture [goodsid]="addgoods.goodsid"></nz-upload-picture>
+  </ng-template>
+</nz-modal>
+

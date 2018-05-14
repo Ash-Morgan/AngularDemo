@@ -25,7 +25,8 @@
   </tbody>
 </nz-table>
 
-<nz-modal [nzVisible]="isVisible" [nzClosable]="false" [nzTitle]="'请用微信扫描付款'" [nzWidth]="215" [nzContent]="modalContent" [nzFooter]="null">
+<nz-modal [nzVisible]="isVisible" [nzClosable]="false" [nzTitle]="'请用微信扫描付款'" [nzWidth]="215" [nzContent]="modalContent"
+          [nzFooter]="null" (nzOnCancel)="close()">
   <ng-template #modalContent>
     <img src="http://b.bshare.cn/barCode?site=weixin&url={{URL}}?changeid={{accountchange.changeid}}">
   </ng-template>

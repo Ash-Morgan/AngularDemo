@@ -24,6 +24,8 @@ export class A_goodsComponent implements OnInit {
   _startdate = new Date();
   u_validateForm: FormGroup;
   a_validateForm: FormGroup;
+  uploadShow:boolean = false;
+  addgoods:GoodsInfo = new GoodsInfo();
 
   initTable(){
     this.goodsService.getAllGoodsInfoByGstate().subscribe(
@@ -41,8 +43,8 @@ export class A_goodsComponent implements OnInit {
     this.goodsinfo.gstartaccount = null;
     this.goodsinfo.ghighaccount = null;
     this.goodsinfo.gcontent = null;
-    this.goodsinfo.gstartdate = null;
-    this.goodsinfo.genddate = null;
+    this.goodsinfo.gstartdate = '';
+    this.goodsinfo.genddate = '';
     this.goodsinfo.gtypeid = null;
     this.goodsinfo.goodstate = null;
     this.goodsinfo.gstate = null;
@@ -96,16 +98,27 @@ export class A_goodsComponent implements OnInit {
     this.goodsinfo.ghighaccount = value.a_ghighaccount;
     this.goodsinfo.gcontent = value.a_gcontent;
     this.goodsinfo.gstartdate = this.datePipe.transform(value.a_gstartdate,'yyyy-MM-dd HH:mm:ss');
-    this.goodsinfo.genddate = this.datePipe.transform(value.a_gstartdate,'yyyy-MM-dd HH:mm:ss');
+    this.goodsinfo.genddate = this.datePipe.transform(value.a_genddate,'yyyy-MM-dd HH:mm:ss');
     this.goodsinfo.gtypeid = value.a_gtypeid;
-    this.goodsinfo.goodstate = value.a_goodstate;
+    console.log("goodsinfo = ",this.goodsinfo);
     this.goodsService.addgoodsinfo(this.goodsinfo).subscribe(
-      () =>{
+      (val) =>{
         this.message.create('success', `添加成功！`);
         this.initTable();
         this.closeAdd();
+        this.addgoods = val;
+        console.log("addgoods",this.addgoods);
+        this.openUpload();
       }
     );
+  }
+
+  openUpload(){
+    this.uploadShow = true;
+  }
+
+  closeUpload(){
+    this.uploadShow = false;
   }
 
   deleteinfo(info:any):void{
@@ -145,8 +158,8 @@ export class A_goodsComponent implements OnInit {
       a_guserid: ['', [Validators.required]],
       a_gstartaccount: ['', [Validators.required]],
       a_ghighaccount: ['', [Validators.required]],
-      a_gstartdate: ['', [Validators.required]],
-      a_genddate: ['', [Validators.required]],
+      a_gstartdate: [''],
+      a_genddate: [''],
       a_gtypeid: ['', [Validators.required]],
       a_goodstate: ['', [Validators.required]],
       a_gcontent: ['', [Validators.required]]

@@ -43,6 +43,7 @@ public class GoodsInfoController extends Cross {
 
     /**
      * 获取指定状态所有商品信息
+     *
      * @return List<GoodsInfo>
      */
     @GetMapping(value = "/getgoodsinfobygoodstate")
@@ -52,16 +53,18 @@ public class GoodsInfoController extends Cross {
 
     /**
      * 获取指定用户和状态的所有商品信息
+     *
      * @return List<GoodsInfo>
      */
     @GetMapping(value = "/getbygstateandguserid")
     public List<GoodsInfo> getGoodsInfoByGstateAndGuserid(@RequestParam("gstate") Integer gstate,
                                                           @RequestParam("userid") Integer userid) {
-        return goodsInfoService.getGoodsInfoByGstateAndGuserid(gstate,userid);
+        return goodsInfoService.getGoodsInfoByGstateAndGuserid(gstate, userid);
     }
 
     /**
      * 获取指定状态所有商品信息
+     *
      * @return List<GoodsInfo>
      */
     @GetMapping(value = "/getgoodsinfobygstate")
@@ -71,6 +74,7 @@ public class GoodsInfoController extends Cross {
 
     /**
      * 根据商品编号获取商品信息
+     *
      * @param id
      * @return Map<String, String>
      */
@@ -86,17 +90,18 @@ public class GoodsInfoController extends Cross {
 
     /**
      * 用户对拍卖商品出价
+     *
      * @param params
      * @return Map<String, String>
      */
     @ResponseBody
     @PostMapping("/posthighaccount")
-    public Map<String, String> postHighAccount(@RequestBody Map<String,Object> params) {
-        Map<String,Object> param = (Map<String,Object>)params.get("params");
-        int goodsid = (int)param.get("goodsid");
+    public Map<String, String> postHighAccount(@RequestBody Map<String, Object> params) {
+        Map<String, Object> param = (Map<String, Object>) params.get("params");
+        int goodsid = (int) param.get("goodsid");
         String username = param.get("username").toString();
-        Double highaccount =Double.parseDouble(param.get("highaccount")+".0");
-        Double addaccount =Double.parseDouble(param.get("addaccount")+".0");
+        Double highaccount = Double.parseDouble(param.get("highaccount") + ".0");
+        Double addaccount = Double.parseDouble(param.get("addaccount") + ".0");
         Map<String, String> map = new HashMap<>();
         AuctionInfo auctionInfo = null;
         UserInfo userInfo = userInfoService.getUserInfoByUname(username);
@@ -127,43 +132,50 @@ public class GoodsInfoController extends Cross {
 
     /**
      * 删除指定商品
+     *
      * @param params
      */
     @ResponseBody
     @PostMapping("/deletegoodsinfo")
-    public void deletegoodsinfo(@RequestBody Map<String,Object> params) {
-        Map<String,Object> param = (Map<String,Object>)params.get("params");
-        GoodsInfo goodsInfo = gson.fromJson(gson.toJson(param),GoodsInfo.class);
-        goodsInfoService.deleteGoodsInfo(goodsInfo);
-    }
-
-    /**
-     * 添加指定商品
-     * @param params
-     */
-    @ResponseBody
-    @PostMapping("/addgoodsinfo")
-    public void addgoodsinfo(@RequestBody Map<String,Object> params){
-        Map<String,Object> param = (Map<String,Object>)params.get("params");
-        GoodsInfo goodsInfo = gson.fromJson(gson.toJson(param),GoodsInfo.class);
-        goodsInfo.setGstate(0);
+    public void deletegoodsinfo(@RequestBody Map<String, Object> params) {
+        Map<String, Object> param = (Map<String, Object>) params.get("params");
+        GoodsInfo goodsInfo = gson.fromJson(gson.toJson(param), GoodsInfo.class);
+        goodsInfo.setGoodstate("已删除");
+        goodsInfo.setGstate(2);
         goodsInfoService.saveGoodsInfo(goodsInfo);
     }
 
     /**
+     * 添加指定商品
+     *
+     * @param params
+     */
+    @ResponseBody
+    @PostMapping("/addgoodsinfo")
+    public GoodsInfo addgoodsinfo(@RequestBody Map<String, Object> params) {
+        Map<String, Object> param = (Map<String, Object>) params.get("params");
+        GoodsInfo goodsInfo = gson.fromJson(gson.toJson(param), GoodsInfo.class);
+        goodsInfo.setGoodstate("待审核");
+        goodsInfo.setGstate(0);
+        return goodsInfoService.saveGoodsInfo(goodsInfo);
+    }
+
+    /**
      * 更新指定商品信息
+     *
      * @param params
      */
     @ResponseBody
     @PostMapping("/updategoodsinfo")
-    public void updategoodsinfo(@RequestBody Map<String,Object> params){
-        Map<String,Object> param = (Map<String,Object>)params.get("params");
-        GoodsInfo goodsInfo = gson.fromJson(gson.toJson(param),GoodsInfo.class);
+    public void updategoodsinfo(@RequestBody Map<String, Object> params) {
+        Map<String, Object> param = (Map<String, Object>) params.get("params");
+        GoodsInfo goodsInfo = gson.fromJson(gson.toJson(param), GoodsInfo.class);
         goodsInfoService.saveGoodsInfo(goodsInfo);
     }
 
     /**
      * 获取所有商品信息
+     *
      * @return List<GoodsInfo>
      */
     @GetMapping(value = "/getnotcheckgoodsinfo")
@@ -173,20 +185,27 @@ public class GoodsInfoController extends Cross {
 
     /**
      * 更新商品状态
+     *
      * @param params
      */
     @ResponseBody
     @PostMapping("/postchecksign")
-    public void postCheckSign(@RequestBody Map<String,Object> params){
-        Map<String,Object> param = (Map<String,Object>)params.get("params");
-        Integer sign = (Integer)params.get("sign");
-        GoodsInfo goodsInfo = gson.fromJson(gson.toJson(param),GoodsInfo.class);
+    public void postCheckSign(@RequestBody Map<String, Object> params) {
+        Map<String, Object> param = (Map<String, Object>) params.get("params");
+        Integer sign = (Integer) params.get("sign");
+        GoodsInfo goodsInfo = gson.fromJson(gson.toJson(param), GoodsInfo.class);
+        if (sign == 1) {
+            goodsInfo.setGoodstate("未出售");
+        } else if (sign == 2) {
+            goodsInfo.setGoodstate("已驳回");
+        }
         goodsInfo.setGstate(sign);
         goodsInfoService.saveGoodsInfo(goodsInfo);
     }
 
     /**
      * 获取所有不合格商品信息
+     *
      * @return List<GoodsInfo>
      */
     @GetMapping(value = "/getcheckfailedgoodsinfo")
@@ -196,6 +215,7 @@ public class GoodsInfoController extends Cross {
 
     /**
      * 获取所有商品信息
+     *
      * @return List<GoodsInfo>
      */
     @GetMapping(value = "/getallgoodstype")
@@ -205,6 +225,7 @@ public class GoodsInfoController extends Cross {
 
     /**
      * 根据商品类型获取商品信息
+     *
      * @param typeid
      * @return List<GoodsInfo>
      */
@@ -216,6 +237,7 @@ public class GoodsInfoController extends Cross {
 
     /**
      * 获取指定商品类型
+     *
      * @return GoodsType
      */
     @GetMapping(value = "/gettypebyid")
@@ -224,26 +246,26 @@ public class GoodsInfoController extends Cross {
     }
 
     @GetMapping(value = "/ischange")
-    public Map<String,String> isChange(@RequestParam("username") String username,
-                                       @RequestParam("goodsid") int goodsid) {
+    public Map<String, String> isChange(@RequestParam("username") String username,
+                                        @RequestParam("goodsid") int goodsid) {
         Map<String, String> map = new HashMap<>();
-        System.out.println("username= "+username);
+        System.out.println("username= " + username);
         UserInfo userInfo = userInfoService.getUserInfoByUname(username);
         GoodsInfo goodsInfo = goodsInfoService.findById(goodsid);
         List<AuctionInfo> auctionInfoList = auctionInfoService.getTopFromAuction(goodsid);
         AuctionInfo auctionInfo = null;
-        if(auctionInfoList.size()>0){
+        if (auctionInfoList.size() > 0) {
             auctionInfo = auctionInfoList.get(0);
             goodsInfo.setGuserid(auctionInfo.getUserid());
             goodsInfo.setGhighaccount(auctionInfo.getAaccount());
             goodsInfo.setGoodstate("已出售");
             goodsInfoService.saveGoodsInfo(goodsInfo);
         }
-        if(userInfo==null){
+        if (userInfo == null) {
             map.put("result", "notlogin");
-        }else if(userInfo.getUserid().equals(auctionInfo.getUserid())){
+        } else if (userInfo.getUserid().equals(auctionInfo.getUserid())) {
             map.put("result", "success");
-        }else {
+        } else {
             map.put("result", "error");
         }
         return map;
