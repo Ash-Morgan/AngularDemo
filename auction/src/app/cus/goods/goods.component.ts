@@ -3,8 +3,6 @@ import {GoodsInfo} from "../../entity/GoodsInfo";
 import {GoodsInfoService} from "../../services/goods-info.service";
 import {NzMessageService} from "ng-zorro-antd";
 import {ActivatedRoute} from "@angular/router";
-import {AuctionInfo} from "../../entity/AuctionInfo";
-import {UserInfoService} from "../../services/user-info.service";
 import {UserInfo} from "../../entity/UserInfo";
 
 @Component({
@@ -50,11 +48,12 @@ export class GoodsComponent implements OnInit {
       alert("请问您，是否确认出价？")
       this.isButton = 'Did'
       this.highaccount += this.count
+      var userInfo = JSON.parse(sessionStorage.getItem('userinfo'));
       const data = {
         'goodsid': this.goodsinfo.goodsid,
         'highaccount': this.highaccount,
         'addaccount':this.count,
-        'username': sessionStorage.getItem('userinfo')
+        'username': userInfo.username
       };
       this.goodsInfoService.postHighAccount(data).subscribe(
         (val) => {
@@ -84,17 +83,9 @@ export class GoodsComponent implements OnInit {
   }
 
   isDid(): boolean {
-    const data = {
-      "username": sessionStorage.getItem('userinfo')
-    }
-    this.userInfoService.getUserInfoByUsername(data).subscribe(
-      (val) => {
-        console.log("GET call successful!", val);
-        this.userinfo = JSON.parse(val.userinfo);
-      }
-    );
+    var userInfo = JSON.parse(sessionStorage.getItem('userinfo'));
     if (this.auctioninfoList.length > 0) {
-      if (this.userinfo.userid === this.auctioninfoList[0].userid) {
+      if (userInfo.userid === this.auctioninfoList[0].userid) {
         return true;
       }else {
         return false;
@@ -104,7 +95,6 @@ export class GoodsComponent implements OnInit {
   }
 
   constructor(private goodsInfoService: GoodsInfoService,
-              private userInfoService: UserInfoService,
               private _message: NzMessageService,
               private routerInfo: ActivatedRoute) {
   }
@@ -133,8 +123,9 @@ export class GoodsComponent implements OnInit {
       this.endDate = Date.parse(this.goodsinfo.genddate);
       if (Math.floor(this.endDate - Date.now()) <= 0) {
         this.isButton = 'End';
+        var userInfo = JSON.parse(sessionStorage.getItem('userinfo'));
         const data = {
-          'username': sessionStorage.getItem('userinfo'),
+          'username': userInfo.username,
           'goodsid': this.goodsinfo.goodsid
         }
         this.goodsInfoService.isChange(data).subscribe(
