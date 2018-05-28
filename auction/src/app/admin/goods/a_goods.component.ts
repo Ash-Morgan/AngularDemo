@@ -5,6 +5,8 @@ import {GoodsInfoService} from "../../services/goods-info.service";
 import {GoodsInfo} from "../../entity/GoodsInfo";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DatePipe} from "@angular/common";
+import {GoodsTypeService} from "../../services/goods-type.service";
+import {GoodsType} from "../../entity/GoodsType";
 
 @Component({
   selector: 'app-a-goods',
@@ -17,6 +19,7 @@ export class A_goodsComponent implements OnInit {
     '商品最高拍卖价格', '商品简介', '拍卖开始时间', '拍卖结束时间', '商品类别',
     '商品状态','操作'];
   data: any;
+  typeList:Array<GoodsType> = [];
   goodsUpdate:GoodsInfo = new GoodsInfo();
   goodsinfo:GoodsInfo = new GoodsInfo();
   updateShow:boolean = false;
@@ -34,6 +37,15 @@ export class A_goodsComponent implements OnInit {
         this.data = val;
       }
     );
+  }
+
+  initType(){
+    this.goodstypeservice.getAllType().subscribe(
+      (val) => {
+        console.log('Get success!', val);
+        this.typeList = val;
+      }
+    )
   }
 
   initgoodsinfo():void{
@@ -54,6 +66,7 @@ export class A_goodsComponent implements OnInit {
     console.log('info=',info.gname);
     this.goodsUpdate=info;
     this._startdate = new Date();
+    this.initType();
     this.updateShow = true;
   }
 
@@ -82,6 +95,7 @@ export class A_goodsComponent implements OnInit {
 
   openAdd():void{
     this.initgoodsinfo();
+    this.initType();
     this.addShow = true;
   }
 
@@ -140,6 +154,7 @@ export class A_goodsComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private datePipe: DatePipe,
+              private goodstypeservice:GoodsTypeService,
               private message: NzMessageService,
               private goodsService: GoodsInfoService) {
     this.u_validateForm = this.fb.group({

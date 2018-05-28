@@ -33,7 +33,7 @@ export class A_loginComponent implements OnInit{
         if (val.result === "success") {
           sessionStorage.setItem('adminstate', theinfo.workid);
           this.message.create('success', `Welcome to login:` +  theinfo.workid);
-          window.open('/admin/main',"_self");
+          //window.open('/admin/main/goods',"_self");
         }
       },
       response => {
@@ -43,5 +43,8 @@ export class A_loginComponent implements OnInit{
         console.log("The POST observable is now completed.");
       }
     );
+
+    var promise = this.adminInfoService.postAdminLogin(theinfo).toPromise();
+    console.log("promise = ",promise.then());
   }
 }

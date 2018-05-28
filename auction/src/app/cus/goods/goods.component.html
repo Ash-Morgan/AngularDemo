@@ -73,6 +73,11 @@
                       [nzType]="'primary'">
                 禁止出价
               </button>
+              <button *ngIf="isButton === 'Own'" disabled
+                      style="background-color: #cfd0d1;font-size: 30px;height: 80px;width: 320px;padding-left: 20px" nz-button
+                      [nzType]="'primary'">
+                您自己的商品无法出价
+              </button>
             </li>
           </ul>
         </div>

@@ -258,12 +258,12 @@
           <label>商品类别</label>
         </div>
         <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
-          <nz-input formControlName="a_gtypeid" [(ngModel)]="goodsinfo.gtypeid" [nzType]="'text'"
-                    [nzPlaceHolder]="'请输入商品类别'" [nzSize]="'large'">
-          </nz-input>
-          <div nz-form-explain *ngIf="getA_FormControl('a_gtypeid')
-          .dirty&&getA_FormControl('a_gtypeid').hasError('required')">商品类别不能为空!
-          </div>
+          <nz-select style="width: 200px;" [(ngModel)]="goodsinfo.gtypeid" [nzPlaceHolder]="'请选择商品类型'" [nzSize]="typeList.length">
+            <nz-option *ngFor="let type of typeList" [nzLabel]="type.tname" [nzValue]="type.typeid"></nz-option>
+          </nz-select>
+          <!--<div nz-form-explain *ngIf="getA_FormControl('a_gtypeid')-->
+          <!--.dirty&&getA_FormControl('a_gtypeid').hasError('required')">商品类别不能为空!-->
+          <!--</div>-->
         </div>
       </div>
       <!--商品简介-->

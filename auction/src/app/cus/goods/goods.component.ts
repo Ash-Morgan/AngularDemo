@@ -94,6 +94,15 @@ export class GoodsComponent implements OnInit {
     return false;
   }
 
+  isOwn(){
+    var userInfo = JSON.parse(sessionStorage.getItem('userinfo'));
+    if(this.goodsinfo.guserid==userInfo.userid){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   constructor(private goodsInfoService: GoodsInfoService,
               private _message: NzMessageService,
               private routerInfo: ActivatedRoute) {
@@ -110,7 +119,9 @@ export class GoodsComponent implements OnInit {
     var interval = setInterval(_ => {
       this.initGoods();
       if (this.isLogin()) {
-        if (this.isDid()) {
+        if(this.isOwn()){
+          this.isButton = 'Own';
+        }else if (this.isDid()) {
           this.isButton = 'Did';
         }else {
           this.isButton = 'Ing';

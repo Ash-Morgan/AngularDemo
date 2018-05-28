@@ -8,6 +8,12 @@ import {Component, OnInit} from '@angular/core';
 export class A_mainComponent implements OnInit{
   adminstate = sessionStorage.getItem('adminstate');
   isCollapsed = false;
+
+  exit(){
+    sessionStorage.removeItem('adminstate');
+    window.open('/admin/login','_self');
+  }
+
   constructor(
   ){}
 
