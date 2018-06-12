@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 */
 @Repository(value = "address-info-repo")
 public interface AddressInfoRepo extends CrudRepository<AddressInfo, String> {
+    public Iterable<AddressInfo> findByUserid(Integer userid);
 }

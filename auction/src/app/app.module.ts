@@ -32,7 +32,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {GoodsTypeService} from "./services/goods-type.service";
 import {GoodstypeComponent} from "./cus/type/goodstype.component";
 import {DatePipe} from "@angular/common";
-import {PersonComponent} from "./cus/person/person.component";
 import {AccountComponent} from "./cus/account/account";
 import {BalanceComponent} from "./cus/account/balance/balance";
 import {AccountInfoService} from "./services/account-info.service";
@@ -48,6 +47,10 @@ import {GoodsauctionComponent} from "./cus/auction/goodsauction/goodsauction";
 import {GoodscheckComponent} from "./cus/auction/goodscheck/goodscheck";
 import {GoodsfailedComponent} from "./cus/auction/goodsfailed/goodsfailed";
 import {NzDemoUploadPictureCardComponent} from "./content/upload/NzDemoUploadPictureCard.component";
+import {AddressComponent} from "./cus/person/addresspage/address";
+import {PmainComponent} from "./cus/person/pmain";
+import {PersonComponent} from "./cus/person/personpage/person.component";
+import {AddressInfoService} from "./services/address-info.service";
 
 
 @NgModule({
@@ -72,7 +75,6 @@ import {NzDemoUploadPictureCardComponent} from "./content/upload/NzDemoUploadPic
     U_managementComponent,
     U_formComponent,
     GoodstypeComponent,
-    PersonComponent,
     AccountComponent,
     BalanceComponent,
     RechargeComponent,
@@ -84,7 +86,10 @@ import {NzDemoUploadPictureCardComponent} from "./content/upload/NzDemoUploadPic
     GoodsauctionComponent,
     GoodscheckComponent,
     GoodsfailedComponent,
-    NzDemoUploadPictureCardComponent
+    NzDemoUploadPictureCardComponent,
+    AddressComponent,
+    PmainComponent,
+    PersonComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -104,7 +109,8 @@ import {NzDemoUploadPictureCardComponent} from "./content/upload/NzDemoUploadPic
     GoodsInfoService,
     GoodsTypeService,
     AccountInfoService,
-    AuctionInfoService
+    AuctionInfoService,
+    AddressInfoService
   ],
   bootstrap: [AppComponent]
 })

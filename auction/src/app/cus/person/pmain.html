@@ -1,0 +1,25 @@
+<nz-layout>
+  <nz-sider>
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" style="width: 200px;">
+      <li nz-menu-group>
+        <span title>个人中心</span>
+        <ul>
+          <li nz-menu-item (click)="turnTo('/cus/pmain/person')">个人信息管理</li>
+          <li nz-menu-item (click)="turnTo('/cus/pmain/address')">个人地址管理</li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-content style="padding:0 50px;">
+      <!--<nz-breadcrumb style="margin:12px 0;">-->
+      <!--<nz-breadcrumb-item>Home</nz-breadcrumb-item>-->
+      <!--<nz-breadcrumb-item>List</nz-breadcrumb-item>-->
+      <!--<nz-breadcrumb-item>App</nz-breadcrumb-item>-->
+      <!--</nz-breadcrumb>-->
+      <div style="background:#fff; padding: 24px; min-height: 280px;">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

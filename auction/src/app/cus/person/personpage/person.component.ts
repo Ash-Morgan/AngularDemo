@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {UserInfo} from "../../entity/UserInfo";
+import {UserInfo} from "../../../entity/UserInfo";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
-import {UserInfoService} from "../../services/user-info.service";
+import {UserInfoService} from "../../../services/user-info.service";
 import {NzMessageService} from "ng-zorro-antd";
 
 @Component({
   selector: 'app-person',
   templateUrl: './person.component.html',
-  styleUrls:['person.component.css']
+  styleUrls:['./person.component.css']
 })
 export class PersonComponent implements OnInit{
   datainfo:UserInfo = JSON.parse(sessionStorage.getItem('userinfo'));

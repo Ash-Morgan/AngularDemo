@@ -2,10 +2,12 @@ package com.auction.server.controllers;
 
 import com.auction.server.entities.AccountChange;
 import com.auction.server.entities.AccountInfo;
+import com.auction.server.entities.AddressInfo;
 import com.auction.server.entities.UserInfo;
 import com.auction.server.general.Cross;
 import com.auction.server.services.AccountChangeService;
 import com.auction.server.services.AccountInfoSevice;
+import com.auction.server.services.AddressInfoService;
 import com.auction.server.services.UserInfoService;
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +35,9 @@ public class UserInfoController extends Cross {
 
     @Resource(name = "account-change-service", type = AccountChangeService.class)
     private AccountChangeService accountChangeService;
+
+    @Resource(name = "address-info-service", type = AddressInfoService.class)
+    private AddressInfoService addressInfoService;
 
     Gson gson = new Gson();
 
@@ -219,5 +224,10 @@ public class UserInfoController extends Cross {
         AccountChange accountChange = accountChangeService.getAccountChangeById(changeid);
         accountChange.setCstate(2);
         accountChangeService.save(accountChange);
+    }
+
+    @GetMapping(value = "/getaddressbyuserid")
+    public List<AddressInfo> getAllAddressInfo(@RequestParam("userid") Integer userid){
+        return addressInfoService.getAllAddressInfo(userid);
     }
 }

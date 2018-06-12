@@ -15,7 +15,6 @@ import {U_checkComponent} from "./admin/user/usercheck/u_check.component";
 import {U_check_FailedComponent} from "./admin/user/userfailed/u_failed.component";
 import {U_managementComponent} from "./admin/user/usermanagement/u_management.component";
 import {GoodstypeComponent} from "./cus/type/goodstype.component";
-import {PersonComponent} from "./cus/person/person.component";
 import {AccountComponent} from "./cus/account/account";
 import {BalanceComponent} from "./cus/account/balance/balance";
 import {RechargeComponent} from "./cus/account/recharge/recharge";
@@ -27,6 +26,9 @@ import {GoodsaddComponent} from "./cus/auction/goodsadd/goodsadd";
 import {GoodsauctionComponent} from "./cus/auction/goodsauction/goodsauction";
 import {GoodscheckComponent} from "./cus/auction/goodscheck/goodscheck";
 import {GoodsfailedComponent} from "./cus/auction/goodsfailed/goodsfailed";
+import {PmainComponent} from "./cus/person/pmain";
+import {AddressComponent} from "./cus/person/addresspage/address";
+import {PersonComponent} from "./cus/person/personpage/person.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/cus/main', pathMatch: 'full'},
@@ -46,7 +48,12 @@ const routes: Routes = [
           {path: 'goodsfailed', component: GoodsfailedComponent}
         ]
       },
-      {path: 'person', component: PersonComponent},
+      {path: 'pmain', component: PmainComponent,
+        children:[
+          {path: 'person', component: PersonComponent},
+          {path: 'address', component: AddressComponent}
+        ]
+      },
       {path: 'account', component: AccountComponent,
         children:[
           {path: 'balance', component: BalanceComponent},
